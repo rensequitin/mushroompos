@@ -22,7 +22,7 @@
 
 		}
 
-	}a
+	}
 
 	function uploadToFolderRestore($db){
 		$data = $_GET['data'];
