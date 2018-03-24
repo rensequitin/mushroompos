@@ -160,7 +160,6 @@ function newOrder(orderType){
 					document.getElementById("queueDiv").classList.remove("hidden");
 					document.getElementById("resetDiv").classList.remove("hidden");
 					document.getElementById("divReset").classList.add("hidden");
-					document.getElementById("payment-takeout-div").classList.add("hidden");
 					document.getElementById("paymentDiv").classList.remove("hidden");
 					document.getElementById("reserveDiv").classList.add("hidden");
 					document.getElementById("addDiv").classList.add("hidden");
@@ -174,9 +173,8 @@ function newOrder(orderType){
 					document.getElementById("id-available").style.display ="none";	
 					document.getElementById("queueDiv").classList.add("hidden");
 					document.getElementById("resetDiv").classList.add("hidden");
-					document.getElementById("divReset").classList.remove("hidden");					
-					document.getElementById("payment-takeout-div").classList.remove("hidden");
-					document.getElementById("paymentDiv").classList.add("hidden");
+					document.getElementById("divReset").classList.remove("hidden");
+					document.getElementById("paymentDiv").classList.remove("hidden");
 					document.getElementById("reserveDiv").classList.add("hidden");
 					document.getElementById("addDiv").classList.add("hidden");
 					document.getElementById("customer-name").innerHTML = "";
@@ -188,7 +186,6 @@ function newOrder(orderType){
 					document.getElementById("queueDiv").classList.add("hidden");
 					document.getElementById("resetDiv").classList.add("hidden");
 					document.getElementById("divReset").classList.remove("hidden");
-					document.getElementById("payment-takeout-div").classList.add("hidden");
 					document.getElementById("paymentDiv").classList.add("hidden");
 					document.getElementById("reserveDiv").classList.remove("hidden");
 					document.getElementById("addDiv").classList.add("hidden");
@@ -203,7 +200,6 @@ function newOrder(orderType){
 					document.getElementById("resetDiv").classList.add("hidden");
 					document.getElementById("divReset").classList.remove("hidden");
 					document.getElementById("reserveDiv").classList.add("hidden");
-					document.getElementById("payment-takeout-div").classList.add("hidden");
 					document.getElementById("paymentDiv").classList.add("hidden");
 					document.getElementById("addDiv").classList.remove("hidden");
 					document.getElementById("customer-name").innerHTML = "";
