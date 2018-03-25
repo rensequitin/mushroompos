@@ -1453,7 +1453,7 @@
 									  <td style="text-align:right;" id="review-payment"> 0.00</td>
 									</tr>
 									<tr style="font-size:15pt; font-weight:bold;">									  
-									  <td><strong>Discount</strong>: <div class='containerclass'><div class='inner-circle'><i style="cursor:pointer;" onclick="showDiscountModal();" class="fa fa-plus-circle"> </i></i></div></div></td>
+									  <td><strong>Discount</strong>: <div class='containerclass discount-button'><div class='inner-circle'><i style="cursor:pointer;" onclick="showDiscountModal();" class="fa fa-plus-circle"> </i></i></div></div></td>
 									  <td style="text-align:right;" id="review-discount"> 0.00</td>
 									</tr>
 									<!-- <tr style="font-size:15pt; font-weight:bold;">									  
