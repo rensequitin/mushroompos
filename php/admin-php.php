@@ -4587,6 +4587,10 @@
 						$printer->setTextSize(1,1);
 						$printer -> setJustification();
 						$printer->feed();
+						$ctr = 0;
+						if(isset($_SESSION['Discount'])){
+							$ctr = count($_SESSION['Discount']);
+						}
 						foreach ($_SESSION['POSCart'] as $cart => $cartItems) {
 							$sql1 = "Select * from mushroom_foods where food_code = '$cart'";
 							$exist1 = $db->checkExist($sql1);
@@ -4618,19 +4622,50 @@
 								if(isset($_SESSION['Discount'])){
 									$discountedOrder = $_SESSION['Discount'];
 
-									if($food==$discountedOrder){
+									if($ctr > 0){
+										if($ctr>=$cartItems){
+											$ctr -= $cartItems;
+											$subtotal = (float)$food_price * (float)$cartItems;
+											$subtotal =  floatval(str_replace(",","",$subtotal));
+											$discounted = $subtotal * 0.20;
+											$subtotal = $subtotal - $discounted;
+											// $sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','Yes')";
+											$food = $food."(20%)";			
+											$sql3 = "Insert into mushroom_orders values('$code','$food','$cartItems','$food_price','$subtotal')";																	
+										}
+										else{
+											$discounted_subtotal = 0;
+											$cartQty = (int)$cartItems - (int)$ctr;
+											$subtotal = (float)$food_price * (float)$cartQty;
+											$discounted_subtotal += $subtotal;
+											// $sqli = "Insert into mushroom_queue_orders values('$code','$food','$cartQty','$food_price','$subtotal','Yes','No')";
+											$sqli = "Insert into mushroom_orders values('$code','$food','$cartQty','$food_price','$subtotal')";
+											$exists3 = $db->checkExist($sqli);
 
-										$subtotal =  floatval(str_replace(",","",$subtotal));
-										$discounted = $subtotal * 0.20;
-										$subtotal = $subtotal - $discounted;
-										$food.="(20%)";
-										$sql3 = "Insert into mushroom_orders values('$code','$food','$cartItems','$food_price','$subtotal')";
+											$subtotal = (float)$food_price * (float)$ctr;
+											$subtotal =  floatval(str_replace(",","",$subtotal));
+											$discounted = $subtotal * 0.20;
+											$subtotal = $subtotal - $discounted;
+											$discounted_subtotal += $subtotal;
+											// $sql3 = "Insert into mushroom_queue_orders values('$code','$food','$ctr','$food_price','$subtotal','Yes','Yes')";
+											$food1 = $food."(20%)";			
+											$sql3 = "Insert into mushroom_orders values('$code','$food1','$ctr','$food_price','$subtotal')";
+											$food = $food."(20% - ".$ctr."x)";											
+											/* $discounted_food = (float)$food_price * (float)$ctr;
+											$discount_price = $discounted_food * 0.20;
+											$discounted += $discount_price; */
+											$ctr = 0;
+											//echo "\n".$ctr."c";
+											$subtotal = $discounted_subtotal;
+										}
 									}
 									else{
-										//$subtotal = $row2['orders_subtotal'];
+										$subtotal = (float)$food_price * (float)$cartItems;
+										$food = $row2['food_name'];
 
+										// $sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','No')";
 										$sql3 = "Insert into mushroom_orders values('$code','$food','$cartItems','$food_price','$subtotal')";
-									}
+									}				
 								}
 								else{
 									//$subtotal = $row2['orders_subtotal'];
