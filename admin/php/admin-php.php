@@ -4802,33 +4802,60 @@
 			$total_price = 0;
 			$sql2 = "Select * from mushroom_queue_orders where queue_code = '$code' AND queue_paid ='No'";
 			$exist2 = $db->checkExist($sql2);
+				if(isset($_SESSION['Discount'])){
+					$ctr = count($_SESSION['Discount']);
+				}
 				if($exist2){
 					while($row2 = $db->fetch_array($exist2)){
+						$cartItems = $row2['orders_quantity'];
+						$food_price = $row2['orders_price'];						
 						if(isset($_SESSION['Discount'])){
 							$discountedOrder = $_SESSION['Discount'];
-							$foodName = $row2['orders_foods'];
-							if($foodName==$discountedOrder){
-								$subtotal = $row2['orders_subtotal'];
-								$subtotal =  floatval(str_replace(",","",$subtotal));
-								$discounted = $subtotal * 0.20;
-								$subtotal = $subtotal - $discounted;
-								$foodName = $discountedOrder."(20%)";
-							}
-							else{
-								$subtotal = $row2['orders_subtotal'];
-								$foodName = $row2['orders_foods'];
-							}
+							$food = $row2['orders_foods'];
+
+							if($ctr > 0){
+								if($ctr>=$cartItems){
+									$ctr -= $cartItems;
+									$subtotal = (float)$food_price * (float)$cartItems;
+									$subtotal =  floatval(str_replace(",","",$subtotal));
+									$discounted = $subtotal * 0.20;
+									$subtotal = $subtotal - $discounted;
+									$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','Yes')";
+									$food = $food."(20%)";
+								}
+								else{
+									$discounted_subtotal = 0;
+									$cartQty = (int)$cartItems - (int)$ctr;
+									$subtotal = (float)$food_price * (float)$cartQty;
+									$discounted_subtotal += $subtotal;
+									$sqli = "Insert into mushroom_queue_orders values('$code','$food','$cartQty','$food_price','$subtotal','Yes','No')";
+									$exists3 = $db->checkExist($sqli);
+
+									$subtotal = (float)$food_price * (float)$ctr;
+									$subtotal =  floatval(str_replace(",","",$subtotal));
+									$discounted = $subtotal * 0.20;
+									$subtotal = $subtotal - $discounted;
+									$discounted_subtotal += $subtotal;
+									$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$ctr','$food_price','$subtotal','Yes','Yes')";
+									$food = $food."(20% - ".$ctr."x)";
+									$ctr = 0;
+									$subtotal = $discounted_subtotal;
+								}
+							}					
 						}
 						else{
 							$subtotal = $row2['orders_subtotal'];
-							$foodName = $row2['orders_foods'];
+							$food = $row2['orders_foods'];
+							$subtotal = (float)$food_price * (float)$cartItems;
+							// $food = $row2['food_name'];
+							$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','No')";
 						}
-						$food_price = $row2['orders_price'];
-						$cartItems = $row2['orders_quantity'];
+						
+						$exist3 = $db->checkExist($sql3);
 						$food_price = number_format($food_price,"2");
 						$subtotal = number_format($subtotal,"2");
 						$total_items += $cartItems;
-						$printer->text("$cartItems   $foodName @$food_price\n");
+						$printer->text("$cartItems   $food @$food_price\n");
 						$printer->text("        *$subtotal\n");
 						$subtotal = floatval(str_replace(",","",$subtotal));
 						$total_price += $subtotal;
@@ -4871,30 +4898,7 @@
 
 			$sql4 = "Update mushroom_queue set queue_paid ='Yes' where queue_code ='$code'";
 			$exist4 = $db->checkExist($sql4) or die(mysql_error());
-			if(isset($_SESSION['Discount'])){
-				$discountedOrder = $_SESSION['Discount'];
-				$sql8 = "Select * from mushroom_queue_orders where queue_code = '$code' and orders_foods ='$discountedOrder'";
-				$exist8 =  $db->checkExist($sql8) or die(mysql_error());
-				if($exist8){
-					$row8 = $db->fetch_array($exist8);
-					$discountPrice = $row8['orders_subtotal'];
-				}
-
-				$discountPrice =  floatval(str_replace(",","",$discountPrice));
-				$discounted = $discountPrice * 0.20;
-				$discountPrice = $discountPrice - $discounted;
-				//$discountText = $discountedOrder."(20%)";
-				$sql7 = "Update mushroom_queue_orders set queue_discount='Yes', orders_subtotal='$discountPrice' where queue_code ='$code' and queue_paid ='No' and orders_foods = '$discountedOrder'";
-				$exist7 = $db->checkExist($sql7) or die(mysql_error());
-				echo $discountPrice;
-				$sql3 = "Update mushroom_queue_orders set queue_paid ='Yes' where queue_code ='$code'";
-				$exist3 = $db->checkExist($sql3);
-
-			}
-			else{
-				$sql3 = "Update mushroom_queue_orders set queue_paid ='Yes' where queue_code ='$code'";
-				$exist3 = $db->checkExist($sql3);
-			}
+			
 
 			//$sql3 = "Update mushroom_tables set table_status ='vacant' where table_number ='$table'";
 			//$exist3 = $db->checkExist($sql3);
@@ -4910,6 +4914,8 @@
 						//$sql6 = "Insert into mushroom_orders values('$code','$foodName','$cartItems','$food_price','$subtotal')";
 						//$exist6 = $db->checkExist($sql6);
 					}
+			$sql6 = "Delete from mushroom_queue_orders where queue_code = '$code' AND queue_paid = 'No'";
+			$exist6 = $db->checkExist($sql6);					
 			/* $sql7 = "Delete from mushroom_queue where queue_code = '$code' ";
 			$exist7 = $db->checkExist($sql7); */
 

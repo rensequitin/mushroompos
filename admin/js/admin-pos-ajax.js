@@ -2541,7 +2541,7 @@ function printPaymentDineReceipt(payment){
 		obj.onreadystatechange = function(){
 			if(this.readyState==4 && this.status==200){					
 				//alert("Success");
-				alert(this.responseText);
+				// alert(this.responseText);
 				if(this.responseText!="error"){												
 
 					document.getElementById('cartQuantity').firstChild.data = "+"+1;
