@@ -169,7 +169,7 @@ function newOrder(orderType){
 					
 				}
 				else if(this.responseText=="Take out"){
-					document.getElementById("print-button").value= "Take-out";
+					document.getElementById("print-button-takeout").value= "Take-out";
 					document.getElementById("table-add").style.display ="none";
 					document.getElementById("id-available").style.display ="none";	
 					document.getElementById("queueDiv").classList.add("hidden");
@@ -310,7 +310,7 @@ function checkCart(){
 					document.getElementById("print-button").classList.add("disabledbutton");
 					document.getElementById("print-button-takeout").classList.add("disabledbutton");
 					document.getElementById("print-check").style.cursor = "no-drop";
-					document.getElementById("print-check-button").style.cursor = "no-drop";
+					document.getElementById("print-check-takeout").style.cursor = "no-drop";
 					document.getElementById("reserve-button").classList.add("disabledbutton");
 					document.getElementById("print-reserve").style.cursor = "no-drop";
 					document.getElementById("print-button-add").classList.add("disabledbutton");	
@@ -2325,6 +2325,7 @@ function addOrder(code){
 				document.getElementById("resetDiv").classList.add("hidden");
 				document.getElementById("divReset").classList.remove("hidden");
 				document.getElementById("paymentDiv").classList.add("hidden");
+				document.getElementById("payment-takeout-div").classList.add("hidden");
 				document.getElementById("addDiv").classList.remove("hidden");
 				document.getElementById("reserveDiv").classList.add("hidden");
 				document.getElementById("customer-name").innerHTML = "";
@@ -2924,6 +2925,7 @@ function clearCart(){
 	document.getElementById("resetDiv").classList.remove("hidden");
 	document.getElementById("divReset").classList.add("hidden");
 	document.getElementById("paymentDiv").classList.remove("hidden");
+	document.getElementById("payment-takeout-div").classList.add("hidden");
 	document.getElementById("addDiv").classList.add("hidden");
 	document.getElementById("reserveDiv").classList.add("hidden");
 	$('#clearModal').modal('hide');
