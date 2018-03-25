@@ -539,8 +539,8 @@
 						</div>			
 				</div>
 				<div id="payment-takeout-div" class="box-header with-border col-xs-6 col-md-6 hidden" style="padding-top:0px; padding-right:0px; padding-left:0px;">				  
-						<div id="print-check" class="small-box" type="button" style="background-color:#54bd9f; border-radius:0%; margin-bottom:0px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 3px;">          
-						<!--printBill(this.value);--><div onclick="checkPaymentType();"  value="" style="padding:8.5px; cursor:pointer; font-weight:bold; font-size:14pt;" id="print-button" class="small-box-footer disabledbutton"><i class="fa fa-money"></i> PAYMENT</div>
+						<div id="print-check-takeout" class="small-box" type="button" style="background-color:#54bd9f; border-radius:0%; margin-bottom:0px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 3px;">          
+						<!--printBill(this.value);--><div onclick="checkPaymentType();"  value="" style="padding:8.5px; cursor:pointer; font-weight:bold; font-size:14pt;" id="print-button-takeout" class="small-box-footer disabledbutton"><i class="fa fa-money"></i> PAYMENT</div>
 						</div>			
 				</div>
 				<div id="reserveDiv" class="box-header with-border col-xs-6 col-md-6 hidden" style="padding-top:0px; padding-right:0px; padding-left:0px;">				  

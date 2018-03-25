@@ -296,17 +296,21 @@ function checkCart(){
 					document.getElementById("payButton").classList.remove("disabledbutton");
 					document.getElementById("checkout").style.cursor = "pointer";	
 					document.getElementById("print-button").classList.remove("disabledbutton");
+					document.getElementById("print-button-takeout").classList.remove("disabledbutton");
 					document.getElementById("print-check").style.cursor = "pointer";
+					document.getElementById("print-check-takeout").style.cursor = "pointer";
 					document.getElementById("reserve-button").classList.remove("disabledbutton");
 					document.getElementById("print-reserve").style.cursor = "pointer";
 					document.getElementById("print-button-add").classList.remove("disabledbutton");
 					document.getElementById("add-check").style.cursor = "pointer";					
 				}
-				else{										
+				else{				
 					document.getElementById("payButton").classList.add("disabledbutton");
 					document.getElementById("checkout").style.cursor = "no-drop";	
 					document.getElementById("print-button").classList.add("disabledbutton");
+					document.getElementById("print-button-takeout").classList.add("disabledbutton");
 					document.getElementById("print-check").style.cursor = "no-drop";
+					document.getElementById("print-check-button").style.cursor = "no-drop";
 					document.getElementById("reserve-button").classList.add("disabledbutton");
 					document.getElementById("print-reserve").style.cursor = "no-drop";
 					document.getElementById("print-button-add").classList.add("disabledbutton");	
