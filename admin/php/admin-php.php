@@ -3653,15 +3653,18 @@
 				$sql2 = "Select * from mushroom_queue_orders where queue_code = '$code' and queue_paid = 'No' ";
 				$exist2 = $db->checkExist($sql2);
 					if($exist2){
-						$row2 = $db->fetch_array($exist2);
-						$cartItems2 = $row2['orders_quantity'];
-						$food_price2 = $row2['orders_price'];
-						$subtotal2 = $row2['orders_subtotal'];
-						$foodName2 = $row2['orders_foods'];
-						$food_price2 = number_format($food_price2,"2");
-						$subtotal2 = number_format($subtotal2,"2");
-						$subtotal2 = floatval(str_replace(",","",$subtotal2));
-						$total_price += $subtotal2;
+						while($row2 = $db->fetch_array($exist2)){
+							// $row2 = $db->fetch_array($exist2);
+							$cartItems2 = $row2['orders_quantity'];
+							$food_price2 = $row2['orders_price'];
+							$subtotal2 = $row2['orders_subtotal'];
+							$foodName2 = $row2['orders_foods'];
+							$food_price2 = number_format($food_price2,"2");
+							$subtotal2 = number_format($subtotal2,"2");
+							$subtotal2 = floatval(str_replace(",","",$subtotal2));
+							$total_price += $subtotal2;
+						}
+						
 					}
 				/*if(isset($_SESSION['POSCart'])){
 					foreach ($_SESSION['POSCart'] as $cart2 => $cartItems2) {
@@ -3681,7 +3684,7 @@
 						}
 					}
 				}*/
-				echo number_format($total_price,"2");
+				echo number_format($total_price,"2")."bb";
 			}
 	}
 
@@ -3758,15 +3761,18 @@
 				$sql2 = "Select * from mushroom_queue_orders where queue_code = '$code' and queue_paid = 'No' ";
 				$exist2 = $db->checkExist($sql2);
 					if($exist2){
-						$row2 = $db->fetch_array($exist2);
-						$cartItems2 = $row2['orders_quantity'];
-						$food_price2 = $row2['orders_price'];
-						$subtotal2 = $row2['orders_subtotal'];
-						$foodName2 = $row2['orders_foods'];
-						$food_price2 = number_format($food_price2,"2");
-						$subtotal2 = number_format($subtotal2,"2");
-						$subtotal2 = floatval(str_replace(",","",$subtotal2));
-						$total_price += $subtotal2;
+						while($row2 = $db->fetch_array($exist2)){
+							// $row2 = $db->fetch_array($exist2);
+							$cartItems2 = $row2['orders_quantity'];
+							$food_price2 = $row2['orders_price'];
+							$subtotal2 = $row2['orders_subtotal'];
+							$foodName2 = $row2['orders_foods'];
+							$food_price2 = number_format($food_price2,"2");
+							$subtotal2 = number_format($subtotal2,"2");
+							$subtotal2 = floatval(str_replace(",","",$subtotal2));
+							$total_price += $subtotal2;
+						}
+						
 					}
 
 				echo number_format($total_price,"2");
