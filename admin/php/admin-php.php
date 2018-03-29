@@ -4847,6 +4847,12 @@
 									$ctr = 0;
 									$subtotal = $discounted_subtotal;
 								}
+							}
+							else{
+								$subtotal = (float)$food_price * (float)$cartItems;
+								$food = $row2['orders_foods'];	
+
+								$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','No')";
 							}					
 						}
 						else{
