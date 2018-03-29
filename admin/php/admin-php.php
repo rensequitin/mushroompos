@@ -2279,7 +2279,7 @@
 			if($file_type=='jpeg' or $file_type=='jpg' or $file_type=='png'){
 				if($file_size>0 && $file_size<=2148000){
 					$location="foods/$pic_name";
-					$location2="../foods/$pic_name";
+					$location2="../../foods/$pic_name";
 
 					$sql = "UPDATE mushroom_foods SET food_image='$location' WHERE food_code ='$code'";
 					$exist = $db->checkExist($sql) or die(mysql_error());
