@@ -87,11 +87,7 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-shopping-cart"></i>
-              <span class="label label-danger" id="label-message">0</span>
-            </a>
+          <li class="dropdown messages-menu">            
            <ul class="dropdown-menu">
               <li class="header" id="header"></li>
               <li>
@@ -105,13 +101,13 @@
        
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo $pic; ?>" class="user-image" alt="User Image">
-              <span class="hidden-xs">Lorenzo</span>
+              <img src="<?php echo "../".$pic; ?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $name;?></span>
             </a>
             <ul class="dropdown-menu">
 
               <li class="user-header">
-                <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+                <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $name." ".$LName;?> - Administrator
@@ -145,7 +141,7 @@
 
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+          <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $name." ".$LName;?></p>
@@ -287,7 +283,7 @@
             <div class="box-header with-border">           
 				<h3 class="text-center"><i class="fa fa-user-circle-o">&emsp;Profile Picture</i></h3>
 				<hr>
-				<img src="<?php echo $pic; ?>" style="height:208px; width:200px;" class="dp img-thumbnail center-block">
+				<img src="<?php echo "../".$pic; ?>" style="height:208px; width:200px;" class="dp img-thumbnail center-block">
 				<button onclick="changePic();" class="btn btn-primary center-block">Change picture</button>
             </div>             
           </div>  

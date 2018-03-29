@@ -1885,7 +1885,7 @@
 								echo "same";
 							}
 							else{
-								$sql1 = "Insert into mushroom_foods values('$foodCode','$name','$category','$price','$date','foods/sizzling_mushroom.png','Active','No','$secs')";
+								$sql1 = "Insert into mushroom_foods values('$foodCode','$name','$category','$price','$date','foods/default-image.png','Active','No','$secs')";
 								$exist1 = $db->checkExist($sql1) or die(mysql_error());
 									if($exist1){
 										echo "Successful";
