@@ -30,19 +30,39 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!--Sweet alert -->
   <script src="dist/sweetalert2.all.min.js"></script>
-  <link rel="stylesheet" href="css/admin-profile-css.css">
   <!--iziToast-->
   <script src="iziToast-master/dist/js/iziToast.js"> </script>
   <!--ajax-->
   <script src="js/jquery.js"> </script> 
   <script src="js/jquery.timers.js"> </script>
   <script src="js/admin-script.js"> </script>  
-  <script src="js/admin-profile-ajax.js"> </script>
+   <script src="js/admin-summary.js"> </script>
   <!-- <script src="js/admin-script.js"> </script> -->
   
  
   <style>
-
+	#modal-orders,#modal-dinein{
+		display:none;
+	}
+	.zoomIn { 
+		-webkit-animation-name: zoomIn;
+		animation-name: zoomIn;
+		-webkit-animation-duration: .5s;
+		animation-duration: .5s;
+	}
+	.modal-open {
+		overflow-y: scroll;
+	}
+	div.mousescroll { overflow-y: auto; }
+	.mousescroll::-webkit-scrollbar { width: 4px; }
+	.mousescroll::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+		border-radius: 10px;
+	}
+	.mousescroll::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+	}
   </style>
 </head>
 <body class=".sw-active hold-transition skin-blue sidebar-mini fixed">
@@ -61,12 +81,10 @@
 					$row = $db->fetch_array($exist);
 					$name = $row['admin_firstname'];
 					$LName = $row['admin_lastname'];
-					$email = $row['admin_email'];
 					$user = $row['admin_username'];
 					$pic = $row['admin_picture'];
 				}	
 		}
-
 
 ?>
 <div class="wrapper">
@@ -86,32 +104,16 @@
       </a>
 
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-shopping-cart"></i>
-              <span class="label label-danger" id="label-message">0</span>
-            </a>
-           <ul class="dropdown-menu">
-              <li class="header" id="header"></li>
-              <li>
-                <ul class="menu" id="menu">
-                                    
-                </ul>
-              </li>
-              <li class="footer"><a href="#" onclick='location.href="admin-pending-orders.php"; return false;'>See All Messages</a></li>
-            </ul>
-          </li>
-       
+        <ul class="nav navbar-nav">      
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo $pic; ?>" class="user-image" alt="User Image">
-              <span class="hidden-xs">Lorenzo</span>
+              <img src="<?php echo "../".$pic; ?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $name; ?></span>
             </a>
             <ul class="dropdown-menu">
 
               <li class="user-header">
-                <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+                <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $name." ".$LName;?> - Administrator
@@ -145,7 +147,7 @@
 
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+          <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $name." ".$LName;?></p>
@@ -198,7 +200,7 @@
             <i class="fa fa-user-plus"></i> <span>Users</span>           
           </a>
         </li>
-        <li class="treeview">
+		<li class="treeview active">
           <a href="#">
             <i class="fa fa-bar-chart"></i> <span>Reports</span> 
             <span class="pull-right-container">
@@ -207,9 +209,11 @@
           </a>
           <ul class="treeview-menu">
 			<li><a href="admin-reports.php"><i class="fa fa-circle-o"></i> Sales </a></li>
-			<li><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
+			<li class="active"><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
           </ul>
-        </li>    
+        </li>
+        
+              
       </ul>
     </section>
 
@@ -282,68 +286,77 @@
 	  
       <div class="row">
         <div class="col-md-12">
-        <div class="col-md-4">
-          <div class="box box-default">
-            <div class="box-header with-border">           
-				<h3 class="text-center"><i class="fa fa-user-circle-o">&emsp;Profile Picture</i></h3>
-				<hr>
-				<img src="<?php echo $pic; ?>" style="height:208px; width:200px;" class="dp img-thumbnail center-block">
-				<button onclick="changePic();" class="btn btn-primary center-block">Change picture</button>
-            </div>             
-          </div>  
-        </div>        
-		<div class="col-md-8">
-          <div class="box box-default">
-            <div class="box-header with-border"> 
-			<button class="btn btn-secondary pull-right" id="changepw" data-toggle="modal" data-target="#changePW">change password</button>
-			<h3 class="text-center">My Account</i></h3>
-             <hr>     
-			<p><strong>Personal Information</strong></p>			
- 			<div class="col-md-12"> 
-				<input type="text" class="form-control input-md" id="FirstName" onclick='this.select();' value='<?php echo $name; ?>' placeholder="First name" onfocus="this.placeholder=''" onblur="this.placeholder ='First name'"> 
-			</div> 	
-			<div class="col-md-12"> 
-				<input type="text" class="form-control input-md" id="LastName" onclick='this.select();' value='<?php echo $LName; ?>' placeholder="Last name" onfocus="this.placeholder=''" onblur="this.placeholder ='Last name'"> 
-			</div>		
-			<div class="col-md-12"> 
-				<input type="email" class="form-control input-md" id="EmailAddress" onclick='this.select();' value='<?php echo $email; ?>' placeholder="Email" onfocus="this.placeholder=''" onblur="this.placeholder ='Email'"> 
-			</div>			
-			<div class="col-md-12"> 
-				<input type="text" class="form-control input-md" id="Username" onclick='this.select();' value='<?php echo $user; ?>' placeholder="Username" onfocus="this.placeholder=''" onblur="this.placeholder ='Username'"> 
-			</div>
-			<button class="btn btn-success pull-right" onclick="updateProfile();"><i class="fa fa-save"></i> Update</button>
-            </div> 
-          </div>  
-        </div>
+          <div class="box box-primary">
+            <div class="box-header with-border">
+             
+			<h3 style="margin-top:0px;"align="center"><i class="fa fa-list-alt"></i> Reports/Summary</h3>
+              
+            </div>            
+            <div class="box-body no-padding">				  
+				<div class="form-group" style="display:block;" align="center">
+                <label>Date range:</label>
+
+                <div class="input-group col-xs-3">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input onchange="changeSales();" type="text" class="form-control pull-right" id="reservation">
+                </div>
+                <!-- /.input group -->
+              </div>	
+				<!--<div class="form-group" style="display:block;" align="center">
+					<label>Date range button:</label>
+
+					<div class="input-group">
+						 <button type="button" class="btn btn-default pull-right" id="daterange-btn">
+						<span id="date-range">
+							<i class="fa fa-calendar"></i> Date range picker
+						</span>
+							<i class="fa fa-caret-down"></i>
+						</button>
+					</div>
+				</div>-->
+									 
+              <div class="table-responsive mousescroll" style=" height:225px; overflow-y:scroll; ">
+                <table class="table table-hover table-striped" >
+				  <thead style="background-color:#e9f0f5; ">
+					<tr>						
+						<th class='col-xs-6' style="text-align:center;"><b>Products</b></th>
+						<th style="text-align:center;"><b>Quantity</b> </th>					
+					 </tr>
+				  </thead>
+                  <tbody id="sales-table" style="text-align:center;">
+       
+                  </tbody>
+				  			
+                </table>
+				
+              </div>   
+				<table class="table table-hover table-striped" >				 
+                  </tbody>
+				  	<tfoot>
+						
+						<tr style="font-size:15pt;">														
+							
+							<td class="col-xs-8" align="center">
+							<a download="sales.pdf" href="admin-summary-reports.php" type="button" class="btn btn-danger">
+								<i class="fa fa-file-pdf-o fa-lg" style="padding-right:2px;"></i> Download pdf
+							</a>
+							<a onclick="window.open('admin-summary-reports.php', 'newwindow', 'width=1366,height=662'); return false;" type="button" class="btn btn-default"><!--target="_new" href="admin-sales.php"-->
+								<i class="fa fa-eye fa-lg" style="padding-right:2px;"></i> View in pdf
+							</a></td>
+							<!--<td class="col-xs-3" align="right"><strong>Total</strong>: </td>
+							<td id="sales-total"> 0.00</td>-->
+						</tr>
+					</tfoot>		
+                </table>			  
+            </div>
+         
+          </div>
         </div>
       </div>
     </section>
-	<!-- Modal for change password-->
-	<div id="changePW" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
-		<!-- Modal content-->
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h4 class="modal-title pull-left">Change password</h4>
-		  </div>
-		  <div class="modal-body">
-		 	<div class="col-md-12"> 
-				<input type="password" class="form-control input-md" id="currentpass" placeholder="Current password" onfocus="this.placeholder=''" onblur="this.placeholder ='Current password'"> 
-			</div>		
-			<div class="col-md-12"> 
-				<input type="password" class="form-control input-md" id="newpass" placeholder="New password" onfocus="this.placeholder=''" onblur="this.placeholder ='New password'"> 
-			</div>		
-			<div class="col-md-12" style="margin-bottom: 2%;"> 
-				<input type="password" class="form-control input-md" id="conpass" placeholder="Confirm new password" onfocus="this.placeholder=''" onblur="this.placeholder ='Confirm new password'"> 
-			</div>
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" onclick="savePass();" class="btn btn-success btn-block">Save</button>
-		  </div>
-		</div>
-	  </div>
-	</div>
+	
   </div>
   
   <footer class="main-footer">
@@ -359,36 +372,6 @@
 	</div>
   </aside>
   
-  <div class="modal fade" data-backdrop="static" data-keyboard="false" style="padding-top:100px;"id="editphoto" role="dialog">				
-		<div class="modal-dialog modal-sm">		
-			<div class="modal-content" id="editphotoanimate" style="border-radius:3pt;">
-				<div class="modal-header" align="center">
-					<button type="button" class="close" onclick='closeEditPhoto();'>&times;</button>
-					
-				</div>
-				<div class="modal-body" style="text-align:center;">
-					Once you update your photo,
-					your current photo will be replaced.
-					<div class="imageInput">
-						<form id="form-data" enctype='multipart/form-data'>
-							<input style="display:none;" id="upload-file" name='myfile' type="file" />
-							<div class="col-xs-12">
-								<input type="text" class="form-control input-md" id='file-label' readonly placeholder="NO FILES">
-							</div>
-							<img id="file-delete" src="images/icon-delete.png" width="30" height="28">
-							<img id="file-attach" src="images/icon-attach.png" width="30" height="28">													
-							<!--<input type="file" name="pic" id="imageUpload" style="display: none;">-->
-							<label>File type: jpg, png</label>
-						</form>
-					</div>
-				</div>
-				<div class="modal-footer" style=" text-align:center;">	
-					<button id="edit-button-value" onclick="uploadPic('form-data');" class="btn btn-success"><i style="padding-right:3px;" class="fa fa-floppy-o"></i>UPDATE</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	
   <div class="modal fade" data-backdrop="static" data-keyboard="false" style="padding-top:100px;"id="alertModal" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content" id="alertModalAnimate" style="border-radius:3pt;">

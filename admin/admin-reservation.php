@@ -22,10 +22,6 @@
   <!--animate-->
   <link rel="stylesheet" href="css/normalize.min.css">
   <link rel="stylesheet" href="css/animate.min.css">
-    <!-- daterange picker -->
-  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!--Sweet alert -->
@@ -36,7 +32,7 @@
   <script src="js/jquery.js"> </script> 
   <script src="js/jquery.timers.js"> </script>
   <script src="js/admin-script.js"> </script>  
-   <script src="js/admin-summary.js"> </script>
+   <script src="js/admin-reservation.js"> </script>
   <!-- <script src="js/admin-script.js"> </script> -->
   
  
@@ -44,25 +40,10 @@
 	#modal-orders,#modal-dinein{
 		display:none;
 	}
-	.zoomIn { 
-		-webkit-animation-name: zoomIn;
-		animation-name: zoomIn;
-		-webkit-animation-duration: .5s;
-		animation-duration: .5s;
+	#data-table_wrapper > .row{
+		margin:0px;	
 	}
-	.modal-open {
-		overflow-y: scroll;
-	}
-	div.mousescroll { overflow-y: auto; }
-	.mousescroll::-webkit-scrollbar { width: 4px; }
-	.mousescroll::-webkit-scrollbar-track {
-		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-		border-radius: 10px;
-	}
-	.mousescroll::-webkit-scrollbar-thumb {
-		border-radius: 10px;
-		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-	}
+
   </style>
 </head>
 <body class=".sw-active hold-transition skin-blue sidebar-mini fixed">
@@ -86,6 +67,7 @@
 				}	
 		}
 
+
 ?>
 <div class="wrapper">
 
@@ -104,32 +86,16 @@
       </a>
 
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-shopping-cart"></i>
-              <span class="label label-danger" id="label-message">0</span>
-            </a>
-           <ul class="dropdown-menu">
-              <li class="header" id="header"></li>
-              <li>
-                <ul class="menu" id="menu">
-                                    
-                </ul>
-              </li>
-              <li class="footer"><a href="#" onclick='location.href="admin-pending-orders.php"; return false;'>See All Messages</a></li>
-            </ul>
-          </li>
-       
+        <ul class="nav navbar-nav">        
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo $pic; ?>" class="user-image" alt="User Image">
-              <span class="hidden-xs">Lorenzo</span>
+              <img src="<?php echo "../".$pic; ?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $name; ?></span>
             </a>
             <ul class="dropdown-menu">
 
               <li class="user-header">
-                <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+                <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $name." ".$LName;?> - Administrator
@@ -163,7 +129,7 @@
 
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+          <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $name." ".$LName;?></p>
@@ -178,17 +144,17 @@
             <i class="fa fa-desktop"></i> <span>Point Of Sale</span>           
           </a>
         </li>
-        <li class="treeview">
+        <li class="treeview active">
           <a href="#">
             <i class="fa fa-inbox"></i> <span>Orders</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
+		  <ul class="treeview-menu">
 			<li><a href="admin-orders.php"><i class="fa fa-circle-o"></i> View Orders</a></li>
 			<li><a href="admin-pending-orders.php"><i class="fa fa-circle-o"></i> Pending Deliveries</a></li>            
-			<li><a href="admin-reservation.php"><i class="fa fa-circle-o"></i> Reservations</a></li>
+			<li class="active"><a href="admin-reservation.php"><i class="fa fa-circle-o"></i> Reservations</a></li>           
           </ul>
         </li>
       
@@ -216,7 +182,7 @@
             <i class="fa fa-user-plus"></i> <span>Users</span>           
           </a>
         </li>
-		<li class="treeview active">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-bar-chart"></i> <span>Reports</span> 
             <span class="pull-right-container">
@@ -225,11 +191,9 @@
           </a>
           <ul class="treeview-menu">
 			<li><a href="admin-reports.php"><i class="fa fa-circle-o"></i> Sales </a></li>
-			<li class="active"><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
+			<li><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
           </ul>
-        </li>
-        
-              
+        </li>     
       </ul>
     </section>
 
@@ -304,68 +268,83 @@
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
-             
-			<h3 style="margin-top:0px;"align="center"><i class="fa fa-list-alt"></i> Reports/Summary</h3>
+             <!-- <h3 class="box-title">Orders</h3>-->
+			 <div class="box-body no-padding">
+				<ul style='padding:0px;' class="nav nav-pills nav-stacked">
+					<li style='padding-left:0px; padding-right:0px; box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.26); ' class="active col-xs-2 pull-left"><a onclick='return false;' href="#"><i class="fa fa-inbox"></i> Orders</a></li><!--<span class="label label-primary pull-right">12</span>-->
+					<!--<li style='padding-left:0px; padding-right:0px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.26); ' class="col-xs-2 pull-left"><a onclick='return false;' href="#"><i class="fa fa-trash-o"></i> Trash</a></li>-->
+				</ul>
+			  </div>
               
             </div>            
-            <div class="box-body no-padding">				  
-				<div class="form-group" style="display:block;" align="center">
-                <label>Date range:</label>
-
-                <div class="input-group col-xs-3">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
+            <div class="box-body no-padding">
+              <div class="mailbox-controls">                  
+                <button onclick="view_table();" type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                <!--<div class="pull-right">
+                  1-50/200
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
                   </div>
-                  <input onchange="changeSales();" type="text" class="form-control pull-right" id="reservation">
-                </div>
-                <!-- /.input group -->
-              </div>	
-				<!--<div class="form-group" style="display:block;" align="center">
-					<label>Date range button:</label>
-
-					<div class="input-group">
-						 <button type="button" class="btn btn-default pull-right" id="daterange-btn">
-						<span id="date-range">
-							<i class="fa fa-calendar"></i> Date range picker
-						</span>
-							<i class="fa fa-caret-down"></i>
-						</button>
-					</div>
-				</div>-->
-									 
-              <div class="table-responsive mousescroll" style=" height:225px; overflow-y:scroll; ">
-                <table class="table table-hover table-striped" >
-				  <thead style="background-color:#e9f0f5; ">
-					<tr>						
-						<th class='col-xs-6' style="text-align:center;"><b>Products</b></th>
-						<th style="text-align:center;"><b>Quantity</b> </th>					
+     
+                </div>-->
+				<div class="box-tools pull-right">
+					<!--<div class="has-feedback">
+					  <input type="text" class="form-control input-sm" placeholder="Search by order no." />
+					  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+					</div>-->
+				</div>
+              </div>
+             <!-- <div class="table-responsive">
+                <table class="table table-hover table-striped">
+				<thead style="background-color:#e9f0f5;">
+					<tr>
+						<th></th>
+						<th><a style='cursor:default;' onclick='return false;' href='#'>Order No.</a></th>
+						<th><b>Customer</b> </th>
+						<th><b>Order Type</b> - Orders</th>
+						<th>Time</th>
+						<th>Date</th>
+						<th>Action</th>
 					 </tr>
 				  </thead>
-                  <tbody id="sales-table" style="text-align:center;">
-       
+                  <tbody id="pending-table">
+                  <!--<tr>
+                    <td></td>
+                    <td><a style='cursor:default;' onclick='return false;' href='#'>DLV212331</a></td>
+					<td><b>Lorenzo Sequitin</b> 
+                    <td><b>DeliveryDLV212331</b> - Mushroom Sisig, Sizzling Sisig, Mush...</td>
+                    <td>12:27 PM</td>
+                    <td>5 mins ago</td>
+					<td><button onclick='view_orders();' type='button' style='border-radius:2em;' class='btn btn-default btn-sm'><i class='fa fa-search'></i> View</button></td>
+                  </tr>//
+				 
                   </tbody>
-				  			
                 </table>
-				
-              </div>   
-				<table class="table table-hover table-striped" >				 
+              </div> -->
+			 <div class="table-responsive">
+                <table id="data-table" class="table table-hover table-striped">
+				  <thead style="background-color:#e9f0f5;">
+					<tr>
+						<th></th>
+						<!--<th><a style='cursor:default;' onclick='return false;' href='#'>Order No.</a></th>-->
+						<th><b>Customer</b> </th>
+						<th><b>Order Type</b> - Orders</th>
+						<th>Time</th>
+						<th>Date</th>
+						<th>Action</th>
+					 </tr>
+				  </thead>
+                 <tbody id="pending-table">
+					
                   </tbody>
-				  	<tfoot>
-						
-						<tr style="font-size:15pt;">														
-							
-							<td class="col-xs-8" align="center">
-							<a download="sales.pdf" href="admin-summary-reports.php" type="button" class="btn btn-danger">
-								<i class="fa fa-file-pdf-o fa-lg" style="padding-right:2px;"></i> Download pdf
-							</a>
-							<a onclick="window.open('admin-summary-reports.php', 'newwindow', 'width=1366,height=662'); return false;" type="button" class="btn btn-default"><!--target="_new" href="admin-sales.php"-->
-								<i class="fa fa-eye fa-lg" style="padding-right:2px;"></i> View in pdf
-							</a></td>
-							<!--<td class="col-xs-3" align="right"><strong>Total</strong>: </td>
-							<td id="sales-total"> 0.00</td>-->
-						</tr>
-					</tfoot>		
-                </table>			  
+                </table>
+				<div id="spinner" style="position:relative; top:-150px;">
+					<div class="bounce1"></div>
+					<div class="bounce2"></div>
+					<div class="bounce3"></div>
+				</div>
+              </div>
             </div>
          
           </div>
@@ -387,28 +366,6 @@
 		</div>
 	</div>
   </aside>
-  
-  <div class="modal fade" data-backdrop="static" data-keyboard="false" style="padding-top:100px;"id="alertModal" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content" id="alertModalAnimate" style="border-radius:3pt;">
-        <div class="modal-header" style="background-color:#e66454;color:#fff;" align="center">
-          <button type="button" class="close" onclick='closeAlert();'>&times;</button><!--data-dismiss="modal"-->
-		  <i class="fa fa-warning fa-2x"></i>
-          <h3 id='orders-label'  class="modal-title"> Alert</h3>
-        </div>
-		
-        <div class="modal-body" style="text-align:center;">
-			This action requires your confirmation. Please choose and option:
-        </div>
-        <div class="modal-footer" style=" text-align:center;">		
-		<button onclick="archiveOrder(this.name);" name="" id='archive-button' type="button" class="btn btn-danger">
-			<i class="fa fa-trash-o fa-lg"></i> Delete
-		</button>
-				
-        </div>
-      </div>
-    </div>
-  </div>
 	
   
 
@@ -491,7 +448,17 @@
 						  </div>
 						</div>
 						
+						<div class="col-xs-12" style="position:absolute; bottom:40px; text-align:center; padding-top:25px;">
+						
+								<!--<button type="button" class="quantity-plus btn btn-default btn-number">
+									<i  class="fa fa-ban"></i><span>  Cancel Order</span>
+								</button>-->
 					
+								<button onclick="queueDelivery(this.name)" name="" id="accept-delivery" type="button" class="quantity-plus btn btn-danger btn-number"><!--onclick="printReceipt(this.name,this.value);"-->
+									<i  class="fa fa-upload"></i><span>  Accept & Queue</span>
+								</button>
+						
+						</div>
 					</div>
 				
             </div>
@@ -510,21 +477,31 @@
 						</h3>
 					</div>
 					<div class="col-xs-8 col-xs-offset-2" style="padding-top:10px; position:relative; height:535px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
-						<div class="col-xs-4">
+						<!--<div class="col-xs-6" style="text-align:left;">
 						<strong>Order No</strong>. <span id="dinein-orderno"></span>
-						</div>
-						<div class="col-xs-3 col-xs-offset-1">
+						</div>-->
+						<div class="col-xs-12" style="text-align:right;">
 							<i class="fa fa-calendar  fa-lg"> </i><span id="dinein-date">11/25/2017</span>
 						</div>
-						<div class="col-xs-3 col-xs-offset-1">
+						<!--<div class="col-xs-3 col-xs-offset-1">
 						<strong>Order Type</strong>: <span id="dinein-type"></span>
-						</div>
+						</div>-->
 						
 						
 						<div class="col-xs-12" style="padding-top:65px;">
 						  <div class="table-responsive">
 							<table class="table table-bordered">
-		
+							  <!--<caption class="text-right">
+									<a class="btn btn-default" id="buttonAdd">
+										<i style="color:#ccc;" class="fa fa-chevron-left fa-1x"></i> 
+									</a>
+								<span>
+								
+								</span>
+								<a class="btn btn-default" id="buttonAdd">
+									<i style="color:#ccc;" class="fa fa-chevron-right fa-1x"></i> 
+								</a>
+							  </caption>-->
 							  <thead>
 								<tr>
 								  <th>Food Name</th>
@@ -541,12 +518,34 @@
 								  <td colspan="2"></td>
 								  <td><strong>Total</strong>: </td>
 								  <td id="dinein-total"> 0.00</td>
-								</tr>						
+								</tr>
+								<!--<tr>
+								  <td colspan="2"></td>
+								  <td><strong>Payment</strong>: </td>
+								  <td id="review-payment"> 500.00</td>
+								</tr>
+								<tr>
+								  <td colspan="2"></td>
+								  <td><strong>Change Due</strong>: </td>
+								  <td id="review-change"> 0.00</td>
+								</tr>-->
 							  </tfoot>
 							</table>
 						  </div>
 						</div>
-									
+						
+						<div class="col-xs-12" style="position:absolute; bottom:40px; text-align:center; padding-top:25px;">
+						
+								<button type="button" class="quantity-plus btn btn-default btn-number">
+									<i  class="fa fa-ban"></i><span>  Cancel Order</span>
+								</button>
+						
+					
+								<button onclick="moveReservation(this.name)" name="" id="accept-dinein" type="button" class="quantity-plus btn btn-danger btn-number"><!--onclick="printReceipt(this.name,this.value);"-->
+									<i  class="fa fa-upload"></i><span>  Accept & Queue</span>
+								</button>
+						
+						</div>
 					</div>
 				
             </div>
@@ -561,30 +560,10 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 
-<script src="plugins/input-mask/jquery.inputmask.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
-<!-- date-range-picker -->
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <!--iziToast-->
 <script src="js/animatedModal.js"></script>
 <script>
-$.fn.extend({
-    animateCss: function (animationName, callback) {
-        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-        this.addClass('animated ' + animationName).one(animationEnd, function() {
-            $(this).removeClass('animated ' + animationName);
-            if (callback) {
-              callback();
-            }
-        });
-        return this;
-    }
-});
 $("#show_orders").animatedModal({
 	modalTarget:'modal-orders',
     animatedIn:'slideInUp',
@@ -598,54 +577,7 @@ $("#show_dinein").animatedModal({
     color:'#e9f0f5',              
 });
 
-$(function () {
-    //Initialize Select2 Elements
-    //$('.select2').select2()
 
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-    //Money Euro
-    $('[data-mask]').inputmask()
-
-    //Date range picker
-    $('#reservation').daterangepicker()
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
-    //Date range as a button
-    $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
-      },
-      function (start, end) {
-        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
-    )
-
-    //Date picker
-    $('#datepicker').datepicker({
-      autoclose: true
-    })
-
-       
-  })
-
-
- /* $(document).ready(function(){
-	$('#date-range').on('DOMSubtreeModified',function(){
-	  alert($(this).html());
-	}) 
- }); */
 </script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
@@ -656,7 +588,9 @@ $(function () {
 <script src="dist/js/adminJS.js"></script>
 <script src="dist/js/pages/dashboard.js"></script>
 <script src="dist/js/demo.js"></script>
-
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!--sweet alert-->
 
 </body>

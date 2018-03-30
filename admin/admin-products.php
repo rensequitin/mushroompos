@@ -22,6 +22,7 @@
   <!--animate-->
   <link rel="stylesheet" href="css/normalize.min.css">
   <link rel="stylesheet" href="css/animate.min.css">
+  <link rel="stylesheet" href="css/admin-products-css.css">
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!--Sweet alert -->
@@ -31,28 +32,24 @@
   <!--ajax-->
   <script src="js/jquery.js"> </script> 
   <script src="js/jquery.timers.js"> </script>
-  <script src="js/admin-script.js"> </script>  
-   <script src="js/admin-orders.js"> </script>
-  <!-- <script src="js/admin-script.js"> </script> -->
-  
+  <script src="js/admin-script.js"> </script>    
+  <script src="js/admin-product-ajax.js"> </script>      
+
  
   <style>
-	#modal-orders,#modal-dinein{
-		display:none;
-	}
-	.zoomIn { 
-		-webkit-animation-name: zoomIn;
-		animation-name: zoomIn;
-		-webkit-animation-duration: .5s;
-		animation-duration: .5s;
-	}
-	.modal-open {
-		overflow-y: scroll;
-	}
-	#data-table_wrapper > .row{
+  #addProductAnimate{
+	  display:none;
+  }
+  #editProductAnimate{
+	  display:none;
+  }
+  #modal-review{
+	  display:none;
+  }
+  #data-table_wrapper > .row{
 		margin:0px;	
 	}
-
+  
   </style>
 </head>
 <body class=".sw-active hold-transition skin-blue sidebar-mini fixed">
@@ -95,32 +92,16 @@
       </a>
 
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-shopping-cart"></i>
-              <span class="label label-danger" id="label-message">0</span>
-            </a>
-           <ul class="dropdown-menu">
-              <li class="header" id="header"></li>
-              <li>
-                <ul class="menu" id="menu">
-                                    
-                </ul>
-              </li>
-              <li class="footer"><a href="#" onclick='location.href="admin-pending-orders.php"; return false;'>See All Messages</a></li>
-            </ul>
-          </li>
-       
+        <ul class="nav navbar-nav">                
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo $pic; ?>" class="user-image" alt="User Image">
-              <span class="hidden-xs">Lorenzo</span>
+              <img src="<?php echo "../".$pic; ?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $name; ?></span>
             </a>
             <ul class="dropdown-menu">
 
               <li class="user-header">
-                <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+                <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $name." ".$LName;?> - Administrator
@@ -154,7 +135,7 @@
 
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+          <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $name." ".$LName;?></p>
@@ -169,21 +150,21 @@
             <i class="fa fa-desktop"></i> <span>Point Of Sale</span>           
           </a>
         </li>
-        <li class="treeview active">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-inbox"></i> <span>Orders</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-			<li class="active"><a href="admin-orders.php"><i class="fa fa-circle-o"></i> View Orders</a></li>
+         <ul class="treeview-menu">
+			<li><a href="admin-orders.php"><i class="fa fa-circle-o"></i> View Orders</a></li>
 			<li><a href="admin-pending-orders.php"><i class="fa fa-circle-o"></i> Pending Deliveries</a></li>            
 			<li><a href="admin-reservation.php"><i class="fa fa-circle-o"></i> Reservations</a></li>
           </ul>
         </li>
       
-        <li class="treeview">
+        <li class="treeview active">
           <a href="#">
             <i class="fa fa-cutlery"></i> <span>Product</span>
             <span class="pull-right-container">
@@ -191,7 +172,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-			<li><a href="admin-products.php"><i class="fa fa-circle-o"></i> Products</a></li>
+			<li class="active"><a href="admin-products.php"><i class="fa fa-circle-o"></i> Products</a></li>
 			<li><a href="admin-foods.php"><i class="fa fa-circle-o"></i> Foods</a></li>           
           </ul>
         </li>
@@ -218,7 +199,7 @@
 			<li><a href="admin-reports.php"><i class="fa fa-circle-o"></i> Sales </a></li>
 			<li><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
           </ul>
-        </li>    
+        </li>  
       </ul>
     </section>
 
@@ -227,10 +208,10 @@
   </aside>
 
   <div class="content-wrapper">
-    <section class="content">
+
+	<section class="content">
 	<div class="row">	 
-		<li style="display:none;"><a id="show_orders" href="#modal-orders">Review</a></li>
-		<li style="display:none;"><a id="show_dinein" href="#modal-dinein">Review</a></li>		
+		<li style="display:none;"><a id="print_review" href="#modal-review">Review</a></li>	  
 		<div class="col-lg-3 col-sm-6 col-xs-12">
           <div class="small-box bg-aqua">
             <div class="inner">
@@ -287,61 +268,138 @@
         </div>
 		
       </div>
-	  
-	  
       <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-             
-			 <div class="box-body no-padding">
-				<ul style='padding:0px;' class="nav nav-pills nav-stacked">
-					<li onclick="location.href='admin-orders.php'" style='padding-left:0px; padding-right:0px; box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.26); ' class="active col-xs-2 pull-left"><a onclick='return false;' href="#"><i class="fa fa-inbox"></i> Orders</a></li><!--<span class="label label-primary pull-right">12</span>-->
-					<li onclick="location.href='admin-orders-archive.php'" style='padding-left:0px; padding-right:0px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.26); ' class="col-xs-2 pull-left"><a onclick='return false;' href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
-				</ul>
-			  </div>
-              
-            </div>            
-            <div class="box-body no-padding">
-              <div class="mailbox-controls">                  
-                <button onclick="view_table();" type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-				<div class="box-tools pull-right">
-                <!--<div class="has-feedback">
-                  <input type="text" onkeyup="searchOrder(this.value);" class="form-control input-sm" placeholder="Search by order no." />
-                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                </div>-->
-              </div>
-              </div>
-              <div class="table-responsive">
-                <table id="data-table" class="table table-hover table-striped">
-				  <thead style="background-color:#e9f0f5;">
-					<tr>
-						<th></th>
-						<th style="text-align:center;"><a style='cursor:default;' onclick='return false;' href='#'>Order No.</a></th>
-						<th style="text-align:center;"><b>Served by</b> </th>
-						<th style="text-align:center;"><b>Order Type</b> - Orders</th>
-						<th style="text-align:center;">Time</th>
-						<th style="text-align:center;">Date</th>
-						<th style="text-align:center;">Action</th>
-					 </tr>
-				  </thead>
-                  <tbody id="orders-table" style="text-align:center;">
-					
-                  </tbody>
-                </table>
-				<div id="spinner" style="position:relative; top:-150px;">
-					<div class="bounce1"></div>
-					<div class="bounce2"></div>
-					<div class="bounce3"></div>
-				</div>
-              </div>              
+	  <div id="addProductAnimate" class="col-md-12">
+          <div class="box box-primary" style="border-top-color:#fff; height:180px;">		
+			<!--<div class="col-xs-5"> 
+				<input id="food-category-input" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="Food Category"> 
+			</div>
+			<div class="col-xs-12">
+				<label style="padding-left:25px; color:red; font-weight:normal;">This is important! </label><label style="font-weight:normal; padding-left:2px;"> e.g."allday", "sizzlingfor3", "student"</label>
+			</div>-->
+			<div class="col-xs-5"> 
+				<input id="food-name-input" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="Food Name">
+			</div>
+			<div class="col-xs-5" style="margin-top:15px; padding-right:0px;"> 
+				<button onclick="saveProduct()" type="button" class="btn btn-info btn-number active">
+					Save
+				</button>		
+				<button id="cancel-product"  type="button" class="btn btn-danger btn-number active">
+					Cancel
+				</button>
+			</div>
+			<div class="col-xs-12">
+				<label style="padding-left:25px; font-weight:normal;">e.g. "All Day Meals", "Sizzling For 3", "Student"</label>	
+			</div>
+			<div class="col-xs-5"> 
+				<input id="food-price-input" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="True Price">
+			</div>
+			<div class="col-xs-12">
+				<label style="padding-left:25px; font-weight:normal;">e.g. "120", "50", or you can leave this empty</label>
+			</div>
+		  </div>		
+		</div>
+		 <div id="editProductAnimate" class="col-md-12">		 
+          <div class="box box-primary" style="border-top-color:#fff; height:250px;">		
+			<h3 class="box-title" style="padding-left:10px; margin-top:0px;">Product category: <label id="product-category"></label></h3>
+			<div class="col-xs-5"> 
+				<input id="food-name-value" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="Food Name">
+			</div>
+			<div class="col-xs-5" style="margin-top:15px; padding-right:0px;"> 
+				<button id="update-product" value="" onclick="updateProduct(this.value);" type="button" class="btn btn-info btn-number active">
+					Update
+				</button>		
+				<button id="cancel-edit" type="button" class="btn btn-danger btn-number active">
+					Cancel
+				</button>
+			</div>
+			<div class="col-xs-12">
+				<label style="padding-left:25px; font-weight:normal;">e.g. "All Day Meals", "Sizzling For 3", "Student"</label>	
+			</div>
+			<div class="col-xs-5"> 
+				<input id="food-price-value" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="True Price">
+			</div>
+			<div class="col-xs-12">
+				<label style="padding-left:25px; font-weight:normal;">e.g. "120", "50", or you can leave this empty</label>
+			</div>
+		  </div>		
+		</div>
+       <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header" >
+				<h3 class="box-title">Products</h3>
+				<button id="add-product" style="border-radius: 2em;" type="button" class="btn btn-info btn-number pull-right active">
+					<i class="fa fa-plus-circle fa-lg" style="padding-right:5px;"></i>Add New Product
+				</button>
             </div>
-         
+            <!-- /.box-header -->
+			 <div class="box-body">
+			 <div class="table-responsive">
+              <table id="data-table" class="table table-hover">
+                <thead style="background-color:#e9f0f5;">
+                <tr>                  
+                  <th style="text-align:center;">Product Name</th>
+                  <th style="text-align:center;">Product True Price</th>
+				  <th style="text-align:center;">Added Date</th>
+                  <th style="text-align:center;">Status</th>
+                  <th style="text-align:center;">Action</th>
+                </tr>
+                </thead>
+                <tbody align="center" id="products-table-value">
+                
+                
+                </tbody>
+               
+              </table>
+			  <div id="spinner" style="position:relative; top:-150px;">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			  </div>
+			  </div>
+            </div>
+            <!--<div class="box-body">
+              <table id="data-table" class="table table-hover">
+                <thead style="background-color:#e9f0f5;">
+                <tr>                  
+                  <th style="text-align:center;">Product Name</th>
+                  <th style="text-align:center;">Product Estimated Price</th>
+				  <th style="text-align:center;">Added Date</th>
+                  <th style="text-align:center;">Status</th>
+                  <th style="text-align:center;">Action</th>
+                </tr>
+                </thead>
+                <tbody align="center" id="products-table-value">
+            
+                </tbody>
+              </table>
+            </div>-->
           </div>
+		      <!--<tr>
+                  <td>All Day Meals</td>
+                  <td>120</td>
+                  <td>November 20, 2017</td>
+                  <td><span class="input-group-btn">
+					<button style="border-top-left-radius: 2em; border-right:none; border-bottom-left-radius: 2em;" type="button" class="btn btn-info btn-number active">
+						Active
+					</button>
+					<button style="border-top-right-radius: 2em; border-left:none; border-bottom-right-radius: 2em;" type="button" class="btn btn-danger btn-number">
+						Inactive
+					</button>
+				</span></td>
+                  <td><span class="input-group-btn">
+					<button style="border-radius: 2em;" type="button" class="btn btn-info btn-number">
+						<i class="fa fa-edit"></i>Edit
+					</button>					
+					<button style="border-radius: 2em; margin-left:5px;" type="button" class="btn btn-danger btn-number">
+						<i class="fa fa-trash-o"> </i>Delete
+					</button>
+				</span></td>
+                </tr>-->
         </div>
-      </div>
+        </div>
+      
     </section>
-	
   </div>
   
   <footer class="main-footer">
@@ -356,7 +414,7 @@
 		</div>
 	</div>
   </aside>
-  
+
   <div class="modal fade" data-backdrop="static" data-keyboard="false" style="padding-top:100px;"id="alertModal" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content" id="alertModalAnimate" style="border-radius:3pt;">
@@ -370,25 +428,25 @@
 			This action requires your confirmation. Please choose and option:
         </div>
         <div class="modal-footer" style=" text-align:center;">		
-		<button onclick="archiveOrder(this.name);" name="" id='archive-button' type="button" class="btn btn-danger">
-			<i class="fa fa-trash-o fa-lg"></i> Delete
-		</button>
-				
+			<a id="" onclick="deleteProduct(this.id); return false;" class="del-product btn btn-danger active" href="#">
+				<i class="fa fa-trash-o fa-lg"></i> Delete
+			</a>			
         </div>
       </div>
     </div>
-  </div>
-	
+  </div>  
   
 
-	<div id="modal-orders">   
+	<div id="modal-review">
+   
+            
             
             <div class="modal-content" style="background-color:pink; margin-top:15px;">
                 
 				 
 					<div class="col-xs-8 col-xs-offset-2" style="position:relative; height:65px; background-color:#34454f; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 3px 3px 0px 3px;">						
 						<h3 id='orders-label' style="color:#fff;">Order Details
-						<button type="button" style="position:relative; top:-4px; border-radius:12pt; background-color:#f97a78; border-color:#f97a78; " class="close-modal-orders btn btn-danger btn-number pull-right">
+						<button type="button" style="position:relative; top:-4px; border-radius:12pt; background-color:#f97a78; border-color:#f97a78; " class="close-modal-review btn btn-danger btn-number pull-right">
 							CLOSE
 						</button>
 						</h3>
@@ -397,27 +455,17 @@
 						<div class="col-xs-4">
 						<strong>Order No</strong>. <span id="review-orderno"></span>
 						</div>
-						<div class="col-xs-3 col-xs-offset-1">
+						<div class="col-xs-2 col-xs-offset-1">
 							<i class="fa fa-calendar  fa-lg"> </i><span id="review-date">11/25/2017</span>
 						</div>
-						<div class="col-xs-3 col-xs-offset-1">
-						<strong>Order Type</strong>: <span id="review-type"></span>
+						<div class="col-xs-3 col-xs-offset-2">
+						<strong>Total Amount</strong>: <span id="review-total-top">143.00</span>
 						</div>
-						<div style='padding-top:15px;' class="col-xs-4">
-						<strong>Name</strong>. <span id="review-name"></span>
-						</div>
-						<div style='padding-top:15px;' class="col-xs-4">
-						<strong>Address</strong>. <span id="review-address"></span>
-						</div>
-						<div style='padding-top:15px;' class="col-xs-4">
-						<strong>Contact No</strong>. <span id="review-contact"></span>
-						</div>
-					
 						
-						<div class="col-xs-12" style="padding-top:65px;">
+						<div class="col-xs-12" style="padding-top:25px;">
 						  <div class="table-responsive">
 							<table class="table table-bordered">
-							  <!--<caption class="text-right">
+							  <caption class="text-right">
 									<a class="btn btn-default" id="buttonAdd">
 										<i style="color:#ccc;" class="fa fa-chevron-left fa-1x"></i> 
 									</a>
@@ -427,7 +475,7 @@
 								<a class="btn btn-default" id="buttonAdd">
 									<i style="color:#ccc;" class="fa fa-chevron-right fa-1x"></i> 
 								</a>
-							  </caption>-->
+							  </caption>
 							  <thead>
 								<tr>
 								  <th>Food Name</th>
@@ -443,9 +491,9 @@
 								<tr>
 								  <td colspan="2"></td>
 								  <td><strong>Total</strong>: </td>
-								  <td id="review-total"> 0.00</td>
+								  <td id="review-total"> 400.00</td>
 								</tr>
-								<!--<tr>
+								<tr>
 								  <td colspan="2"></td>
 								  <td><strong>Payment</strong>: </td>
 								  <td id="review-payment"> 500.00</td>
@@ -454,68 +502,24 @@
 								  <td colspan="2"></td>
 								  <td><strong>Change Due</strong>: </td>
 								  <td id="review-change"> 0.00</td>
-								</tr>-->
+								</tr>
 							  </tfoot>
 							</table>
 						  </div>
 						</div>
+						
+						<div class="col-xs-12" style="position:absolute; bottom:40px; text-align:center; padding-top:25px;">
+						
+								<button type="button" class="quantity-plus btn btn-default btn-number">
+									<i  class="fa fa-upload"></i><span>  Accept</span>
+								</button>
 						
 					
-					</div>
-				
-            </div>
-        </div>
-		
-		<div id="modal-dinein">   
-            
-            <div class="modal-content" style="background-color:pink; margin-top:15px;">
-                
-				 
-					<div class="col-xs-8 col-xs-offset-2" style="position:relative; height:65px; background-color:#34454f; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 3px 3px 0px 3px;">						
-						<h3 id='orders-label' style="color:#fff;">Order Details
-						<button type="button" style="position:relative; top:-4px; border-radius:12pt; background-color:#f97a78; border-color:#f97a78; " class="close-modal-dinein btn btn-danger btn-number pull-right">
-							CLOSE
-						</button>
-						</h3>
-					</div>
-					<div class="col-xs-8 col-xs-offset-2" style="padding-top:10px; position:relative; height:535px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
-						<div class="col-xs-4">
-						<strong>Order No</strong>. <span id="dinein-orderno"></span>
-						</div>
-						<div class="col-xs-3 col-xs-offset-1">
-							<i class="fa fa-calendar  fa-lg"> </i><span id="dinein-date">11/25/2017</span>
-						</div>
-						<div class="col-xs-3 col-xs-offset-1">
-						<strong>Order Type</strong>: <span id="dinein-type"></span>
-						</div>
+								<button type="button" value="1" name="" onclick="printReceipt(this.name,this.value);" id="accept-print" class="quantity-plus btn btn-danger btn-number">
+									<i  class="fa fa-print"></i><span>  Accept & Print</span>
+								</button>
 						
-						
-						<div class="col-xs-12" style="padding-top:65px;">
-						  <div class="table-responsive">
-							<table class="table table-bordered">
-		
-							  <thead>
-								<tr>
-								  <th>Food Name</th>
-								  <th>Quantity</th>
-								  <th>Price</th>
-								  <th>Total</th>
-								</tr>
-							  </thead>
-							  <tbody id="dinein-table">																
-								
-							  </tbody>
-							  <tfoot>
-								<tr>
-								  <td colspan="2"></td>
-								  <td><strong>Total</strong>: </td>
-								  <td id="dinein-total"> 0.00</td>
-								</tr>						
-							  </tfoot>
-							</table>
-						  </div>
 						</div>
-									
 					</div>
 				
             </div>
@@ -529,31 +533,15 @@
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <!--iziToast-->
 <script src="js/animatedModal.js"></script>
 <script>
-$.fn.extend({
-    animateCss: function (animationName, callback) {
-        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-        this.addClass('animated ' + animationName).one(animationEnd, function() {
-            $(this).removeClass('animated ' + animationName);
-            if (callback) {
-              callback();
-            }
-        });
-        return this;
-    }
-});
-$("#show_orders").animatedModal({
-	modalTarget:'modal-orders',
-    animatedIn:'slideInUp',
-    animatedOut:'slideOutDown',
-    color:'#e9f0f5',              
-});
-$("#show_dinein").animatedModal({
-	modalTarget:'modal-dinein',
+$("#print_review").animatedModal({
+	modalTarget:'modal-review',
     animatedIn:'slideInUp',
     animatedOut:'slideOutDown',
     color:'#e9f0f5',              
@@ -570,9 +558,8 @@ $("#show_dinein").animatedModal({
 <script src="dist/js/adminJS.js"></script>
 <script src="dist/js/pages/dashboard.js"></script>
 <script src="dist/js/demo.js"></script>
-<!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.7.3.custom.min.js"></script>
+<script src="js/script.js"> </script>
 <!--sweet alert-->
 
 </body>

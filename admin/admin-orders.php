@@ -22,10 +22,6 @@
   <!--animate-->
   <link rel="stylesheet" href="css/normalize.min.css">
   <link rel="stylesheet" href="css/animate.min.css">
-    <!-- daterange picker -->
-  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <!--Sweet alert -->
@@ -36,7 +32,7 @@
   <script src="js/jquery.js"> </script> 
   <script src="js/jquery.timers.js"> </script>
   <script src="js/admin-script.js"> </script>  
-   <script src="js/admin-reports.js"> </script>
+   <script src="js/admin-orders.js"> </script>
   <!-- <script src="js/admin-script.js"> </script> -->
   
  
@@ -53,16 +49,10 @@
 	.modal-open {
 		overflow-y: scroll;
 	}
-	div.mousescroll { overflow-y: auto; }
-	.mousescroll::-webkit-scrollbar { width: 4px; }
-	.mousescroll::-webkit-scrollbar-track {
-		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-		border-radius: 10px;
+	#data-table_wrapper > .row{
+		margin:0px;	
 	}
-	.mousescroll::-webkit-scrollbar-thumb {
-		border-radius: 10px;
-		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-	}
+
   </style>
 </head>
 <body class=".sw-active hold-transition skin-blue sidebar-mini fixed">
@@ -86,6 +76,7 @@
 				}	
 		}
 
+
 ?>
 <div class="wrapper">
 
@@ -104,32 +95,16 @@
       </a>
 
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-shopping-cart"></i>
-              <span class="label label-danger" id="label-message">0</span>
-            </a>
-           <ul class="dropdown-menu">
-              <li class="header" id="header"></li>
-              <li>
-                <ul class="menu" id="menu">
-                                    
-                </ul>
-              </li>
-              <li class="footer"><a href="#" onclick='location.href="admin-pending-orders.php"; return false;'>See All Messages</a></li>
-            </ul>
-          </li>
-       
+        <ul class="nav navbar-nav">         
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo $pic; ?>" class="user-image" alt="User Image">
-              <span class="hidden-xs">Lorenzo</span>
+              <img src="<?php echo "../".$pic; ?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $name; ?></span>
             </a>
             <ul class="dropdown-menu">
 
               <li class="user-header">
-                <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+                <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $name." ".$LName;?> - Administrator
@@ -163,7 +138,7 @@
 
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+          <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $name." ".$LName;?></p>
@@ -178,7 +153,7 @@
             <i class="fa fa-desktop"></i> <span>Point Of Sale</span>           
           </a>
         </li>
-        <li class="treeview">
+        <li class="treeview active">
           <a href="#">
             <i class="fa fa-inbox"></i> <span>Orders</span>
             <span class="pull-right-container">
@@ -186,7 +161,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-			<li><a href="admin-orders.php"><i class="fa fa-circle-o"></i> View Orders</a></li>
+			<li class="active"><a href="admin-orders.php"><i class="fa fa-circle-o"></i> View Orders</a></li>
 			<li><a href="admin-pending-orders.php"><i class="fa fa-circle-o"></i> Pending Deliveries</a></li>            
 			<li><a href="admin-reservation.php"><i class="fa fa-circle-o"></i> Reservations</a></li>
           </ul>
@@ -216,7 +191,7 @@
             <i class="fa fa-user-plus"></i> <span>Users</span>           
           </a>
         </li>
-        <li class="treeview active">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-bar-chart"></i> <span>Reports</span> 
             <span class="pull-right-container">
@@ -224,7 +199,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-			<li class="active"><a href="admin-reports.php"><i class="fa fa-circle-o"></i> Sales </a></li>
+			<li><a href="admin-reports.php"><i class="fa fa-circle-o"></i> Sales </a></li>
 			<li><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
           </ul>
         </li>    
@@ -303,79 +278,47 @@
           <div class="box box-primary">
             <div class="box-header with-border">
              
-			<h3 style="margin-top:0px;"align="center"><i class="fa fa-line-chart"></i> Reports/Sales</h3>
+			 <div class="box-body no-padding">
+				<ul style='padding:0px;' class="nav nav-pills nav-stacked">
+					<li onclick="location.href='admin-orders.php'" style='padding-left:0px; padding-right:0px; box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.26); ' class="active col-xs-2 pull-left"><a onclick='return false;' href="#"><i class="fa fa-inbox"></i> Orders</a></li><!--<span class="label label-primary pull-right">12</span>-->
+					<li onclick="location.href='admin-orders-archive.php'" style='padding-left:0px; padding-right:0px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.26); ' class="col-xs-2 pull-left"><a onclick='return false;' href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+				</ul>
+			  </div>
               
             </div>            
-            <div class="box-body no-padding">	
-					
-				<div class="form-group" style="display:block;" align="center">
-				<div class="pull-left">
-					<select onchange="changeSales()" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" name="reports_category" id="reports_category">								
-						<option selected value='All'>All</option>
-						<option value='Dine-in'>Dine-in</option>
-						<option value='Take-out'>Take-out</option>
-					</select>						
-				</div> 		
-                <label style="margin-left:-140px;">Date range:</label>
-
-                <div class="input-group col-xs-6 col-md-3" style="margin-left:-140px;">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input onchange="changeSales();" type="text" class="form-control pull-right" id="reservation">
-                </div>
-                <!-- /.input group -->
-              </div>	
-				<!--<div class="form-group" style="display:block;" align="center">
-					<label>Date range button:</label>
-
-					<div class="input-group">
-						 <button type="button" class="btn btn-default pull-right" id="daterange-btn">
-						<span id="date-range">
-							<i class="fa fa-calendar"></i> Date range picker
-						</span>
-							<i class="fa fa-caret-down"></i>
-						</button>
-					</div>
-				</div>-->
-									 
-              <div class="table-responsive mousescroll" style=" height:225px; overflow-y:scroll;">
-                <table class="table table-hover table-striped" >
+            <div class="box-body no-padding">
+              <div class="mailbox-controls">                  
+                <button onclick="view_table();" type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+				<div class="box-tools pull-right">
+                <!--<div class="has-feedback">
+                  <input type="text" onkeyup="searchOrder(this.value);" class="form-control input-sm" placeholder="Search by order no." />
+                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>-->
+              </div>
+              </div>
+              <div class="table-responsive">
+                <table id="data-table" class="table table-hover table-striped">
 				  <thead style="background-color:#e9f0f5;">
 					<tr>
-						<!--<th style="text-align:center;"><b>Date</b></th>-->
-						<th style="text-align:center;"><b>Order No.</b></th>
-						<th style="text-align:center;"><b>Order Type</b> </th>
-						<th style="text-align:center;"><b>Quantity</b></th>
-						<th style="text-align:center;"><b>Amount</b></th>
-				
+						<th></th>
+						<th style="text-align:center;"><a style='cursor:default;' onclick='return false;' href='#'>Order No.</a></th>
+						<th style="text-align:center;"><b>Served by</b> </th>
+						<th style="text-align:center;"><b>Order Type</b> - Orders</th>
+						<th style="text-align:center;">Time</th>
+						<th style="text-align:center;">Date</th>
+						<th style="text-align:center;">Action</th>
 					 </tr>
 				  </thead>
-                  <tbody id="sales-table" style="text-align:center;">
-       
+                  <tbody id="orders-table" style="text-align:center;">
+					
                   </tbody>
-				  			
                 </table>
-				
-              </div>   
-				<table class="table table-hover table-striped" >				 
-                  </tbody>
-				  	<tfoot>
-						
-						<tr style="font-size:15pt;">														
-							
-							<td style="padding-right:45px;" class="col-xs-8" align="right">
-							<a download="sales.pdf" href="admin-sales.php" type="button" class="btn btn-danger">
-								<i class="fa fa-file-pdf-o fa-lg" style="padding-right:2px;"></i> Download pdf
-							</a>
-							<a onclick="window.open('admin-sales.php', 'newwindow', 'width=1366,height=662'); return false;" type="button" class="btn btn-default"><!--target="_new" href="admin-sales.php"-->
-								<i class="fa fa-eye fa-lg" style="padding-right:2px;"></i> View in pdf
-							</a></td>
-							<td class="col-xs-3" align="right"><strong>Total</strong>: </td>
-							<td id="sales-total"> 0.00</td>
-						</tr>
-					</tfoot>		
-                </table>			  
+				<div id="spinner" style="position:relative; top:-150px;">
+					<div class="bounce1"></div>
+					<div class="bounce2"></div>
+					<div class="bounce3"></div>
+				</div>
+              </div>              
             </div>
          
           </div>
@@ -571,14 +514,6 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
 
-<script src="plugins/input-mask/jquery.inputmask.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
-<!-- date-range-picker -->
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <!--iziToast-->
 <script src="js/animatedModal.js"></script>
@@ -608,54 +543,7 @@ $("#show_dinein").animatedModal({
     color:'#e9f0f5',              
 });
 
-$(function () {
-    //Initialize Select2 Elements
-    //$('.select2').select2()
 
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    //Datemask2 mm/dd/yyyy
-    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-    //Money Euro
-    $('[data-mask]').inputmask()
-
-    //Date range picker
-    $('#reservation').daterangepicker()
-    //Date range picker with time picker
-    $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
-    //Date range as a button
-    $('#daterange-btn').daterangepicker(
-      {
-        ranges   : {
-          'Today'       : [moment(), moment()],
-          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        },
-        startDate: moment().subtract(29, 'days'),
-        endDate  : moment()
-      },
-      function (start, end) {
-        $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-      }
-    )
-
-    //Date picker
-    $('#datepicker').datepicker({
-      autoclose: true
-    })
-
-       
-  })
-
-
- /* $(document).ready(function(){
-	$('#date-range').on('DOMSubtreeModified',function(){
-	  alert($(this).html());
-	}) 
- }); */
 </script>
 <script>
   $.widget.bridge('uibutton', $.ui.button);
@@ -666,7 +554,9 @@ $(function () {
 <script src="dist/js/adminJS.js"></script>
 <script src="dist/js/pages/dashboard.js"></script>
 <script src="dist/js/demo.js"></script>
-
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!--sweet alert-->
 
 </body>

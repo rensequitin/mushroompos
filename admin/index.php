@@ -31,6 +31,7 @@
   <script src="iziToast-master/dist/js/iziToast.js"> </script>
   <!--ajax-->
   <script src="js/jquery.js"> </script>
+  <script src="js/jquery.timers.js"> </script>
   <script src="js/admin-pos-ajax.js"> </script>
   <script src="js/admin-settings.js"> </script>
   <link rel="stylesheet" href="dist/css/admin-index.css"> 
@@ -202,13 +203,13 @@
        
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo $pic; ?>" class="user-image" alt="User Image">
-              <span class="hidden-xs">Lorenzo</span>
+              <img src="<?php echo "../".$pic; ?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $name ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+                <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $name." ".$LName?> - Administrator
@@ -1177,8 +1178,53 @@
 						</button>-->
 						</h3>
 					</div>
-					<div class="col-sm-8" style="padding-top:10px; position:relative; height:635px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
-						<div class="col-xs-4">
+					<div class="col-sm-8" style="padding-top:10px; position:relative; height:605px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
+						<div class="row">	 						
+					        <div class="col-lg-4 col-sm-4 col-xs-12">
+					          <div class="small-box bg-green">
+					            <div class="inner">
+					              <h4 id="sales-label"><span style="font-size:18px; font-weight: bold;" id="payment-table-no"></span><sup style="font-size: 20px"></sup></h4>
+
+					              <p>Table Number</p>
+					            </div>
+					            <div class="icon">
+					              <i class="ion ion-stats-bars"></i>
+					            </div>
+					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
+					          </div>
+					        </div>
+					        <div class="col-lg-4 col-sm-4 col-xs-12">
+
+					          <div class="small-box bg-yellow">
+					            <div class="inner">
+					              <h4><span style="font-size:18px; font-weight: bold;">Dine-in</span></h4>
+
+					              <p>Order Type</p>
+					            </div>
+					            <div class="icon">
+					              <i class="ion ion-person-add"></i>
+					            </div>
+					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
+					          </div>
+					        </div>
+
+					        <div class="col-lg-4 col-sm-4 col-xs-12">
+
+					          <div class="small-box bg-red">
+					            <div class="inner">
+					              <h4 style="font-size:18px; font-weight: bold;" id='payment-time'><?php date_default_timezone_set('Asia/Manila'); echo date("h:iA");?></h4>
+					              <p id='payment-date'><?php echo date("D, m/d/Y"); ?></p>
+					            </div>
+					            <div class="icon">
+					              <i class="ion ion-ios-calendar"></i>
+					            </div>
+					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
+					          </div>
+					        </div>
+							
+					      </div>
+
+						<!-- <div class="col-xs-4">
 						<strong>Order Type</strong>: <span>Dine-in</span>
 						</div>
 						<div class="col-xs-2 col-xs-offset-1">
@@ -1194,10 +1240,10 @@
 						<i class="fa fa-calendar  fa-lg" style="padding-right:2px;"> </i><span id="payment-date">11/25/2017</span>
 						</div>
 						<div class="col-xs-3 col-xs-offset-2">
-						</div>
+						</div> -->
 						
-						<div class="col-xs-12" style="padding-top:55px;">
-						  <div class="table-responsive">
+						<div class="col-xs-12" style="padding-top:25px;">
+						  <div class="box box-primary table-responsive mousescroll" style="max-height: 393px;">
 							<table class="table table-bordered">
 						
 							  <thead>
@@ -1215,10 +1261,12 @@
 							</table>
 						  </div>
 						</div>
-						
+						<div style="position: absolute; bottom:5px; right:35px; font-size:18px;">
+						<strong>Total Amount</strong>: <span id="payment-total-top"></span>
+						</div>
 						
 					</div>
-					<div class="col-sm-4" style="padding-top:10px; position:relative; height:635px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
+					<div class="col-sm-4" style="padding-top:10px; position:relative; height:605px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
 						<div class="has-feedback ">
 						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="paymentText" onkeyup="changePaymentTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" placeholder="0">
 						</div>
@@ -1281,8 +1329,40 @@
 						</button>-->
 						</h3>
 					</div>
-					<div class="col-sm-8" style="padding-top:10px; position:relative; height:535px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
-						<div class="col-xs-4">
+					
+					<div class="col-sm-8" style="padding-top:10px; position:relative; height:595px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
+
+						<div class="row">	 							   
+					        <div class="col-lg-6 col-sm-6 col-xs-12">
+					          <div class="small-box bg-yellow">
+					            <div class="inner">
+					              <h4 id="users-label"><span style="font-size:18px; font-weight: bold;">Take-out</span></h4>
+
+					              <p>Order Type</p>
+					            </div>
+					            <div class="icon">
+					              <i class="ion ion-person-add"></i>
+					            </div>
+					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
+					          </div>
+					        </div>
+
+					        <div class="col-lg-6 col-sm-6 col-xs-12">
+
+					          <div class="small-box bg-red">
+					            <div class="inner">
+					              <h4 style="font-size:18px; font-weight: bold;" id='takeout-time'><?php date_default_timezone_set('Asia/Manila'); echo date("h:iA");?></h4>
+					              <p id='takeout-date'><?php echo date("D, m/d/Y"); ?></p>
+					            </div>
+					            <div class="icon">
+					              <i class="ion ion-ios-calendar"></i>
+					            </div>
+					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
+					          </div>
+					        </div>		
+						</div>
+
+						<!-- <div class="col-xs-4">
 						<i class="fa fa-calendar  fa-lg" style="padding-right:2px;"> </i><span id="takeout-date">11/25/2017</span>
 						</div>
 						<div class="col-xs-2 col-xs-offset-1">
@@ -1296,10 +1376,10 @@
 						</div>
 						
 						<div class="col-xs-3 col-xs-offset-2">
-						</div>
+						</div> -->
 						
-						<div class="col-xs-12" style="padding-top:55px;">
-						  <div class="table-responsive">
+						<div class="col-xs-12" style="padding-top:25px;">
+						  <div class="box box-primary table-responsive mousescroll" style="max-height: 373px;">
 							<table class="table table-bordered">
 						
 							  <thead>
@@ -1317,10 +1397,12 @@
 							</table>
 						  </div>
 						</div>
-						
+						<div style="position: absolute; bottom:5px; right:35px; font-size:18px;">
+							<strong>Total Amount</strong>: <span id="takeout-total-top"></span>
+						</div>
 						
 					</div>
-					<div class="col-sm-4" style="padding-top:10px; position:relative; height:535px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
+					<div class="col-sm-4" style="padding-top:10px; position:relative; height:595px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
 						<div class="has-feedback ">
 						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="paymentTakeout" onkeyup="changePaymentTakeoutTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" placeholder="0">
 						</div>
@@ -1401,16 +1483,71 @@
 				
 						</h3>
 					</div>
-					<div class="col-sm-8" style="padding-top:10px; position:relative; height:525px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
-						<div class="col-xs-4">
+
+					<div class="col-sm-8" style="padding-top:10px; position:relative; height:565px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
+						<div class="row">	 
+							<div class="col-lg-3 col-sm-6 col-xs-12">
+					          <div class="small-box bg-aqua">
+					            <div class="inner">
+					              <h4 id='orders-label'><span style="font-size:18px; font-weight: bold;" id="review-orderno"></span></h4>
+
+					              <p>Order Number</p>
+					            </div>
+					            <div class="icon">
+					              <i class="ion ion-ios-cart"></i>
+					            </div>
+					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
+					          </div>
+					        </div>
+					        <div class="col-lg-3 col-sm-6 col-xs-12">
+					          <div class="small-box bg-green">
+					            <div class="inner">
+					              <h4 id="sales-label"><span style="font-size:18px; font-weight: bold;" id="review-table-no"></span><sup style="font-size: 20px"></sup></h4>
+
+					              <p>Table Number</p>
+					            </div>
+					            <div class="icon">
+					              <i class="ion ion-stats-bars"></i>
+					            </div>
+					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
+					          </div>
+					        </div>
+					        <div class="col-lg-3 col-sm-6 col-xs-12">
+
+					          <div class="small-box bg-yellow">
+					            <div class="inner">
+					              <h4 id="users-label"><span style="font-size:18px; font-weight: bold;" id="review-type"></span></h4>
+
+					              <p>Order Type</p>
+					            </div>
+					            <div class="icon">
+					              <i class="ion ion-person-add"></i>
+					            </div>
+					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
+					          </div>
+					        </div>
+
+					        <div class="col-lg-3 col-sm-6 col-xs-12">
+
+					          <div class="small-box bg-red">
+					            <div class="inner">
+					              <h4 style="font-size:18px; font-weight: bold;" id='review-hour'><?php date_default_timezone_set('Asia/Manila'); echo date("h:iA");?></h4>
+					              <p id='review-date'><?php echo date("D, m/d/Y"); ?></p>
+					            </div>
+					            <div class="icon">
+					              <i class="ion ion-ios-calendar"></i>
+					            </div>
+					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
+					          </div>
+					        </div>
+							
+					      </div>
+						<!-- <div class="col-xs-4">
 						<strong>Order No</strong>. <span id="review-orderno"></span>
 						</div>
 						<div class="col-xs-2 col-xs-offset-1">
 							<i class="fa fa-calendar  fa-lg"> </i><span id="review-date">11/25/2017</span>
-						</div>
-						<div class="col-xs-3 col-xs-offset-2">
-						<strong>Total Amount</strong>: <span id="review-total-top">143.00</span>
-						</div>
+						</div>						
 						<div class="col-xs-4">
 						<strong>Order Type</strong>: <span id="review-type"></span>
 						</div>
@@ -1418,31 +1555,32 @@
 						<strong>Table No</strong>. <span id="review-table-no"></span>
 						</div>
 						<div class="col-xs-3 col-xs-offset-2">
-						</div>
-						
-						<div class="col-xs-12" style="padding-top:55px;">
-						  <div class="table-responsive">
-							<table class="table table-bordered">
-						
-							  <thead>
-								<tr>
-								  <th>Food Name</th>
-								  <th>Quantity</th>
-								  <th>Price</th>
-								  <th>Total</th>
-								</tr>
-							  </thead>
-							  <tbody id="review-table">																
-								
-							  </tbody>
-							  
-							</table>
+						</div> -->						
+						<div class="col-xs-12" style="padding-top:25px;">
+						  <div class="box box-primary table-responsive mousescroll" style="max-height: 363px;">				
+								<table class="table table-bordered">
+							
+								  <thead>
+									<tr>
+									  <th>Food Name</th>
+									  <th>Quantity</th>
+									  <th>Price</th>
+									  <th>Total</th>
+									</tr>
+								  </thead>
+								  <tbody id="review-table">																
+									
+								  </tbody>
+								  
+								</table>
 						  </div>
+						</div>						
+						<div style="position: absolute; bottom:5px; right:35px; font-size:18px;">
+							<strong>Total Amount</strong>: <span id="review-total-top"></span>
 						</div>
-						
 						
 					</div>
-					<div class="col-sm-4" style="padding-top:10px; position:relative; height:525px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
+					<div class="col-sm-4" style="padding-top:10px; position:relative; height:565px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
 						<div class="has-feedback ">
 						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtPayment" onkeyup="changeDineTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" placeholder="0">
 						</div>
@@ -1455,7 +1593,7 @@
 									  <td style="text-align:right;" id="review-payment"> 0.00</td>
 									</tr>
 									<tr style="font-size:15pt; font-weight:bold;">									  
-									  <td><strong>Discount</strong>: <div class='containerclass'><div class='inner-circle'><i style="cursor:pointer;" onclick="showDiscountModal();" class="fa fa-plus-circle"> </i></i></div></div></td>
+									  <td><strong>Discount</strong>: <div class='containerclass discount-button'><div class='inner-circle'><i style="cursor:pointer;" onclick="showDiscountModal();" class="fa fa-plus-circle"> </i></i></div></div></td>
 									  <td style="text-align:right;" id="review-discount"> 0.00</td>
 									</tr>
 									<!-- <tr style="font-size:15pt; font-weight:bold;">									  

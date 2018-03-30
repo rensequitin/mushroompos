@@ -2146,10 +2146,12 @@ function showQueue(code){
 					if(msg[9]>=1){
 						document.getElementById("finish-order").classList.add("disabledbutton");
 						document.getElementById("finish-order-button").style.cursor = "no-drop"
+						$(".discount-button").css({"display":"block"});
 					}
 					else{
 						document.getElementById("finish-order").classList.remove("disabledbutton");
 						document.getElementById("finish-order-button").style.cursor = "default"
+						$(".discount-button").css({"display":"none"});
 						//document.getElementById("pay-print-button").style.cursor = "no-drop";
 					}
 					document.getElementById("pay-print").classList.add("disabledbutton");
@@ -2157,7 +2159,7 @@ function showQueue(code){
 				
 					document.getElementById("review-table-no").innerHTML = msg[1];
 					document.getElementById("review-type").innerHTML = msg[0];				
-					document.getElementById("review-table").innerHTML = msg[2];
+					document.getElementById("review-table").innerHTML = msg[2];					
 					document.getElementById("review-orderno").innerHTML = msg[3];
 					document.getElementById("finish-order").setAttribute("name",msg[3]);
 					document.getElementById("addOrder").setAttribute("name",msg[3]);
@@ -2165,13 +2167,16 @@ function showQueue(code){
 					//document.getElementById("print-dine-receipt").setAttribute("name",msg[3]);					
 					document.getElementById("pay-print").setAttribute("name",msg[3]);
 					//document.getElementById("toggle-id").setAttribute("data-id",msg[3]);
-					document.getElementById("review-date").innerHTML = msg[4];
+					// document.getElementById("review-date").innerHTML = msg[4];
+					document.getElementById("review-date").innerHTML = msg[10];
+					document.getElementById("review-hour").innerHTML = msg[11];
 					document.getElementById("review-total").innerHTML = msg[5];
 					document.getElementById("review-total-top").innerHTML = msg[5];					
 					$("#modal-review").css({"display":"block"});
 					$("#print_review").click();
 					$("#txtPayment").val("");
 					$("#review-payment").html("0.00");
+					$("#review-discount").html("0.00");
 					$("#review-change").html("0.00");
 					$("#txtPayment").focus();
 					$("#txtPayment").select();	
@@ -2534,7 +2539,7 @@ function printPaymentDineReceipt(payment){
 		obj.onreadystatechange = function(){
 			if(this.readyState==4 && this.status==200){					
 				//alert("Success");
-				alert(this.responseText);
+				// alert(this.responseText);
 				if(this.responseText!="error"){												
 
 					document.getElementById('cartQuantity').firstChild.data = "+"+1;

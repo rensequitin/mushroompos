@@ -438,7 +438,7 @@
 			function view_pos_products_table(){		
 				$this->productPrice	= number_format($this->productPrice,"2");// data-toggle='modal' data-target='#addModal' onclick='showQuantity(this.id);'
 				echo "<tr id='$this->productCode' onclick='addQuantity(this.id);' style='cursor:pointer; border-bottom:solid 1px #ccc;'>
-					<td class='col-xs-3'><img src='$this->productImage' width='60' height='60'/></td>
+					<td class='col-xs-3'><img src='../$this->productImage' width='60' height='60'/></td>
 					<td class='col-xs-10'><strong id='prod-name'>$this->productName</strong><br/><small>&#8369; $this->productPrice</small></td>
 					<td style='line-height:5;' class='col-xs-1'><i class='fa fa-angle-double-right fa-2x'></i> </td>					
 				  </tr>";
@@ -449,7 +449,7 @@
 				$this->foodSubtotal = number_format($this->foodSubtotal,"2");
 				$id = $this->foodQuantity." ".$this->foodCode;
 				echo "<tr style='border-bottom:solid 1px #ccc;'>
-					<td class='col-xs-1'><img src='$this->foodImage' style='width:120px; height:20%;'class='img-rounded'/></td>
+					<td class='col-xs-1'><img src='../$this->foodImage' style='width:120px; height:90px;'class='img-rounded'/></td>
 					<td class='col-xs-4' style='padding-right:0px;' ><strong style='font-size:15pt; letter-spacing:2px; '>$this->foodName</strong><br/><small>&#8369; $this->foodPrice</small></td>					
 					<td style='line-height:5; font-size:1.25em; font-weight:bold;' class='col-xs-2'><small>&#8369; $this->foodSubtotal</small> <strong> </strong> </td>
 					<td style='line-height:5; font-size:1.3em;' class='col-xs-1'><strong id='$id' onclick='load(this.id,event);' style='cursor:pointer; border:solid 1.5pt #ccc; width:10px height:10px; border-radius:2em; padding:0px 7px 0px 7px;'>$this->foodQuantity</strong> </td>

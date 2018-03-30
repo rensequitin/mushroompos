@@ -33,7 +33,7 @@
   <script src="js/jquery.js"> </script> 
   <script src="js/jquery.timers.js"> </script>
   <script src="js/admin-script.js"> </script>    
-  <script src="js/admin-product-ajax.js"> </script>      
+  <script src="js/admin-foods-ajax.js"> </script>      
 
  
   <style>
@@ -49,7 +49,6 @@
   #data-table_wrapper > .row{
 		margin:0px;	
 	}
-  
   </style>
 </head>
 <body class=".sw-active hold-transition skin-blue sidebar-mini fixed">
@@ -92,32 +91,16 @@
       </a>
 
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-shopping-cart"></i>
-              <span class="label label-danger" id="label-message">0</span>
-            </a>
-           <ul class="dropdown-menu">
-              <li class="header" id="header"></li>
-              <li>
-                <ul class="menu" id="menu">
-                                    
-                </ul>
-              </li>
-              <li class="footer"><a href="#" onclick='location.href="admin-pending-orders.php"; return false;'>See All Messages</a></li>
-            </ul>
-          </li>
-       
+        <ul class="nav navbar-nav">       
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo $pic; ?>" class="user-image" alt="User Image">
-              <span class="hidden-xs">Lorenzo</span>
+              <img src="<?php echo "../".$pic; ?>" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $name; ?></span>
             </a>
             <ul class="dropdown-menu">
 
               <li class="user-header">
-                <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+                <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $name." ".$LName;?> - Administrator
@@ -151,7 +134,7 @@
 
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo $pic; ?>" class="img-circle" alt="User Image">
+          <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $name." ".$LName;?></p>
@@ -173,7 +156,7 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-         <ul class="treeview-menu">
+          <ul class="treeview-menu">
 			<li><a href="admin-orders.php"><i class="fa fa-circle-o"></i> View Orders</a></li>
 			<li><a href="admin-pending-orders.php"><i class="fa fa-circle-o"></i> Pending Deliveries</a></li>            
 			<li><a href="admin-reservation.php"><i class="fa fa-circle-o"></i> Reservations</a></li>
@@ -188,8 +171,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-			<li class="active"><a href="admin-products.php"><i class="fa fa-circle-o"></i> Products</a></li>
-			<li><a href="admin-foods.php"><i class="fa fa-circle-o"></i> Foods</a></li>           
+			<li><a href="admin-products.php"><i class="fa fa-circle-o"></i> Products</a></li>
+			<li class="active"><a href="admin-foods.php"><i class="fa fa-circle-o"></i> Foods</a></li>           
           </ul>
         </li>
 		        
@@ -215,7 +198,24 @@
 			<li><a href="admin-reports.php"><i class="fa fa-circle-o"></i> Sales </a></li>
 			<li><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
           </ul>
-        </li>  
+        </li>
+       <!-- <li>
+          <a href="admin-calendar.php">
+            <i class="fa fa-calendar"></i> <span>Calendar</span>
+           
+          </a>
+        </li>
+        <li>
+          <a href="pages/mailbox/mailbox.html">
+            <i class="fa fa-envelope"></i> <span>Mailbox</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-yellow">12</small>
+              <small class="label pull-right bg-green">16</small>
+              <small class="label pull-right bg-red">5</small>
+            </span>
+          </a>
+        </li>-->
+
       </ul>
     </section>
 
@@ -286,38 +286,63 @@
       </div>
       <div class="row">
 	  <div id="addProductAnimate" class="col-md-12">
-          <div class="box box-primary" style="border-top-color:#fff; height:180px;">		
+          <div class="box box-primary" style="border-top-color:#fff; height:260px;">		
 			<!--<div class="col-xs-5"> 
-				<input id="food-category-input" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="Food Category"> 
+				<input id="food-code-input" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="Food Code"> 
 			</div>
+			
 			<div class="col-xs-12">
-				<label style="padding-left:25px; color:red; font-weight:normal;">This is important! </label><label style="font-weight:normal; padding-left:2px;"> e.g."allday", "sizzlingfor3", "student"</label>
+				<label style="padding-left:25px; color:red; font-weight:normal;">This is important! </label><label style="font-weight:normal; padding-left:2px;"> e.g."bangsilog", "spaghetti", "taro"</label>
 			</div>-->
+			<div class="col-xs-5">
+				<select onchange="viewProducts()" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" name="product_category" id="product_category">								
+<?php
+	$select = "selected";
+	$sql = "Select * from mushroom_products where product_status = 'Active' and product_archive ='No' order by product_name ASC";
+	$exist = $db->checkExist($sql) or die(mysql_error());
+	$stat = 'active';
+	while($row = $db->fetch_array($exist)){
+		$product = $row['food_category'];
+		$product_name = $row['product_name'];
+		$product_price = $row['product_price'];
+
+							
+			echo "<option $select; value='$product'>{$product_name}</option>";
+
+	$select = " ";
+}
+?>														 
+				</select>
+						
+			</div> 
+			<div class="col-xs-12">
+				<label style="padding-left:25px; color:red; font-weight:normal;"></label><label style="font-weight:normal; padding-left:2px;"> Choose food category</label>
+			</div>
 			<div class="col-xs-5"> 
 				<input id="food-name-input" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="Food Name">
 			</div>
-			<div class="col-xs-5" style="margin-top:15px; padding-right:0px;"> 
-				<button onclick="saveProduct()" type="button" class="btn btn-info btn-number active">
+			<div class="col-xs-5" style="margin-top:0px; padding-right:0px;"> 
+				<button onclick="saveFood();" type="button" class="btn btn-info btn-number active">
 					Save
 				</button>		
-				<button id="cancel-product"  type="button" class="btn btn-danger btn-number active">
+				<button id="cancel-food"  type="button" class="btn btn-danger btn-number active">
 					Cancel
 				</button>
 			</div>
 			<div class="col-xs-12">
-				<label style="padding-left:25px; font-weight:normal;">e.g. "All Day Meals", "Sizzling For 3", "Student"</label>	
+				<label style="padding-left:25px; font-weight:normal;">e.g. "Bangsilog", "Spaghetti Meatballs", "Taro"</label>	
 			</div>
 			<div class="col-xs-5"> 
-				<input id="food-price-input" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="True Price">
+				<input id="food-price-input" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="Price">
 			</div>
 			<div class="col-xs-12">
-				<label style="padding-left:25px; font-weight:normal;">e.g. "120", "50", or you can leave this empty</label>
+				<label style="padding-left:25px; font-weight:normal;">e.g. "120", "50", "35"</label>
 			</div>
 		  </div>		
 		</div>
 		 <div id="editProductAnimate" class="col-md-12">		 
           <div class="box box-primary" style="border-top-color:#fff; height:250px;">		
-			<h3 class="box-title" style="padding-left:10px; margin-top:0px;">Product category: <label id="product-category"></label></h3>
+			<h3 class="box-title" style="padding-left:10px; margin-top:0px;">Food code: <label id="food-code"></label></h3>
 			<div class="col-xs-5"> 
 				<input id="food-name-value" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="Food Name">
 			</div>
@@ -333,7 +358,7 @@
 				<label style="padding-left:25px; font-weight:normal;">e.g. "All Day Meals", "Sizzling For 3", "Student"</label>	
 			</div>
 			<div class="col-xs-5"> 
-				<input id="food-price-value" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="True Price">
+				<input id="food-price-value" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="Price">
 			</div>
 			<div class="col-xs-12">
 				<label style="padding-left:25px; font-weight:normal;">e.g. "120", "50", or you can leave this empty</label>
@@ -343,55 +368,48 @@
        <div class="col-xs-12">
           <div class="box">
             <div class="box-header" >
-				<h3 class="box-title">Products</h3>
-				<button id="add-product" style="border-radius: 2em;" type="button" class="btn btn-info btn-number pull-right active">
-					<i class="fa fa-plus-circle fa-lg" style="padding-right:5px;"></i>Add New Product
+				<!--<h3 class="box-title">Foods</h3>-->
+				<div class="col-xs-4">
+					<select onchange="viewProducts()" class="form-control input-lg" name="foodcategory" id="foodcategory">								
+<?php
+	$select = "selected";
+	$sql = "Select * from mushroom_products where product_status = 'Active' and product_archive ='No' order by product_time ASC";
+	$exist = $db->checkExist($sql) or die(mysql_error());
+	$stat = 'active';
+	while($row = $db->fetch_array($exist)){
+		$product = $row['food_category'];
+		$product_name = $row['product_name'];
+		$product_price = $row['product_price'];
+	
+							
+			echo "<option $select; value='$product'>{$product_name}</option>";
+
+	$select = " ";
+}
+?>														 
+						</select>
+						
+					</div> 
+				<button id="add-food" style="border-radius: 2em;" type="button" class="btn btn-info btn-number pull-right active">
+					<i class="fa fa-plus-circle fa-lg" style="padding-right:5px;"></i>Add New Food
 				</button>
             </div>
             <!-- /.box-header -->
-			 <div class="box-body">
-			 <div class="table-responsive">
+            <div class="box-body">
+			<div class="table-responsive">
               <table id="data-table" class="table table-hover">
                 <thead style="background-color:#e9f0f5;">
-                <tr>                  
-                  <th style="text-align:center;">Product Name</th>
-                  <th style="text-align:center;">Product True Price</th>
+                <tr>   
+				  <th style="text-align:center;">Image</th>
+                  <th style="text-align:center;">Food Name</th>
+                  <th style="text-align:center;">Price</th>
 				  <th style="text-align:center;">Added Date</th>
                   <th style="text-align:center;">Status</th>
                   <th style="text-align:center;">Action</th>
                 </tr>
                 </thead>
-                <tbody align="center" id="products-table-value">
-                
-                
-                </tbody>
-               
-              </table>
-			  <div id="spinner" style="position:relative; top:-150px;">
-				<div class="bounce1"></div>
-				<div class="bounce2"></div>
-				<div class="bounce3"></div>
-			  </div>
-			  </div>
-            </div>
-            <!--<div class="box-body">
-              <table id="data-table" class="table table-hover">
-                <thead style="background-color:#e9f0f5;">
-                <tr>                  
-                  <th style="text-align:center;">Product Name</th>
-                  <th style="text-align:center;">Product Estimated Price</th>
-				  <th style="text-align:center;">Added Date</th>
-                  <th style="text-align:center;">Status</th>
-                  <th style="text-align:center;">Action</th>
-                </tr>
-                </thead>
-                <tbody align="center" id="products-table-value">
-            
-                </tbody>
-              </table>
-            </div>-->
-          </div>
-		      <!--<tr>
+                <tbody align="center" id="foods-table-value">
+                <!--<tr>
                   <td>All Day Meals</td>
                   <td>120</td>
                   <td>November 20, 2017</td>
@@ -412,9 +430,19 @@
 					</button>
 				</span></td>
                 </tr>-->
+                
+              </table>
+			  <div id="spinner" style="position:relative; top:-150px;">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			  </div>
+			  </div>
+            </div>
+          </div>
+		  
         </div>
-        </div>
-      
+        </div>      		
     </section>
   </div>
   
@@ -431,6 +459,35 @@
 	</div>
   </aside>
 
+	<div class="modal fade" data-backdrop="static" data-keyboard="false" style="padding-top:100px;"id="editphoto" role="dialog">				
+		<div class="modal-dialog modal-sm">		
+			<div class="modal-content" id="editphotoanimate" style="border-radius:3pt;">
+				<div class="modal-header" align="center">
+					<button type="button" class="close" onclick='closeEditPhoto();'>&times;</button>
+					<h4 class="text-center"><small><img id="food-picture" src="images/once-su.png" width='150'height="100" class="img-rounded" alt="User Image"></small></h4>
+				</div>
+				<div class="modal-body" style="text-align:center;">
+					Once you update your photo,
+					your current photo will be replaced.
+					<div class="imageInput">
+						<form id="form-data" enctype='multipart/form-data'>
+							<input id="upload-file" name='myfile' type="file" />
+							<div class="col-xs-12">
+								<input type="text" class="form-control input-md" id='file-label' readonly placeholder="NO FILES">
+							</div>
+							<img id="file-delete" src="images/icon-delete.png" width="30" height="28">
+							<img id="file-attach" src="images/icon-attach.png" width="30" height="28">													
+							<!--<input type="file" name="pic" id="imageUpload" style="display: none;">-->
+							<label>File type: jpg, png</label>
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer" style=" text-align:center;">	
+					<button id="edit-button-value" onclick="uploadPic('form-data',this.value);" class="btn btn-success"><i style="padding-right:3px;" class="fa fa-floppy-o"></i>UPDATE</button>
+				</div>
+			</div>
+		</div>
+	</div>
   <div class="modal fade" data-backdrop="static" data-keyboard="false" style="padding-top:100px;"id="alertModal" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content" id="alertModalAnimate" style="border-radius:3pt;">
@@ -444,7 +501,7 @@
 			This action requires your confirmation. Please choose and option:
         </div>
         <div class="modal-footer" style=" text-align:center;">		
-			<a id="" onclick="deleteProduct(this.id); return false;" class="del-product btn btn-danger active" href="#">
+			<a id="" onclick="deleteFood(this.id); return false;" class="del-product btn btn-danger active" href="#">
 				<i class="fa fa-trash-o fa-lg"></i> Delete
 			</a>			
         </div>
@@ -549,12 +606,11 @@
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-<!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <!--iziToast-->
 <script src="js/animatedModal.js"></script>
+<script src="js/animate-extend.js"></script>
 <script>
 $("#print_review").animatedModal({
 	modalTarget:'modal-review',
@@ -562,7 +618,6 @@ $("#print_review").animatedModal({
     animatedOut:'slideOutDown',
     color:'#e9f0f5',              
 });
-
 
 </script>
 <script>
@@ -576,6 +631,9 @@ $("#print_review").animatedModal({
 <script src="dist/js/demo.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.7.3.custom.min.js"></script>
 <script src="js/script.js"> </script>
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
 <!--sweet alert-->
 
 </body>
