@@ -1186,7 +1186,7 @@
 					              <p>Table Number</p>
 					            </div>
 					            <div class="icon">
-					              <i class="ion ion-stats-bars"></i>
+					              <i class="ion ion-ios-location"></i>
 					            </div>
 					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
 					          </div>
@@ -1200,7 +1200,7 @@
 					              <p>Order Type</p>
 					            </div>
 					            <div class="icon">
-					              <i class="ion ion-person-add"></i>
+					              <i class="ion ion-ios-pricetags"></i>
 					            </div>
 					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
 					          </div>
@@ -1339,7 +1339,7 @@
 					              <p>Order Type</p>
 					            </div>
 					            <div class="icon">
-					              <i class="ion ion-person-add"></i>
+					              <i class="ion ion-ios-pricetags"></i>
 					            </div>
 					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
 					          </div>
@@ -1492,7 +1492,7 @@
 					              <p>Order Number</p>
 					            </div>
 					            <div class="icon">
-					              <i class="ion ion-ios-cart"></i>
+					              <i class="ion ion-compose"></i>
 					            </div>
 					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
 					          </div>
@@ -1505,7 +1505,7 @@
 					              <p>Table Number</p>
 					            </div>
 					            <div class="icon">
-					              <i class="ion ion-stats-bars"></i>
+					              <i class="ion ion-ios-location"></i>
 					            </div>
 					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
 					          </div>
@@ -1519,7 +1519,7 @@
 					              <p>Order Type</p>
 					            </div>
 					            <div class="icon">
-					              <i class="ion ion-person-add"></i>
+					              <i class="ion ion-ios-pricetags"></i>
 					            </div>
 					            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
 					          </div>
