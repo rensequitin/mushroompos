@@ -2171,7 +2171,9 @@ function showQueue(code){
 					//document.getElementById("print-dine-receipt").setAttribute("name",msg[3]);					
 					document.getElementById("pay-print").setAttribute("name",msg[3]);
 					//document.getElementById("toggle-id").setAttribute("data-id",msg[3]);
-					document.getElementById("review-date").innerHTML = msg[4];
+					// document.getElementById("review-date").innerHTML = msg[4];
+					document.getElementById("review-date").innerHTML = msg[10];
+					document.getElementById("review-hour").innerHTML = msg[11];
 					document.getElementById("review-total").innerHTML = msg[5];
 					document.getElementById("review-total-top").innerHTML = msg[5];					
 					$("#modal-review").css({"display":"block"});

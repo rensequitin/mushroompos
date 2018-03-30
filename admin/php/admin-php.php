@@ -2662,7 +2662,7 @@
 		$table = $_GET['table'];
 		date_default_timezone_set('Asia/Manila');
 		printOrdersDine($db,$table,'Dine-in');
-		echo "*".date("m/d/Y")."*";
+		echo "*".date("D, m/d/Y")."*";
 		echo date("h:i A")."*";
 		$secs = time();
 		$total_price = 0;
@@ -2726,7 +2726,7 @@
 
 		date_default_timezone_set('Asia/Manila');
 		printOrdersTakeout($db,'Take-out');
-		echo "*".date("m/d/Y")."*";
+		echo "*".date("D, m/d/Y")."*";
 		echo date("h:i A")."*";
 		$secs = time();
 		$total_price = 0;
@@ -3228,6 +3228,7 @@
 		$username = $rows['queue_username'];
 		$contact = $rows['queue_contact'];
 		$address = $rows['queue_address'];
+		$secs = $rows['queue_seconds'];
 		echo $type = $rows['queue_type'];
 		echo "*";
 			if($type=="Dine-in"){
@@ -3275,6 +3276,8 @@
 			echo "*".$address;
 			echo "*".$contact;
 			echo "*".$count;
+			echo "*".date('D, m/d/Y', $secs);
+			echo "*".date('h:iA', $secs);
 	}
 
 	function discountOrder($db){
