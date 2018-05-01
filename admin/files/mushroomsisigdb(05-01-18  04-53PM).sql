@@ -220,7 +220,18 @@ INSERT INTO `mushroom_delivery` ( `delivery_code`, `delivery_type`, `delivery_ta
 ('ORD488877017', 'Dine-in', '9', '', '', '', 'January 01, 2018', '180101', '09:49 PM', '1514814546', '', 'Completed', 'No', 'admin', 'No'), 
 ('ORD212273606', 'Dine-in', '2', '', '', '', 'January 01, 2018', '180101', '09:51 PM', '1514814669', '', 'Completed', 'No', 'admin', 'No'), 
 ('ORD801859094', 'Dine-in', '2', '', '', '', 'January 01, 2018', '180101', '09:55 PM', '1514814924', '', 'Completed', 'No', 'admin', 'No'), 
-('ORD765224183', 'Dine-in', '2', '', '', '', 'January 02, 2018', '180102', '12:38 AM', '1514824682', '', 'Completed', 'No', 'admin', 'No');  
+('ORD765224183', 'Dine-in', '2', '', '', '', 'January 02, 2018', '180102', '12:38 AM', '1514824682', '', 'Completed', 'No', 'admin', 'No'), 
+('ORD795491581', 'Dine-in', '13', '', '', '', 'March 24, 2018', '180324', '10:54 PM', '1521903293', '', 'Completed', 'No', 'admin', 'No'), 
+('TKT355647031', 'Take-out', '', '', '', '', 'March 25, 2018', '180325', '11:55 AM', '1521950135', '', 'Completed', 'No', 'admin', 'No'), 
+('TKT204591331', 'Take-out', '', '', '', '', 'March 25, 2018', '180325', '03:52 PM', '1521964358', '', 'Completed', 'No', 'admin', 'No'), 
+('TKT633549585', 'Take-out', '', '', '', '', 'March 25, 2018', '180325', '03:57 PM', '1521964636', '', 'Completed', 'No', 'admin', 'No'), 
+('TKT311675513', 'Take-out', '', '', '', '', 'March 25, 2018', '180325', '04:07 PM', '1521965243', '', 'Completed', 'No', 'admin', 'No'), 
+('TKT561101064', 'Take-out', '', '', '', '', 'March 25, 2018', '180325', '04:13 PM', '1521965610', '', 'Completed', 'No', 'admin', 'No'), 
+('TKT873538658', 'Take-out', '', '', '', '', 'March 25, 2018', '180325', '04:16 PM', '1521965780', '', 'Completed', 'No', 'admin', 'No'), 
+('TKT342598337', 'Take-out', '', '', '', '', 'March 25, 2018', '180325', '04:21 PM', '1521966109', '', 'Completed', 'No', 'admin', 'No'), 
+('TKT722346757', 'Take-out', '', '', '', '', 'March 25, 2018', '180325', '04:23 PM', '1521966191', '', 'Completed', 'No', 'admin', 'No'), 
+('TKT155732727', 'Take-out', '', '', '', '', 'March 25, 2018', '180325', '04:23 PM', '1521966213', '', 'Completed', 'No', 'admin', 'No'), 
+('TKT938223207', 'Take-out', '', '', '', '', 'March 25, 2018', '180325', '04:23 PM', '1521966226', '', 'Completed', 'No', 'admin', 'No');  
 
 
 INSERT INTO `mushroom_foods` ( `food_code`, `food_name`, `food_category`, `food_price`, `food_date`, `food_image`, `food_status`, `food_archive`, `food_time`) VALUES 
@@ -287,7 +298,8 @@ INSERT INTO `mushroom_foods` ( `food_code`, `food_name`, `food_category`, `food_
 ('student_wings', 'Buffalo Wings', 'student', '50', 'November 20, 2017', 'foods/student_bwings.png', 'Active', 'No', '1506960691'), 
 ('addon_rice', 'Rice', 'addon', '15', 'December 02, 2017', 'foods/sizzling_mushroom.png', 'Active', 'No', '1512227641'), 
 ('sizzling_chickens', 'Fried Chicken', 'sizzling', '40', 'December 07, 2017', 'foods/sizzling_mushroom.png', 'Active', 'Yes', '1512622646'), 
-('FDS-666476432', 'drinks', 'addon', '12', 'December 18, 2017', 'foods/sizzling_mushroom.png', 'Active', 'Yes', '1513585142');  
+('FDS-666476432', 'drinks', 'addon', '12', 'December 18, 2017', 'foods/sizzling_mushroom.png', 'Active', 'Yes', '1513585142'), 
+('FDS-708469529', 'new', 'addon', '30', 'March 29, 2018', 'foods/mina.jpg', 'Active', 'No', '1522334087');  
 
 
 INSERT INTO `mushroom_ip` ( `ip_address`) VALUES 
@@ -347,6 +359,37 @@ INSERT INTO `mushroom_orders` ( `delivery_code`, `order_foods`, `order_quantity`
 ('ORD837155396', '5 pcs. Mushroom Siomai', '1', '40', '40');  
 
 
+INSERT INTO `mushroom_orders` ( `delivery_code`, `order_foods`, `order_quantity`, `order_price`, `order_subtotal`) VALUES 
+('ORD795491581', 'Mushroom Sisig(20%)', '2', '120', '192'), 
+('ORD795491581', 'Crispy Kangkong(20%)', '1', '85', '68'), 
+('ORD795491581', 'Shrimp Tempura', '1', '140', '140'), 
+('ORD795491581', 'Mushroom Sisig', '1', '120', '120'), 
+('TKT355647031', 'Chicken Sisig', '1', '120', '120'), 
+('TKT355647031', 'Pink Salmon Head sa Miso', '1', '170', '170'), 
+('TKT355647031', 'Crispy Saluyot', '1', '85', '85'), 
+('TKT204591331', 'Mushroom Sisig', '1', '120', '96'), 
+('TKT633549585', 'Mushroom Sisig', '1', '120', '96'), 
+('TKT633549585', 'Chicken Sisig', '1', '120', '120'), 
+('TKT311675513', 'Chicken Sisig', '2', '120', '192'), 
+('TKT311675513', 'Onion Rings', '1', '85', '85'), 
+('TKT311675513', 'Onion Rings', '2', '85', '136'), 
+('TKT311675513', 'Tofu Sisig', '1', '120', '120'), 
+('TKT561101064', 'Chicken Sisig(20%)', '2', '120', '192'), 
+('TKT561101064', 'Onion Rings', '1', '85', '85'), 
+('TKT561101064', 'Onion Rings(20% - 2x)', '2', '85', '136'), 
+('TKT561101064', 'Tofu Sisig', '1', '120', '120'), 
+('TKT873538658', 'Mushroom Sisig', '1', '120', '120'), 
+('TKT873538658', 'Mushroom Sisig(20%)', '1', '120', '96'), 
+('TKT342598337', 'Mushroom Sisig', '1', '120', '120'), 
+('TKT342598337', 'Mushroom Sisig(20%)', '1', '120', '96'), 
+('TKT722346757', 'Mushroom Sisig', '1', '120', '120'), 
+('TKT722346757', 'Mushroom Sisig(20%)', '1', '120', '96'), 
+('TKT155732727', 'Mushroom Sisig', '1', '120', '120'), 
+('TKT155732727', 'Chicken Sisig', '1', '120', '120'), 
+('TKT938223207', 'Mushroom Sisig(20%)', '1', '120', '96'), 
+('TKT938223207', 'Chicken Sisig', '1', '120', '120');  
+
+
 INSERT INTO `mushroom_products` ( `food_category`, `product_name`, `product_price`, `product_date`, `product_status`, `product_archive`, `product_time`) VALUES 
 ('ad', 'ad', '123', 'December 07, 2017', 'Active', 'Yes', '1512621575'), 
 ('addon', 'Add-ons', '', 'December 02, 2017', 'Active', 'No', '1512204294'), 
@@ -364,18 +407,12 @@ INSERT INTO `mushroom_products` ( `food_category`, `product_name`, `product_pric
 
 
 INSERT INTO `mushroom_queue` ( `queue_code`, `queue_type`, `queue_table`, `queue_customer`, `queue_username`, `queue_contact`, `queue_seconds`, `queue_address`, `queue_paid`) VALUES 
-('ORD586327283', 'Dine-in', '2', '', '', '', '1515307983', '', 'No'), 
-('ORD496083500', 'Dine-in', '8', '', '', '', '1517731120', '', 'Yes'), 
-('ORD336291769', 'Dine-in', '9', '', '', '', '1517731336', '', 'Yes'), 
-('ORD683991510', 'Dine-in', '10', '', '', '', '1517731370', '', 'Yes'), 
-('ORD611317418', 'Dine-in', '11', '', '', '', '1517731666', '', 'Yes'), 
-('ORD811249549', 'Dine-in', '12', '', '', '', '1517731936', '', 'Yes'), 
-('ORD768230458', 'Dine-in', '9', '', '', '', '1517732098', '', 'Yes');  
+('ORD370413741', 'Dine-in', '1', '', '', '', '1522332704', '', 'No'), 
+('ORD184767376', 'Dine-in', '2', '', '', '', '1522386972', '', 'Yes');  
 
 
 INSERT INTO `mushroom_queue_orders` ( `queue_code`, `orders_foods`, `orders_quantity`, `orders_price`, `orders_subtotal`, `queue_paid`, `queue_discount`) VALUES 
 ('DLV381646460', 'Mushroom Sisig', '1', '120.00', '120.00', 'No', 'No'), 
-('ORD586327283', 'Mushroom Sisig', '1', '120', '120', 'No', 'No'), 
 ('ORD496083500', 'Chicken Sisig', '2', '120', '192', 'Yes', 'Yes'), 
 ('ORD496083500', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
 ('ORD336291769', 'Mushroom Sisig', '1', '120', '96', 'Yes', 'Yes'), 
@@ -387,18 +424,126 @@ INSERT INTO `mushroom_queue_orders` ( `queue_code`, `orders_foods`, `orders_quan
 ('ORD811249549', 'Mushroom Sisig', '1', '120', '96', 'Yes', 'Yes'), 
 ('ORD768230458', 'Mushroom Sisig', '2', '120', '192', 'Yes', 'Yes'), 
 ('ORD768230458', 'Chicken Sisig', '2', '120', '240', 'Yes', 'No'), 
-('ORD768230458', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes');  
+('ORD768230458', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD371603412', 'Mushroom Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD158752530', 'Mushroom Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('TKT204591331', 'Chicken Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD158752530', 'Mushroom Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD546794886', 'Mushroom Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD546794886', 'Mushroom Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD546794886', 'Chicken Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD675835346', 'Mushroom Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD675835346', 'Mushroom Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD490304990', 'Chicken Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD948278834', 'Chicken Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD42612529', 'Mushroom Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD42612529', 'Chicken Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD784355775', 'Mushroom Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD784355775', 'Tuna Pesto', '1', '80', '80', 'Yes', 'No'), 
+('ORD784355775', 'Tuna Pesto', '1', '80', '64', 'Yes', 'Yes'), 
+('ORD784355775', 'Tuna Pesto', '1', '80', '64', 'Yes', 'Yes'), 
+('ORD650314008', 'Mushroom Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD650314008', 'Mushroom Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD496805428', 'Mushroom Sisig', '2', '120', '240', 'Yes', 'No'), 
+('ORD496805428', 'Mushroom Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD627831611', 'Mushroom Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD627831611', 'Chicken Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD627831611', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD627831611', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD287543420', 'Mushroom Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD287543420', 'Chicken Sisig', '2', '120', '240', 'No', 'No'), 
+('ORD287543420', 'Beef Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD217034046', 'Mushroom Sisig', '2', '120', '240', 'No', 'No'), 
+('ORD101522111', 'Mushroom Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD101522111', 'Chicken Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD274525747', 'Mushroom Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD274525747', 'Chicken Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD216184675', 'Mushroom Sisig', '2', '120', '240', 'No', 'No'), 
+('ORD990245539', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD990245539', 'Pink Salmon Head sa Miso', '1', '170', '170', 'Yes', 'No'), 
+('ORD990245539', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes');  
+
+
+INSERT INTO `mushroom_queue_orders` ( `queue_code`, `orders_foods`, `orders_quantity`, `orders_price`, `orders_subtotal`, `queue_paid`, `queue_discount`) VALUES 
+('ORD990245539', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD727468488', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD727468488', 'Pink Salmon Head sa Miso', '1', '170', '170', 'Yes', 'No'), 
+('ORD727468488', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD727468488', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD802211383', 'Chicken Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD802211383', 'Pink Salmon Head sa Miso', '2', '170', '340', 'No', 'No'), 
+('ORD802211383', 'Carbonara', '1', '80', '80', 'No', 'No'), 
+('ORD802211383', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD802211383', 'Pink Salmon Head sa Miso', '1', '170', '170', 'Yes', 'No'), 
+('ORD802211383', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD802211383', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD211951551', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD211951551', 'Pink Salmon Head sa Miso', '1', '170', '170', 'Yes', 'No'), 
+('ORD211951551', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD211951551', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD265146646', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD265146646', 'Pink Salmon Head sa Miso', '1', '170', '170', 'Yes', 'No'), 
+('ORD265146646', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD265146646', 'Carbonara', '1', '80', '80', 'Yes', 'No'), 
+('ORD340830838', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD340830838', 'Pink Salmon Head sa Miso', '1', '170', '170', 'Yes', 'No'), 
+('ORD340830838', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD340830838', '', '1', '80', '80', 'Yes', 'No'), 
+('ORD535879837', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD535879837', 'Pink Salmon Head sa Miso', '1', '170', '170', 'Yes', 'No'), 
+('ORD535879837', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD535879837', 'Carbonara', '1', '80', '80', 'Yes', 'No'), 
+('ORD584689975', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD584689975', 'Pink Salmon Head sa Miso', '1', '170', '170', 'Yes', 'No'), 
+('ORD584689975', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD584689975', 'Carbonara', '1', '80', '80', 'Yes', 'No'), 
+('ORD362828623', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD362828623', 'Pink Salmon Head sa Miso', '1', '170', '170', 'Yes', 'No'), 
+('ORD362828623', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD362828623', 'Carbonara', '1', '80', '80', 'Yes', 'No'), 
+('ORD953949575', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD953949575', 'Pink Salmon Head sa Miso', '1', '170', '170', 'Yes', 'No'), 
+('ORD953949575', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD953949575', 'Carbonara', '1', '80', '80', 'Yes', 'No'), 
+('ORD262426558', 'Chicken Sisig', '1', '120', '96', 'Yes', 'Yes'), 
+('ORD262426558', 'Pink Salmon Head sa Miso', '1', '170', '170', 'Yes', 'No'), 
+('ORD262426558', 'Pink Salmon Head sa Miso', '1', '170', '136', 'Yes', 'Yes'), 
+('ORD262426558', 'Carbonara', '1', '80', '80', 'Yes', 'No'), 
+('ORD294143200', 'Mushroom Sisig', '1', '120', '120', 'Yes', 'No'), 
+('ORD294143200', 'Pink Salmon Head sa Miso', '2', '170', '340', 'Yes', 'No'), 
+('ORD294143200', 'Carbonara', '1', '80', '80', 'Yes', 'No'), 
+('ORD370413741', 'Mushroom Sisig', '3', '120', '360', 'No', 'No'), 
+('ORD370413741', 'Chicken Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD518535291', 'Mushroom Sisig', '1', '120', '120', 'No', 'No');  
+
+
+INSERT INTO `mushroom_queue_orders` ( `queue_code`, `orders_foods`, `orders_quantity`, `orders_price`, `orders_subtotal`, `queue_paid`, `queue_discount`) VALUES 
+('ORD518535291', 'Chicken Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD518535291', 'Beef Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD518535291', 'Bangus Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD518535291', 'Seafood Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD518535291', 'Pork Sisig', '1', '120', '120', 'No', 'No'), 
+('ORD518535291', 'Tofu Sisig', '2', '120', '240', 'No', 'No'), 
+('ORD518535291', 'Longsilog', '1', '120', '120', 'No', 'No'), 
+('ORD518535291', 'Longbangsilog', '1', '120', '120', 'No', 'No'), 
+('ORD518535291', 'Liemposilog', '1', '120', '120', 'No', 'No'), 
+('ORD518535291', 'Chicksilog', '1', '120', '120', 'No', 'No'), 
+('ORD518535291', 'Cornsilog', '1', '120', '120', 'No', 'No'), 
+('ORD184767376', 'Mushroom Sisig', '1', '120', '96', 'Yes', 'Yes');  
 
 
 INSERT INTO `mushroom_reservation` ( `reserve_code`, `reserve_customer`, `reserve_username`, `reserve_contact`, `reserve_seconds`) VALUES 
 ('ORD601945666', 'Duday Sequitin', '', '', '1514918204'), 
-('ORD193453450', 'dudss', '', '', '1517294006');  
+('ORD193453450', 'dudss', '', '', '1517294006'), 
+('ORD534362899', 'ren', '', '', '1521894097');  
 
 
 INSERT INTO `mushroom_reservation_orders` ( `reserve_code`, `reserve_orders_foods`, `reserve_orders_quantity`, `reserve_orders_price`, `reserve_orders_subtotal`) VALUES 
 ('ORD601945666', 'Mushroom Sisig', '3', '120', '360'), 
 ('ORD193453450', 'Spaghetti Meatballs', '1', '80', '80'), 
-('ORD193453450', 'Pancit Canton', '1', '80', '80');  
+('ORD193453450', 'Pancit Canton', '1', '80', '80'), 
+('ORD534362899', 'Mushroom Sisig', '1', '120', '120'), 
+('ORD534362899', 'Chicken Sisig', '1', '120', '120');  
 
 
 INSERT INTO `mushroom_slider` ( `slider_number`, `slider_picture`) VALUES 
@@ -427,22 +572,31 @@ INSERT INTO `mushroom_summary` ( `summary_foods`, `summary_quantity`, `summary_d
 ('Rice', '6', '180101', '1514814669'), 
 ('Crispy Mushroom', '10', '180102', '1514824682'), 
 ('Crispy Mushroom (Garlic)', '10', '180102', '1514824682'), 
-('Crispy Mushroom (Chili)', '10', '180102', '1514824682');  
+('Crispy Mushroom (Chili)', '10', '180102', '1514824682'), 
+('Mushroom Sisig', '3', '180324', '1521903293'), 
+('Crispy Kangkong', '1', '180324', '1521903293'), 
+('Shrimp Tempura', '1', '180324', '1521903293'), 
+('Chicken Sisig', '9', '180325', '1521950135'), 
+('Pink Salmon Head sa Miso', '1', '180325', '1521950135'), 
+('Crispy Saluyot', '1', '180325', '1521950135'), 
+('Mushroom Sisig', '10', '180325', '1521964358'), 
+('Onion Rings', '6', '180325', '1521965243'), 
+('Tofu Sisig', '2', '180325', '1521965243');  
 
 
 INSERT INTO `mushroom_tables` ( `table_number`, `table_status`) VALUES 
 ('1', 'occupied'), 
 ('2', 'occupied'), 
-('3', 'occupied'), 
-('4', 'occupied'), 
-('5', 'occupied'), 
-('6', 'occupied'), 
-('7', 'occupied'), 
-('8', 'occupied'), 
-('9', 'occupied'), 
-('10', 'occupied'), 
+('3', 'vacant'), 
+('4', 'vacant'), 
+('5', 'vacant'), 
+('6', 'vacant'), 
+('7', 'vacant'), 
+('8', 'vacant'), 
+('9', 'vacant'), 
+('10', 'vacant'), 
 ('11', 'vacant'), 
-('12', 'occupied'), 
+('12', 'vacant'), 
 ('13', 'vacant'), 
 ('14', 'vacant'), 
 ('15', 'vacant'), 
