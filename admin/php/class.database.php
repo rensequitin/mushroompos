@@ -754,8 +754,13 @@
 				}
 				
 				date_default_timezone_set('Asia/Manila'); 
-				$time = date("h:iA");
-				$date = date("m/d/Y, l");
+				// $time = date("h:iA");
+				$time = time();
+				// $date = date("m/d/Y, l");
+				$date = date("ymd");
+
+				$sql2 = "Insert into mushroom_trails values('$user','Admin','$date','$time','$activity')";
+				$exist2 = $this->checkExist($sql2);
 				//$ip = $this->getIP();
 				/* $file = "../records/records.txt";
 				if(file_exists($file)){

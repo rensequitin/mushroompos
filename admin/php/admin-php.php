@@ -430,7 +430,7 @@
 			$check = $db->get_rows($exist);
 				if($check>=1){
 					$_SESSION['Admin'] = $user;
-					$activity = "Admin logged in";
+					$activity = "Logged in";
 					$db->activity_log($activity);
 					echo "user";
 				}
@@ -440,7 +440,7 @@
 	}
 
 	function logout($db){
-		$activity = "Admin logged out";
+		$activity = "Logged out";
 		$db->activity_log($activity);
 		unset($_SESSION['Admin']);
 	}
@@ -656,6 +656,52 @@
 
 	}
 
+	function viewAuditTrail($db){
+		$trailStart = $_GET['trailStart'];
+		$trailEnd = $_GET['trailEnd'];
+		$_SESSION['trailStart'] = $trailStart;
+		$_SESSION['trailEnd'] = $trailEnd;
+
+		$sql = "Select * from mushroom_trails where trail_date >= '$trailStart' AND trail_date <= '$trailEnd' order by trail_date DESC";
+
+		$exist = $db->checkExist($sql);
+		date_default_timezone_set('Asia/Manila'); 
+		if($exist){
+			$rows = $db->get_rows($exist);
+			if($rows>=1){
+				$fee = 0;
+				while($row = $db->fetch_array($exist)){
+					$ctr =0;
+					$date = date("Y-m-d H:i:s",$row['trail_seconds']);
+					$val = array($row['trail_name'],$row['trail_role'],$date,$row['trail_action']);
+					$data = $val;
+					$quantity = 0;
+					$subtotal = 0;
+						echo "<tr>";
+						foreach ($data as $value) {
+						  echo "<td>$value</td>";
+						  $ctr++;
+
+							if($ctr==4){
+								$ctr =0;
+							}
+						}
+				}
+
+				$fee = number_format($fee,"2");
+				echo "*".$fee;
+
+			}
+			else{
+				echo "<td colspan='12' align='center'>NO RECORD FOUND</td>";
+				echo "*0.00";
+			}
+		}
+		else{
+			echo "<td colspan='12' align='center'>NO DATA FOUND</td>";
+		}
+
+	}
 
 	function viewSummaryReport($db){
 		$salesStart = $_GET['salesStart'];
