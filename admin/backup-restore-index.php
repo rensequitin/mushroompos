@@ -317,9 +317,9 @@
 				  <thead style="background-color:#e9f0f5;">
 					<tr>
 						<th class="col-xs-2" style="text-align:left;"><b>Date - (Last Modified)</b></th>
-						<th class="col-xs-4" style="text-align:left;"><b>Time</b></th>
-						<th style="text-align:right;"><b>File size</b></th>
-						<th style="text-align:left;"><b>Action</b> </th>					
+						<th class="col-xs-3" style="text-align:left;"><b>Time</b></th>
+						<th class="col-xs-2" style="text-align:right;"><b>File size</b></th>
+						<th class="col-xs-5" style="text-align:left;"><b>Action</b> </th>					
 					 </tr>
 				  </thead>
 				  <tbody id="database-table" >
@@ -328,11 +328,20 @@
 							$table = "table.$ctr";
 							foreach ($files as $file) {
 							$table = "table$ctr";
-							$size = formatSizeUnits(filesize("files/$file"));											
+							$size = formatSizeUnits(filesize("files/$file"));			
+              $new_file = explode('(',$file);
+              $file_detail = explode(' ', $new_file[1]);
+              $date = explode('-',$file_detail[0]);
+              $new_date = $date[0]."/".$date[1]."/20".$date[2];
+              $new_format = strtotime($new_date);
+              $uploaded_date = date('F d Y',$new_format);
+              $new_time = explode(')', $file_detail[2]);              
 						?>
 							<tr>
-							<td  style="text-align:left;"><?php date_default_timezone_set('Asia/Manila'); echo date ("F d Y", filemtime("files/$file")); ?></td>
-							<td  style="text-align:left;"><?php date_default_timezone_set('Asia/Manila'); echo date ("h:i A", filemtime("files/$file")); ?></td>
+							<!-- <td  style="text-align:left;"><<?php date_default_timezone_set('Asia/Manila'); echo date ("F d Y", filemtime("files/$file")); ?></td> -->
+              <td  style="text-align:left;"><?php echo $uploaded_date?><?php date_default_timezone_set('Asia/Manila');  date ("F d Y", filemtime("files/$file")); ?></td>
+							<!-- <td  style="text-align:left;"><?php date_default_timezone_set('Asia/Manila'); echo date ("h:i A", filemtime("files/$file")); ?></td> -->
+              <td  style="text-align:left;"><?php date_default_timezone_set('Asia/Manila'); echo substr($new_time[0],0,2).":".substr($new_time[0],3,2)." ".substr($new_time[0],5,2); ?></td>              
 							<td style="text-align:right;"><?php echo $size;?></td>
 							<td style="text-align:left;">
 								<form id="<?php echo $table; ?>"  class="pull-left" method="post"><!--action="<?php //echo $url; ?>"//-->															 
