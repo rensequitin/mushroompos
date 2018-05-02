@@ -32,6 +32,41 @@
 		copy($from, $to);
 	}
 
+	function createText($db){
+		$data = $_GET['val'];
+		$from = $_GET['from'];
+		$to = $_GET['to'];
+		// echo $data;
+		// $files = glob('path/to/temp/*'); // get all file names
+		// foreach($files as $file){ // iterate files
+		//   if(is_file($file))
+		//     unlink($file); // delete file
+		// }
+		$files= array();
+		$dir = dir('../records');
+		while ($file = $dir->read()) {
+			if ($file != '.' && $file != '..') {
+				$link = '../records/'.$file;
+				unlink($link);
+			}
+		}		
+		$myfile = fopen("../records/$data", "w") or die("Unable to open file!");		
+		$sql = "Select * from mushroom_trails where trail_date >= '$from' AND trail_date <= '$to' order by trail_seconds DESC";
+		$exist = $db->checkExist($sql);
+		$rows = $db->get_rows($exist);
+		if($rows>=1){
+			while($row = $db->fetch_array($exist)){
+				$name = $row['trail_name'];
+				$role = $row['trail_role'];
+				$date = date("Y-m-d H:i:s",$row['trail_seconds']);
+				$activity = $row['trail_action'];
+				$txt = "$name, $role, $date  $activity". PHP_EOL ;
+				fwrite($myfile, $txt);
+			}
+		}		
+		fclose($myfile);		
+	}
+
 	function restoreDatabase($db){
 		$name = $_GET['name'];
 
@@ -662,7 +697,7 @@
 		$_SESSION['trailStart'] = $trailStart;
 		$_SESSION['trailEnd'] = $trailEnd;
 
-		$sql = "Select * from mushroom_trails where trail_date >= '$trailStart' AND trail_date <= '$trailEnd' order by trail_date DESC";
+		$sql = "Select * from mushroom_trails where trail_date >= '$trailStart' AND trail_date <= '$trailEnd' order by trail_seconds DESC";
 
 		$exist = $db->checkExist($sql);
 		date_default_timezone_set('Asia/Manila'); 

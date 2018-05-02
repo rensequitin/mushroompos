@@ -341,12 +341,12 @@
 						<tr style="font-size:15pt;">														
 							
 							<td class="col-xs-8" align="center">
-							<a download="sales.pdf" href="admin-summary-reports.php" type="button" class="btn btn-danger">
-								<i class="fa fa-file-pdf-o fa-lg" style="padding-right:2px;"></i> Download pdf
+							<a id="download-text" download="sales.txt" href="records/audit-trails" type="button" class="btn btn-danger">
+								<i class="fa fa-file-pdf-o fa-lg" style="padding-right:2px;"></i> Download text
 							</a>
-							<a onclick="window.open('admin-summary-reports.php', 'newwindow', 'width=1366,height=662'); return false;" type="button" class="btn btn-default"><!--target="_new" href="admin-sales.php"-->
-								<i class="fa fa-eye fa-lg" style="padding-right:2px;"></i> View in pdf
-							</a></td>
+              <!--target="_new" href="admin-sales.php"-->
+							<!-- <a onclick="window.open('admin-summary-reports.php', 'newwindow', 'width=1366,height=662'); return false;" type="button" class="btn btn-default">  	<i class="fa fa-eye fa-lg" style="padding-right:2px;"></i> View in pdf -->
+							<!-- </a></td> -->
 							<!--<td class="col-xs-3" align="right"><strong>Total</strong>: </td>
 							<td id="sales-total"> 0.00</td>-->
 						</tr>
