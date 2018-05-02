@@ -1250,7 +1250,7 @@
 	} */
 
 	function viewUsers($db){
-		$sql = "SELECT * from mushroom_users";
+		$sql = "SELECT * from mushroom_staff";
 		$exist = $db->checkExist($sql);
 		echo $num_rows = $db->get_rows($exist);
 	}

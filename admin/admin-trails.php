@@ -171,7 +171,6 @@
           </a>
           <ul class="treeview-menu">
 			<li><a href="admin-orders.php"><i class="fa fa-circle-o"></i> View Orders</a></li>
-			<li><a href="admin-pending-orders.php"><i class="fa fa-circle-o"></i> Pending Deliveries</a></li>            
 			<li><a href="admin-reservation.php"><i class="fa fa-circle-o"></i> Reservations</a></li>
           </ul>
         </li>
@@ -195,12 +194,7 @@
             <span>Employees</span>            
           </a>
         </li>
-        <li>
-          <a href="admin-users.php">
-            <i class="fa fa-user-plus"></i> <span>Users</span>           
-          </a>
-        </li>
-		<li class="treeview active">
+		<li class="treeview">
           <a href="#">
             <i class="fa fa-bar-chart"></i> <span>Reports</span> 
             <span class="pull-right-container">
@@ -209,7 +203,20 @@
           </a>
           <ul class="treeview-menu">
 			<li><a href="admin-reports.php"><i class="fa fa-circle-o"></i> Sales </a></li>
-			<li class="active"><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
+			<li><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
+          </ul>
+        </li>
+        <li class="treeview active">
+          <a href="#">
+            <i class="fa fa-ellipsis-h"></i> <span>Etc.</span> 
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+      <li><a href="backup-restore.php"><i class="fa fa-circle-o"></i> Backup/Restore </a></li>
+      <li class="active"><a href="admin-trails.php"><i class="fa fa-circle-o"></i> Audit Trails </a></li>
+      <li><a href="admin-tables.php"><i class="fa fa-circle-o"></i> Tables </a></li>
           </ul>
         </li>
         
@@ -258,12 +265,12 @@
             <div class="inner">
               <h3 id="users-label">0</h3>
 
-              <p>User Registrations</p>
+              <p>Employees</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="admin-users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="admin-employees.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
@@ -289,7 +296,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
              
-			<h3 style="margin-top:0px;"align="center"><i class="fa fa-list-alt"></i> Audit Trails</h3>
+			<h3 style="margin-top:0px;"align="center"><i class="fa fa-database"></i> Audit Trails</h3>
               
             </div>            
             <div class="box-body no-padding">				  
@@ -342,7 +349,7 @@
 							
 							<td class="col-xs-8" align="center">
 							<a id="download-text" download="sales.txt" href="records/audit-trails" type="button" class="btn btn-danger">
-								<i class="fa fa-file-pdf-o fa-lg" style="padding-right:2px;"></i> Download text
+								<i class="fa fa-file-text-o fa-lg" style="padding-right:2px;"></i> Download text
 							</a>
               <!--target="_new" href="admin-sales.php"-->
 							<!-- <a onclick="window.open('admin-summary-reports.php', 'newwindow', 'width=1366,height=662'); return false;" type="button" class="btn btn-default">  	<i class="fa fa-eye fa-lg" style="padding-right:2px;"></i> View in pdf -->
