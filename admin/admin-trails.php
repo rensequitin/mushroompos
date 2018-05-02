@@ -289,7 +289,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
              
-			<h3 style="margin-top:0px;"align="center"><i class="fa fa-list-alt"></i> Audit Trails</h3>
+			<h3 style="margin-top:0px;"align="center"><i class="fa fa-database"></i> Audit Trails</h3>
               
             </div>            
             <div class="box-body no-padding">				  
@@ -342,7 +342,7 @@
 							
 							<td class="col-xs-8" align="center">
 							<a id="download-text" download="sales.txt" href="records/audit-trails" type="button" class="btn btn-danger">
-								<i class="fa fa-file-pdf-o fa-lg" style="padding-right:2px;"></i> Download text
+								<i class="fa fa-file-text-o fa-lg" style="padding-right:2px;"></i> Download text
 							</a>
               <!--target="_new" href="admin-sales.php"-->
 							<!-- <a onclick="window.open('admin-summary-reports.php', 'newwindow', 'width=1366,height=662'); return false;" type="button" class="btn btn-default">  	<i class="fa fa-eye fa-lg" style="padding-right:2px;"></i> View in pdf -->
