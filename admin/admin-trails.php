@@ -171,7 +171,6 @@
           </a>
           <ul class="treeview-menu">
 			<li><a href="admin-orders.php"><i class="fa fa-circle-o"></i> View Orders</a></li>
-			<li><a href="admin-pending-orders.php"><i class="fa fa-circle-o"></i> Pending Deliveries</a></li>            
 			<li><a href="admin-reservation.php"><i class="fa fa-circle-o"></i> Reservations</a></li>
           </ul>
         </li>
@@ -193,11 +192,6 @@
           <a href="admin-employees.php">
             <i class="fa fa-users"></i>
             <span>Employees</span>            
-          </a>
-        </li>
-        <li>
-          <a href="admin-users.php">
-            <i class="fa fa-user-plus"></i> <span>Users</span>           
           </a>
         </li>
 		<li class="treeview">
