@@ -2150,7 +2150,8 @@ function showQueue(code){
 					if(msg[9]>=1){
 						document.getElementById("finish-order").classList.add("disabledbutton");
 						document.getElementById("finish-order-button").style.cursor = "no-drop"
-						$(".discount-button").css({"display":"block"});
+						$(".btn-number").css({"display":"inline-block"});
+						$(".discount-button").css({"display":"inline-block"});
 					}
 					else{
 						document.getElementById("finish-order").classList.remove("disabledbutton");

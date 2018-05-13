@@ -1277,7 +1277,7 @@
 									  <td style="text-align:right;" id="payment-total-input"> 0.00</td>
 									</tr>
 									<tr style="font-size:15pt; font-weight:bold;">									  
-									  <td><strong>Discount</strong>: <div class='containerclass'><div class='inner-circle'><i style="cursor:pointer;" onclick="showDiscount();" class="fa fa-plus-circle"> </i></i></div></div></td><!--<div class='containerclass'><div onclick="this.classList.toggle('active'); discountPayment();" id='toggle-id-payment' class='toggle-btn'><div class='inner-circle'></div> </div></div>-->
+									  <td><strong>Discount</strong>: <div class='containerclass'><div class='inner-circle'></i></div></div></td><!--<div class='containerclass'><div onclick="this.classList.toggle('active'); discountPayment();" id='toggle-id-payment' class='toggle-btn'><div class='inner-circle'></div> </div></div>-->
 									  <td style="text-align:right;" id="review-discount-payment"> 0.00</td>
 									</tr>
 									<tr style="font-size:15pt; font-weight:bold;">
@@ -1302,10 +1302,13 @@
 								<!--<button onclick="printDinein(this.name);" id="print-dine-receipt" name="" type="button" class="quantity-plus btn-lg btn-default btn-number">
 									<i  class="fa fa-print"></i><span>  Print Receipt</span>
 								</button>-->
-										
+								<button type="button" value="" name="" onclick="showDiscount();" class="quantity-plus btn-lg btn-success btn-number">
+									<i  class="fa fa-tags"></i><span>  Add Discount</span>
+								</button>		
 								<button type="button" value="" name="" onclick="printPaymentDineReceipt(this.value);" id="payment-print" class="quantity-plus btn-lg btn-danger btn-number">
 									<i  class="fa fa-upload"></i><span>  Pay & Queue</span>
 								</button>
+								
 						
 						</div>
 					</div>
@@ -1413,7 +1416,7 @@
 									  <td style="text-align:right;" id="takeout-total-input"> 0.00</td>
 									</tr>
 									<tr style="font-size:15pt; font-weight:bold;">									  
-									  <td><strong>Discount</strong>: <div class='containerclass'><div class='inner-circle'><i style="cursor:pointer;" onclick="showDiscountTakeout();" class="fa fa-plus-circle"> </i></i></div></div></td>
+									  <td><strong>Discount</strong>: <div class='containerclass'><div class='inner-circle'></div></div></td>
 									  <td style="text-align:right;" id="review-discount-takeout"> 0.00</td>
 									</tr>
 									<!-- <tr style="font-size:15pt; font-weight:bold;">									  
@@ -1455,7 +1458,9 @@
 							</div>
 						</div>
 						<div id="printTakeout-button" class="col-xs-12" style="position:absolute; bottom:80px; text-align:center; padding-top:25px;">
-					
+								<button type="button" value="" name="" onclick="showDiscountTakeout();" class="discount-button quantity-plus btn-lg btn-success btn-number">
+									<i  class="fa fa-tags"></i><span>  Add Discount</span>
+								</button>
 								<button type="button" value="" name="" onclick="printPaymentTakeoutReceipt(this.value);" id="takeout-print" class="quantity-plus btn-lg btn-danger btn-number">
 									<i  class="fa fa-upload"></i><span>  Pay & Queue</span>
 								</button>
@@ -1591,7 +1596,7 @@
 									  <td style="text-align:right;" id="review-payment"> 0.00</td>
 									</tr>
 									<tr style="font-size:15pt; font-weight:bold;">									  
-									  <td><strong>Discount</strong>: <div class='containerclass discount-button'><div class='inner-circle'><i style="cursor:pointer;" onclick="showDiscountModal();" class="fa fa-plus-circle"> </i></i></div></div></td>
+									  <td><strong>Discount</strong>: <div class='containerclass discount-button'><div class='inner-circle'></div></div></td>
 									  <td style="text-align:right;" id="review-discount"> 0.00</td>
 									</tr>
 									<!-- <tr style="font-size:15pt; font-weight:bold;">									  
@@ -1613,12 +1618,15 @@
 								</table>
 							</div>
 						</div>
+						
 						<div class="col-xs-12" id="pay-print-button" style="position:absolute; bottom:80px; text-align:center; padding-top:25px;">
 						
 								<!--<button onclick="printDinein(this.name);" id="print-dine-receipt" name="" type="button" class="quantity-plus btn-lg btn-default btn-number">
 									<i  class="fa fa-print"></i><span>  Print Receipt</span>
 								</button>-->
-										
+								<button type="button" value="" name="" onclick="showDiscountModal();" class="discount-button quantity-plus btn-lg btn-success btn-number">
+									<i  class="fa fa-tags"></i><span>  Add Discount</span>
+								</button>		
 								<button type="button" value="" name="" onclick="printDineReceipt(this.name,this.value);" id="pay-print" class="quantity-plus btn-lg btn-danger btn-number">
 									<i  class="fa fa-upload"></i><span>  Payment</span>
 								</button>
