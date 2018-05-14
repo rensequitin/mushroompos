@@ -40,7 +40,8 @@ function changeTrail(){
 				msg = this.responseText.split("*");
 				document.getElementById("trail-table").innerHTML = msg[0];
 				download_id = 'record('+from+" to "+to+').txt'
-				createText(download_id, salesStart, salesEnd);				
+				createText(download_id, salesStart, salesEnd);		
+				alert(this.responseText);
 				$('#download-text').attr({'download':download_id,'href':'records/'+download_id});
 				//document.getElementById("sales-total").innerHTML = msg[1];
 			}
