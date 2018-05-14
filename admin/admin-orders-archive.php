@@ -135,7 +135,7 @@
 
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-		<li>
+    <li>
           <a href="index.php">
             <i class="fa fa-desktop"></i> <span>Point Of Sale</span>           
           </a>
@@ -147,10 +147,9 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-         <ul class="treeview-menu">
-			<li class="active"><a href="admin-orders.php"><i class="fa fa-circle-o"></i> View Orders</a></li>
-			<li><a href="admin-pending-orders.php"><i class="fa fa-circle-o"></i> Pending Deliveries</a></li>            
-			<li><a href="admin-reservation.php"><i class="fa fa-circle-o"></i> Reservations</a></li>
+          <ul class="treeview-menu">
+      <li class="active"><a href="admin-orders.php"><i class="fa fa-circle-o"></i> View Orders</a></li>
+      <li><a href="admin-reservation.php"><i class="fa fa-circle-o"></i> Reservations</a></li>
           </ul>
         </li>
       
@@ -162,23 +161,18 @@
             </span>
           </a>
           <ul class="treeview-menu">
-			<li class="active"><a href="admin-products.php"><i class="fa fa-circle-o"></i> Products</a></li>
-			<li><a href="admin-foods.php"><i class="fa fa-circle-o"></i> Foods</a></li>           
+      <li><a href="admin-products.php"><i class="fa fa-circle-o"></i> Products</a></li>
+      <li><a href="admin-foods.php"><i class="fa fa-circle-o"></i> Foods</a></li>           
           </ul>
         </li>
-		        
+            
         <li>
           <a href="admin-employees.php">
             <i class="fa fa-users"></i>
             <span>Employees</span>            
           </a>
         </li>
-        <li>
-          <a href="admin-users.php">
-            <i class="fa fa-user-plus"></i> <span>Users</span>           
-          </a>
-        </li>
-        <li class="treeview">
+    <li class="treeview">
           <a href="#">
             <i class="fa fa-bar-chart"></i> <span>Reports</span> 
             <span class="pull-right-container">
@@ -186,10 +180,25 @@
             </span>
           </a>
           <ul class="treeview-menu">
-			<li><a href="admin-reports.php"><i class="fa fa-circle-o"></i> Sales </a></li>
-			<li><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
+      <li><a href="admin-reports.php"><i class="fa fa-circle-o"></i> Sales </a></li>
+      <li><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
           </ul>
-        </li>   
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-ellipsis-h"></i> <span>Etc.</span> 
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+      <li><a href="backup-restore.php"><i class="fa fa-circle-o"></i> Backup/Restore </a></li>
+      <li><a href="admin-trails.php"><i class="fa fa-circle-o"></i> Audit Trails </a></li>
+      <li><a href="admin-tables.php"><i class="fa fa-circle-o"></i> Tables </a></li>
+          </ul>
+        </li>
+        
+              
       </ul>
     </section>
 
@@ -234,12 +243,12 @@
             <div class="inner">
               <h3 id="users-label">0</h3>
 
-              <p>User Registrations</p>
+              <p>Employees</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="admin-users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="admin-employees.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
