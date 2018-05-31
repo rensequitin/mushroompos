@@ -71,7 +71,7 @@
             </div>  
         </div>
 		<img src="images/mushroom-bottomright.png" class="img-responsive pull-right" id="mushroombg">
-			<button class="btn btn-default" id="btnBack" onclick='location.href ="../index.php"'><span class="glyphicon glyphicon-arrow-left"></span></button>
+			
     </div>
 	
 	<div class="modal fade" data-backdrop="static" data-keyboard="false" style="padding-top:100px;"id="alertModal" role="dialog">
