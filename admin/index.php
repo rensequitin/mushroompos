@@ -1488,7 +1488,7 @@
 						</h3>
 					</div>
 
-					<div class="col-sm-8" style="padding-top:10px; position:relative; height:565px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
+					<div class="col-sm-8" style="padding-top:10px; position:relative; height:551px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
 						<div class="row">	 
 							<div class="col-lg-3 col-sm-6 col-xs-12">
 					          <div class="small-box bg-aqua">
@@ -1584,7 +1584,7 @@
 						</div>
 						
 					</div>
-					<div class="col-sm-4" style="padding-top:10px; position:relative; height:565px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
+					<div class="col-sm-4" style="padding-top:10px; position:relative; height:551px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
 						<div class="has-feedback ">
 						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtPayment" onkeyup="changeDineTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" placeholder="0">
 						</div>
