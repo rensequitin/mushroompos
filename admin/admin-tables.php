@@ -79,12 +79,12 @@
 
   <header class="main-header">
 
-    <a href="index.php" class="logo">
+    <div class="logo">
 
       <span class="logo-mini"><i class="fa fa-laptop"></i></span>
 
       <span class="logo-lg"><i class="fa fa-laptop"></i> <b>Admin </b>Panel</span>
-    </a>
+    </div>
 
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -93,22 +93,7 @@
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-shopping-cart"></i>
-              <span class="label label-danger" id="label-message">0</span>
-            </a>
-           <ul class="dropdown-menu">
-              <li class="header" id="header"></li>
-              <li>
-                <ul class="menu" id="menu">
-                                    
-                </ul>
-              </li>
-              <li class="footer"><a href="#" onclick='location.href="admin-pending-orders.php"; return false;'>See All Messages</a></li>
-            </ul>
-          </li>
-       
+               
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?php echo "../".$pic; ?>" class="user-image" alt="User Image">

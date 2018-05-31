@@ -78,12 +78,12 @@
 
   <header class="main-header">
 
-    <a href="index.php" class="logo">
+    <div class="logo">
 
       <span class="logo-mini"><i class="fa fa-laptop"></i></span>
 
       <span class="logo-lg"><i class="fa fa-laptop"></i> <b>Admin </b>Panel</span>
-    </a>
+    </div>
 
     <nav class="navbar navbar-static-top">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
