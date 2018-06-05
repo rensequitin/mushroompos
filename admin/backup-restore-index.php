@@ -329,8 +329,8 @@
 					<tr>
 						<th class="col-xs-2" style="text-align:left;"><b>Date - (Last Modified)</b></th>
 						<th class="col-xs-3" style="text-align:left;"><b>Time</b></th>
-						<th class="col-xs-2" style="text-align:right;"><b>File size</b></th>
-						<th class="col-xs-5" style="text-align:left;"><b>Action</b> </th>					
+						<th class="col-xs-3" style="text-align:right;"><b>File size</b></th>
+						<th class="col-xs-4" style="text-align:left;"><b>Action</b> </th>					
 					 </tr>
 				  </thead>
 				  <tbody id="database-table" >
@@ -355,11 +355,11 @@
               <td  style="text-align:left;"><?php date_default_timezone_set('Asia/Manila'); echo substr($new_time[0],0,2).":".substr($new_time[0],3,2)." ".substr($new_time[0],5,2); ?></td>              
 							<td style="text-align:right;"><?php echo $size;?></td>
 							<td style="text-align:left;">
-								<form id="<?php echo $table; ?>"  class="pull-left" method="post"><!--action="<?php //echo $url; ?>"//-->															 
-									<button onclick="uploadToFolderCloud('<?php echo $file; ?>');" value="Send to Google Drive" name="submit" class="btn btn-sm btn-info"> <!--type="submit"-->
+								<!-- <form id="<?php echo $table; ?>"  class="pull-left" method="post">														 
+									<button onclick="uploadToFolderCloud('<?php echo $file; ?>');" value="Send to Google Drive" name="submit" class="btn btn-sm btn-info">
 										<i class="fa fa-send fa-lg" style="padding-right:2px;"></i> Send to Google Drive
 									</button>											
-								</form>
+								</form> -->
 								<a onclick="uploadToFolderRestore('<?php echo $file; ?>');" type="button" style="margin-left:2px;" class="btn btn-sm btn-warning pull-left"> <!--href="import.php"-->
 									<i class="fa fa-recycle fa-lg" style="padding-right:2px;"></i> Restore
 								</a>
