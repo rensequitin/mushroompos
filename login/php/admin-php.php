@@ -1418,18 +1418,18 @@
 	}
 
 	function updateProfile($db){
-		// [TODO]
+		
 		$firstname = $_GET['firstname'];
 		$lastname = $_GET['lastname'];
 		$email = $_GET['email'];
 		$username = $_GET['username'];
-			if(isset($_SESSION['Admin'])){
-				$account = $_SESSION['Admin'];
+			if(isset($_SESSION['Staff'])){
+				$account = $_SESSION['Staff'];
 			}
-		$sql = "Update mushroom_admin set admin_firstname ='$firstname', admin_lastname='$lastname',admin_email ='$email',admin_username='$username' where admin_username ='$account'";
+		$sql = "Update mushroom_staff set staff_firstname ='$firstname', staff_lastname='$lastname',staff_email ='$email',staff_username='$username' where staff_username ='$account'";
 		$check = $db->checkExist($sql);
 			if($check){
-				$_SESSION['Admin'] = $username;
+				$_SESSION['Staff'] = $username;
 			}
 	}
 
@@ -2394,12 +2394,12 @@
 	}
 
 	function saveProfileImage($db){
-		// [TODO]
+		
 		//header('Content-Type: text/plain; charset=utf-8');
 
 		//$code = $_GET['code'];
 		//$user = $_SESSION['User'];
-		$user = $_SESSION['Admin'];
+		$user = $_SESSION['Staff'];
 		$pic_name = $_FILES['myfile']['name'];
 		$tmp_name = $_FILES['myfile']['tmp_name'];
 		$file_size = $_FILES['myfile']['size'];
@@ -2411,7 +2411,7 @@
 					$location="profile/$pic_name";
 					$location2="../../profile/$pic_name";
 
-					$sql = "UPDATE mushroom_admin SET admin_picture ='$location' WHERE admin_username ='$user'";
+					$sql = "UPDATE mushroom_staff SET staff_picture ='$location' WHERE staff_username ='$user'";
 					$exist = $db->checkExist($sql) or die(mysql_error());
 						if($exist){
 							move_uploaded_file($tmp_name,$location2);
@@ -2472,19 +2472,19 @@
 	}
 
 	function changePassword($db){
-		// [TODO]
-		$user = $_SESSION['Admin'];
+		
+		$user = $_SESSION['Staff'];
 		$current = md5($_GET['currentPass']);
 		$new = $_GET['newPass'];
 		$con = $_GET['conPass'];
 
-		$sql = "Select * from mushroom_admin where admin_password = '$current'";
+		$sql = "Select * from mushroom_staff where staff_password = '$current'";
 		$exist = $db->checkExist($sql) or die(mysql_error());
 		$num_rows = $db->get_rows($exist);
 			if($num_rows>=1){
 				if($new==$con){
 					$con = md5($con);
-					$sql1 = "Update mushroom_admin set admin_password = '$con' where admin_username = '$user'";
+					$sql1 = "Update mushroom_staff set staff_password = '$con' where staff_username = '$user'";
 					$exist1 = $db->checkExist($sql1);
 				}
 				else{
