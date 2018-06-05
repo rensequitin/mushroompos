@@ -2038,6 +2038,12 @@
 		$exist = $db->checkExist($sql);
 	}
 
+	function cancelOrderReserve($db){
+		$code = $_GET["code"];
+		$sql = "Delete from mushroom_reservation where reserve_code='$code'";
+		$exist = $db->checkExist($sql);
+	}
+
 	function restoreOrder($db){
 		$code = $_GET["code"];
 		$sql = "Update mushroom_delivery set delivery_archive = 'No' where delivery_code='$code'";

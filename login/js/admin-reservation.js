@@ -4,6 +4,67 @@ function start(){
 	view_table();
 }
 
+function disableScrolling(){
+	var x=window.scrollX;
+	var y=window.scrollY;
+	window.onscroll=function(){window.scrollTo(x, y);};
+}
+function enableScrolling(){
+	window.onscroll=function(){};
+}
+
+function ask(code){
+	code = code;	
+	document.getElementById("cancel-button").setAttribute("name",code);
+	$(".close-modal-dinein").click();
+	disableScrolling();
+	$('#alertModal').modal('show');
+	$("#alertModalAnimate").modal('show');	
+}
+
+function closeAlert(){
+	enableScrolling();
+	$('#alertModal').modal('hide');
+	$("#alertModalAnimate").animateCss('zoomOut');
+}
+
+function cancelOrder(code){
+	
+	if(window.XMLHttpRequest){
+		obj = new XMLHttpRequest();
+	}
+	else{
+		if(window.ActiveXObject){
+			try{
+				obj = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch(e){
+				
+			}
+		}
+	}
+	
+	if(obj){
+		obj.onreadystatechange = function(){
+			if(this.readyState==4 && this.status==200){	
+				iziToast.success({
+					title: 'Successful',			
+					timeout: 3000,
+				});			
+				$(".close-modal-dinein").click();	
+				view_table();				
+				// closeAlert();
+				
+			}
+		};
+		obj.open("GET","php/admin-php.php?action="+'cancelOrderReserve'+"&code="+code, true);
+		obj.send(null);
+	}
+	else{
+		alert("Error");
+	}
+}
+
 function view_orders(code){
 	//alert(code);
 	
@@ -32,6 +93,7 @@ function view_orders(code){
 							document.getElementById("dinein-date").innerHTML = msg[2];
 							document.getElementById("dinein-total").innerHTML = msg[3];		
 							document.getElementById("accept-dinein").setAttribute("name",msg[1]);
+							document.getElementById("cancel-dinein").setAttribute("name",msg[1]);
 							/* document.getElementById("dinein-type").innerHTML = msg[8]; */
 							$('#modal-dinein').css({"display":"block"});
 							$("#show_dinein").click();
