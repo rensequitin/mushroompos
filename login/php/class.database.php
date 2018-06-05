@@ -516,14 +516,7 @@
 					$button1
 					$button2
 				</span></td>
-                  <td><span class='input-group-btn'>
-					<button id='$this->productFoodCategory' onclick='edit_product(this.id);' style='border-radius: 2em;' type='button' class='btn btn-info btn-number'>
-						<i class='fa fa-edit'></i>Edit
-					</button>					
-					<button id='$this->productFoodCategory' onclick='ask(this.id);' style='border-radius: 2em; margin-left:5px;' type='button' class='btn btn-danger btn-number'>
-						<i class='fa fa-trash-o'> </i>Delete
-					</button>
-				</span></td>
+                  
                 </tr>";
 			}
 			
@@ -555,14 +548,7 @@
 					$button1
 					$button2
 				</span></td>
-                  <td><span class='input-group-btn'>
-					<button id='$this->productNameVal' onclick='edit_product(this.id);' style='border-radius: 2em;' type='button' class='btn btn-info btn-number'>
-						<i class='fa fa-edit'></i>Edit
-					</button>					
-					<button id='$this->productNameVal' onclick='ask(this.id);' style='border-radius: 2em; margin-left:5px;' type='button' class='btn btn-danger btn-number'>
-						<i class='fa fa-trash-o'> </i>Delete
-					</button>
-				</span></td>
+                  
                 </tr>";
 			}
 			
@@ -600,14 +586,7 @@
 					$button1
 					$button2
 				</span></td>
-                  <td><span class='input-group-btn'>
-					<button id='$this->productCode' onclick='edit_food(this.id);' style='border-radius: 2em;' type='button' class='btn btn-info btn-number'>
-						<i class='fa fa-edit'></i>Edit
-					</button>					
-					<button id='$this->productCode' onclick='ask(this.id);' style='border-radius: 2em; margin-left:5px;' type='button' class='btn btn-danger btn-number'>
-						<i class='fa fa-trash-o'> </i>Delete
-					</button>
-				</span></td>
+                  
                 </tr>";
 			}
 			

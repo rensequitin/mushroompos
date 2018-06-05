@@ -1168,7 +1168,7 @@ function reserveOrder(){
 		obj.onreadystatechange = function(){ 	//updateProduct;
 			if(this.readyState == 4 && this.status == 200) {					
 				iziToast.success({
-					message: 'Moved to Orders->Reservations',						
+					message: 'Moved to Reservations',						
 					timeout: 2500,
 				});	
 				/* if(this.responseText!="error"){																	

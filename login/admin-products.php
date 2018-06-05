@@ -282,9 +282,7 @@
           <div class="box">
             <div class="box-header" >
 				<h3 class="box-title">Products</h3>
-				<button id="add-product" style="border-radius: 2em;" type="button" class="btn btn-info btn-number pull-right active">
-					<i class="fa fa-plus-circle fa-lg" style="padding-right:5px;"></i>Add New Product
-				</button>
+				
             </div>
             <!-- /.box-header -->
 			 <div class="box-body">
@@ -295,8 +293,7 @@
                   <th style="text-align:center;">Product Name</th>
                   <th style="text-align:center;">Product True Price</th>
 				  <th style="text-align:center;">Added Date</th>
-                  <th style="text-align:center;">Status</th>
-                  <th style="text-align:center;">Action</th>
+                  <th style="text-align:center;">Status</th>                  
                 </tr>
                 </thead>
                 <tbody align="center" id="products-table-value">

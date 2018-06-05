@@ -48,8 +48,8 @@ $(document).everyTime("1s", function() {
 	if(obj){
 		obj.onreadystatechange = function(){
 			if(this.readyState == 4 && this.status == 200) {
-				document.getElementById('sales-label').innerHTML = this.responseText;
-				var len = document.getElementById('sales-label').innerHTML.length;
+				// document.getElementById('sales-label').innerHTML = this.responseText;
+				// var len = document.getElementById('sales-label').innerHTML.length;
 			/* 	if(len>=5 && len < 7){
 					document.getElementById('sales-label').style.fontSize = '3.0em';
 				}
@@ -118,7 +118,7 @@ $(document).everyTime("1s", function() {
 	if(obj){
 		obj.onreadystatechange = function(){
 			if(this.readyState == 4 && this.status == 200) {
-				document.getElementById('users-label').innerHTML = this.responseText;
+				// document.getElementById('users-label').innerHTML = this.responseText;
 			}
 		};
 		obj.open("GET","php/admin-php.php?action="+'viewUsers', true);

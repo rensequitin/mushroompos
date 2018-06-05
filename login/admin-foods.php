@@ -327,9 +327,7 @@
 						</select>
 						
 					</div> 
-				<button id="add-food" style="border-radius: 2em;" type="button" class="btn btn-info btn-number pull-right active">
-					<i class="fa fa-plus-circle fa-lg" style="padding-right:5px;"></i>Add New Food
-				</button>
+
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -342,7 +340,7 @@
                   <th style="text-align:center;">Price</th>
 				  <th style="text-align:center;">Added Date</th>
                   <th style="text-align:center;">Status</th>
-                  <th style="text-align:center;">Action</th>
+                  
                 </tr>
                 </thead>
                 <tbody align="center" id="foods-table-value">
