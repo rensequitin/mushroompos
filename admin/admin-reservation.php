@@ -473,6 +473,30 @@
 				
             </div>
         </div>
+
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" style="padding-top:100px;"id="alertModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content" id="alertModalAnimate" style="border-radius:3pt;">
+        <div class="modal-header" style="background-color:#e66454;color:#fff;" align="center">
+          <!--data-dismiss="modal"-->
+      <i class="fa fa-warning fa-2x"></i>
+          <h3 id='orders-label'  class="modal-title"> Alert</h3>
+        </div>
+    
+        <div class="modal-body" style="text-align:center;">
+      This action requires your confirmation. Please choose an option:
+        </div>
+        <div class="modal-footer" style=" text-align:center;">  
+        <button type="button" class="btn btn-link" onclick='closeAlert();'>Cancel</button>  
+        <button onclick="cancelOrder(this.name);" name="" id='cancel-button' type="button" class="btn btn-danger">
+          <i class="fa fa-trash-o fa-lg"></i> Delete
+        </button>
+    
+        
+        </div>
+      </div>
+    </div>
+  </div>
 		
 		<div id="modal-dinein">   
             
@@ -546,9 +570,9 @@
 						
 						<div class="col-xs-12" style="position:absolute; bottom:40px; text-align:center; padding-top:25px;">
 						
-								<!-- <button type="button" class="quantity-plus btn btn-default btn-number">
-									<i  class="fa fa-ban"></i><span>  Cancel Order</span>
-								</button> -->
+								<button type="button" name="" onclick="cancelOrder(this.name)" id="cancel-dinein" class="quantity-plus btn btn-default btn-number"><!--ask()-->
+                  <i  class="fa fa-ban"></i><span>  Cancel Order</span>
+                </button>
 						
 					
 								<button onclick="moveReservation(this.name)" name="" id="accept-dinein" type="button" class="quantity-plus btn btn-danger btn-number"><!--onclick="printReceipt(this.name,this.value);"-->
