@@ -195,7 +195,7 @@
 	<section class="content">
 	<div class="row">	 
 		<li style="display:none;"><a id="print_review" href="#modal-review">Review</a></li>	  
-		<div class="col-lg-3 col-sm-6 col-xs-12">
+		<div class="col-sm-6 col-xs-12">
           <div class="small-box bg-aqua">
             <div class="inner">
               <h3 id='orders-label'>0</h3>
@@ -205,40 +205,12 @@
             <div class="icon">
               <i class="ion ion-ios-cart"></i>
             </div>
-            <a href="admin-orders.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a class="small-box-footer"> <i style="visibility:hidden;" class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <div class="col-lg-3 col-sm-6 col-xs-12">
+        <div class="col-sm-6 col-xs-12">
+
           <div class="small-box bg-green">
-            <div class="inner">
-              <h3 id="sales-label">0<sup style="font-size: 20px"></sup></h3>
-
-              <p>Today's Sales</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="admin-reports.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 col-xs-12">
-
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3 id="users-label">0</h3>
-
-              <p>Employees</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="admin-employees.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-sm-6 col-xs-12">
-
-          <div class="small-box bg-red">
             <div class="inner">
               <h3 id='hour-label'><?php date_default_timezone_set('Asia/Manila'); echo date("h:iA");?></h3>
               <p id='date-label'><?php echo date("D, m/d/Y"); ?></p>

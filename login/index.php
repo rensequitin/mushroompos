@@ -164,7 +164,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-dashboard"></i>  Dashboard <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">       
-                <li><a style="color:#000;" href="admin-orders.php"><i class="fa fa-inbox"></i> Reservations</a></li>
+                <li><a style="color:#000;" href="admin-reservation.php"><i class="fa fa-inbox"></i> Reservations</a></li>
                 <li class="divider"></li>
                 <li><a style="color:#000;" href="admin-products.php"><i class="fa fa-cutlery"></i> Products</a></li>
 				<li class="divider"></li>
