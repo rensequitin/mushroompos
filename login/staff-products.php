@@ -376,7 +376,7 @@
         </div>
 		
         <div class="modal-body" style="text-align:center;">
-			This action requires your confirmation. Please choose and option:
+			This action requires your confirmation. Please choose an option:
         </div>
         <div class="modal-footer" style=" text-align:center;">		
 			<a id="" onclick="deleteProduct(this.id); return false;" class="del-product btn btn-danger active" href="#">

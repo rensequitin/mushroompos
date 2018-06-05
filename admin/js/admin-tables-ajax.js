@@ -139,7 +139,7 @@ function setTableInactive(category){
 }
 function ask(category){
 	disableScrolling();
-	alert(category);
+	// alert(category);
 	$('#alertModal').modal('show');
 	$('.del-product').attr('id',category);
 	$("#alertModalAnimate").animateCss('zoomIn');	

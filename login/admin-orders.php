@@ -360,7 +360,7 @@
         </div>
 		
         <div class="modal-body" style="text-align:center;">
-			This action requires your confirmation. Please choose and option:
+			This action requires your confirmation. Please choose an option:
         </div>
         <div class="modal-footer" style=" text-align:center;">		
 		<button onclick="archiveOrder(this.name);" name="" id='archive-button' type="button" class="btn btn-danger">

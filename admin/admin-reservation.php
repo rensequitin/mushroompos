@@ -546,9 +546,9 @@
 						
 						<div class="col-xs-12" style="position:absolute; bottom:40px; text-align:center; padding-top:25px;">
 						
-								<button type="button" class="quantity-plus btn btn-default btn-number">
+								<!-- <button type="button" class="quantity-plus btn btn-default btn-number">
 									<i  class="fa fa-ban"></i><span>  Cancel Order</span>
-								</button>
+								</button> -->
 						
 					
 								<button onclick="moveReservation(this.name)" name="" id="accept-dinein" type="button" class="quantity-plus btn btn-danger btn-number"><!--onclick="printReceipt(this.name,this.value);"-->

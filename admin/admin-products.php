@@ -429,15 +429,16 @@
     <div class="modal-dialog modal-sm">
       <div class="modal-content" id="alertModalAnimate" style="border-radius:3pt;">
         <div class="modal-header" style="background-color:#e66454;color:#fff;" align="center">
-          <button type="button" class="close" onclick='closeAlert();'>&times;</button><!--data-dismiss="modal"-->
+          <!--data-dismiss="modal"-->
 		  <i class="fa fa-warning fa-2x"></i>
           <h3 id='orders-label'  class="modal-title"> Alert</h3>
         </div>
 		
         <div class="modal-body" style="text-align:center;">
-			This action requires your confirmation. Please choose and option:
+			This action requires your confirmation. Please choose an option:
         </div>
-        <div class="modal-footer" style=" text-align:center;">		
+        <div class="modal-footer" style=" text-align:center;">	
+        <button type="button" class="btn btn-link" onclick='closeAlert();'>Cancel</button>	
 			<a id="" onclick="deleteProduct(this.id); return false;" class="del-product btn btn-danger active" href="#">
 				<i class="fa fa-trash-o fa-lg"></i> Delete
 			</a>			
