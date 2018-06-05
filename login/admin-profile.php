@@ -157,17 +157,10 @@
             <i class="fa fa-desktop"></i> <span>Point Of Sale</span>           
           </a>
         </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-inbox"></i> <span>Orders</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+        <li>
+          <a href="admin-reservation.php">
+            <i class="fa fa-inbox"></i> <span>Reservations</span>
           </a>
-          <ul class="treeview-menu">
-      <li><a href="admin-orders.php"><i class="fa fa-circle-o"></i> View Orders</a></li>
-      <li><a href="admin-reservation.php"><i class="fa fa-circle-o"></i> Reservations</a></li>
-          </ul>
         </li>
       
         <li class="treeview">
@@ -182,25 +175,6 @@
       <li><a href="admin-foods.php"><i class="fa fa-circle-o"></i> Foods</a></li>           
           </ul>
         </li>
-            
-        <li>
-          <a href="admin-employees.php">
-            <i class="fa fa-users"></i>
-            <span>Employees</span>            
-          </a>
-        </li>
-    <li class="treeview">
-          <a href="#">
-            <i class="fa fa-bar-chart"></i> <span>Reports</span> 
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-      <li><a href="admin-reports.php"><i class="fa fa-circle-o"></i> Sales </a></li>
-      <li><a href="admin-summary.php"><i class="fa fa-circle-o"></i> Summary </a></li>
-          </ul>
-        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-ellipsis-h"></i> <span>Etc.</span> 
@@ -209,8 +183,6 @@
             </span>
           </a>
           <ul class="treeview-menu">
-      <li><a href="backup-restore.php"><i class="fa fa-circle-o"></i> Backup/Restore </a></li>
-      <li><a href="admin-trails.php"><i class="fa fa-circle-o"></i> Audit Trails </a></li>
       <li><a href="admin-tables.php"><i class="fa fa-circle-o"></i> Tables </a></li>
           </ul>
         </li>

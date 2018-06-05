@@ -164,15 +164,11 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-dashboard"></i>  Dashboard <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">       
-                <li><a style="color:#000;" href="admin-orders.php"><i class="fa fa-inbox"></i> Orders</a></li>
+                <li><a style="color:#000;" href="admin-orders.php"><i class="fa fa-inbox"></i> Reservations</a></li>
                 <li class="divider"></li>
                 <li><a style="color:#000;" href="admin-products.php"><i class="fa fa-cutlery"></i> Products</a></li>
 				<li class="divider"></li>
-                <li><a style="color:#000;" href="admin-employees.php"><i class="fa fa-users"></i> Employees</a></li>
-				<li class="divider"></li>
-                <li><a style="color:#000;" href="admin-users.php"><i class="fa fa-user-plus"></i> Users</a></li>
-				<li class="divider"></li>
-                <li><a style="color:#000;" href="admin-reports.php"><i class="fa fa-bar-chart"></i> Reports/Sales</a></li>
+                <li><a style="color:#000;" href="admin-tables.php"><i class="fa fa-cog"></i> Etc.</a></li>
               </ul>
             </li>
           </ul>
