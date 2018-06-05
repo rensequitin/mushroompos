@@ -1,0 +1,28 @@
+label.error {
+  padding-left: 0px;
+  padding-top: 5px;
+  width:24px;
+  background: url(images/icon-warning.png) left center no-repeat;
+  background-size:24px 24px;
+  background-position:0 12;
+/*   display: none !important; */
+  display: inline-block;
+  text-indent: -99999px;
+  position:absolute;
+}
+
+label.valid {
+  padding-left: 0px;
+  padding-top: 10px;
+  width:24px;
+  background: url(images/valid.png) left center no-repeat;
+  background-size:24px 24px;
+  background-position:0 12;
+  display: inline-block;
+  text-indent: -99999px;
+  position:absolute;
+}
+
+label.error,label.valid {
+	visibility:hidden;
+}

@@ -36,6 +36,7 @@
   <script src="js/admin-pos-ajax.js"> </script>
   <script src="js/admin-settings.js"> </script>
   <link rel="stylesheet" href="dist/css/admin-index.css"> 
+  <link rel="stylesheet" href="css/admin-pass.css">
   <style><!-- /* flipInX bounceInDown jackInTheBox*/-->
 
 .bounceInDown { 
@@ -119,7 +120,9 @@
 	transition: all 250ms ease-in-out;
 	margin-left:15px;
 }
+
   </style>
+
 </head>
 <body class="hold-transition skin-blue layout-top-nav fixed"> <!-- 1<body class=".sw-active hold-transition skin-blue sidebar-mini sidebar-collapse fixed ">-->
 <?php
@@ -582,7 +585,7 @@
   </aside>
 	<!-- Modal -->
   <div class="modal fade" data-backdrop="static" data-keyboard="false" style="padding-top:100px;"id="payModal" role="dialog">
-  <form id="reg-form" class='reg-form'>
+  <form>
     <div class="modal-dialog modal-sm">
       <div class="modal-content" id="payModalAnimate" style="border-radius:3pt;">
         <div class="modal-header">
@@ -609,7 +612,7 @@
   </div>
   
   <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px;"id="qtyModal" role="dialog">
-  <form id="reg-form" class='reg-form'>
+  <form>
     <div id="qtyModalBody" class="modal-dialog modal-sm">
       <div class="modal-content" id="qtyModalAnimate" style="border-radius:3pt;">
         <div class="modal-header">
@@ -639,7 +642,7 @@
   </div>
   
   <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px;"id="nameModal" role="dialog">
-  <form id="reg-form" class='reg-form'>
+  <form>
     <div id="nameModalBody" class="modal-dialog modal-sm">
       <div class="modal-content" id="nameModalAnimate" style="border-radius:3pt;">
         <div class="modal-header">
@@ -667,9 +670,45 @@
     </div>
 	</form>
   </div>
+  <div data-backdrop="static" data-keyboard="false" id="changePass" class="modal fade" role="dialog">
+	  <div class="login-box modal-dialog modal-sm">
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<!--<button type="button" id="closeChange" class="close" onclick="closeChange();" data-dismiss="modal">&times;</button>-->
+			<h4 class="modal-title pull-left">Change password</h4>
+		  </div>
+		  <div class="modal-body register-box-body">
+		 	<form id="password-form">
+			<div class="col-md-12"> 
+				<!--<input type="password" class="form-control input-md" id="newpass" placeholder="New password" onfocus="this.placeholder=''" onblur="this.placeholder ='New password'"> -->
+				<div class="form-group has-feedback" style="display:block;">
+					<input type="password" id="newPassword" name="newPassword" class="form-control" placeholder="New password">
+					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+				</div>
+			</div>		
+			<div class="col-md-12" style="margin-bottom: 2%;"> 
+				<!--<input type="password" class="form-control input-md" id="conpass" placeholder="Confirm new password" onfocus="this.placeholder=''" onblur="this.placeholder ='Confirm new password'"> -->
+				<div class="form-group has-feedback" style="display:block;">
+					<input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm new password">
+					<span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+				</div>
+			</div>
+			</form>
+		  </div>
+		  <div class="modal-footer" style="text-align:center;">
+			<button onclick="updatePassword();" name="" id="button-update" type="button" class="quantity-plus btn btn-primary btn-number">
+				<i class="fa fa-save"></i><span> Update</span>
+			</button>
+			<!--  <button type="button" class="btn btn-primary btn-block">Update</button>-->
+			
+		  </div>
+		</div>
+	  </div>
+	</div>
   
   <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="scModal" role="dialog">
-  <form id="reg-form" class='reg-form'>
+  <form>
     <div id="scModalBody" class="modal-dialog modal-sm">
       <div class="modal-content" id="scModalAnimate" style="border-radius:3pt;">
         <div class="modal-header">
@@ -697,7 +736,7 @@
   </div>
 
   <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="scTkModal" role="dialog">
-  <form id="reg-form" class='reg-form'>
+  <form>
     <div id="scTkModalBody" class="modal-dialog modal-sm">
       <div class="modal-content" id="scTkModalAnimate" style="border-radius:3pt;">
         <div class="modal-header">
@@ -725,7 +764,7 @@
   </div>
 
   <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="scReviewModal" role="dialog">
-  <form id="reg-form" class='reg-form'>
+  <form>
     <div id="scReviewModalBody" class="modal-dialog modal-sm">
       <div class="modal-content" id="scReviewModalAnimate" style="border-radius:3pt;">
         <div class="modal-header">
@@ -753,7 +792,7 @@
   </div>
   
   <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="pwdModal" role="dialog">
-  <form id="reg-form" class='reg-form'>
+  <form>
     <div id="pwdModalBody" class="modal-dialog modal-sm">
       <div class="modal-content" id="pwdModalAnimate" style="border-radius:3pt;">
         <div class="modal-header">
@@ -781,7 +820,7 @@
   </div>
 
   <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="pwdTkModal" role="dialog">
-  <form id="reg-form" class='reg-form'>
+  <form>
     <div id="pwdTkModalBody" class="modal-dialog modal-sm">
       <div class="modal-content" id="pwdTkModalAnimate" style="border-radius:3pt;">
         <div class="modal-header">
@@ -809,7 +848,7 @@
   </div>
   
   <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="pwdReviewModal" role="dialog">
-  <form id="reg-form" class='reg-form'>
+  <form>
     <div id="pwdReviewModalBody" class="modal-dialog modal-sm">
       <div class="modal-content" id="pwdReviewModalAnimate" style="border-radius:3pt;">
         <div class="modal-header">
@@ -2054,5 +2093,11 @@ else{
 		$type = "Undefined";	
 	}
 ?>
+<script src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
+<script src="js/jquery.validate-2.min.js"> </script>
+<script src="js/admin-employees-script.js" type="text/javascript"></script>
+<script src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
+<script src="js/jquery.validate.min.js"> </script>
+<script src="js/admin-employees-script2.js" type="text/javascript"></script>
 </body>
 </html>

@@ -2453,6 +2453,35 @@
 		//$pass = md5($_GET['password']);
 	}
 
+	function checkChange($db){
+		//$user = $_GET['username'];
+		$user = $_SESSION['Staff'];
+		
+		$sql = "Select * from mushroom_staff where staff_username = '$user'";
+		$exist = $db->checkExist($sql) or die(mysql_error());
+		$row = $db->fetch_array($exist);
+		echo $row['staff_changed'];
+	}
+
+	function editUserPassFirst($db){
+		//$user = $_GET['username'];
+		$user = $_SESSION['Staff'];
+		$newpass = md5($_GET['newpass']);				
+		
+		$sql = "Update mushroom_staff set staff_password = '$newpass',staff_changed='Yes' where staff_username = '$user'";
+		$exist = $db->checkExist($sql) or die(mysql_error());
+
+			$sql1 = "Select * from mushroom_staff where staff_username = '$user'";
+			$exist1 = $db->checkExist($sql1);
+			$row = $db->fetch_array($exist1);
+			$name = $row['staff_firstname']." ".$row['staff_lastname'];
+			$activity = "Changed password ($name / Employee)";
+			$db->activity_log($activity);
+			echo "Password was successfully changed";
+	
+		//$pass = md5($_GET['password']);
+	}
+
 	function editUsersPass($db){
 		$user = $_GET['username'];
 		$newpass = md5($_GET['newpass']);

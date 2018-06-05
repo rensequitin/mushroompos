@@ -5,7 +5,7 @@ $adminJQ = jQuery.noConflict();
 function start(){
 	changeChoices();	
 	changeCartValues();
-	
+	checkChange();
 }
 
 function changeChoices(){
@@ -2997,6 +2997,122 @@ function changeCartValues(){
 		};
 		
 		obj.open("GET","php/admin-php.php?action="+'viewCart', true);
+		obj.send(null);
+	}
+	else{
+		alert("Error");
+	}
+}
+
+function updatePassword(){
+	var passw = document.getElementById('newPassword');
+	var conpassw = document.getElementById('confirmPassword');
+	//var username = document.getElementById("button-update").getAttribute("name");
+	
+	if(passw.value.length!=0 && conpassw.value.length!=0){
+	
+		var pass = passw.nextElementSibling.nextElementSibling.innerHTML;
+		
+		if(pass=='OK!'){
+			var conpass = conpassw.nextElementSibling.nextElementSibling.innerHTML;
+			
+			passw.parentElement.classList.remove("has-error");			
+			if(conpass=='OK!'){
+				var newpass = passw.value;
+				conpassw.parentElement.classList.remove("has-error");
+				if(window.XMLHttpRequest){
+					obj = new XMLHttpRequest();
+				}
+				else{
+					if(window.ActiveXObject){
+						try{
+							obj = new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						catch(e){
+								
+						}
+					}
+				}
+					
+				if(obj){
+					obj.onreadystatechange = function(){
+						if(this.readyState==4 && this.status==200){			
+							iziToast.success({
+								title: 'Success',
+								message: this.responseText,
+								timeout: 2000,
+							});	
+							setTimeout(function(){
+								location.href = window.location.href;
+							}, 2000);
+						};
+					}
+					obj.open("GET","php/admin-php.php?action="+'editUserPassFirst'+"&newpass="+newpass, true); //+"&username="+username
+					obj.send(null);	
+				}
+				else{
+					alert("Error");
+				}
+			}
+			else{
+				conpassw.parentElement.classList.add("has-error");
+				iziToast.warning({
+					title: conpass,
+					backgroundColor: '#E16045',
+					timeout: 3000,
+				});
+			}
+			
+		}
+		else{
+			passw.parentElement.classList.add("has-error");
+			iziToast.warning({
+				title: pass,
+				//message: this.responseText,
+				backgroundColor: '#E16045',
+				timeout: 3000,
+			});
+		}
+	}
+	else{
+		iziToast.warning({
+			title: 'Please fill up the form',
+			//message: this.responseText,
+			backgroundColor: '#E16045',
+			timeout: 3000,
+		});
+	}
+	
+	
+}
+
+function checkChange(){
+	
+	if(window.XMLHttpRequest){
+		obj = new XMLHttpRequest();
+	}
+	else{
+		if(window.ActiveXObject){
+			try{
+				obj = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch(e){
+				
+			}
+		}
+	}
+	
+	if(obj){
+		obj.onreadystatechange = function(){
+			if(this.readyState==4 && this.status==200){
+				msg = this.responseText;
+				if(msg=="No"){
+					$("#changePass").modal("show");
+					disableScrolling();
+				}
+			}
+		};
+		obj.open("GET","php/admin-php.php?action="+'checkChange', true);
 		obj.send(null);
 	}
 	else{
