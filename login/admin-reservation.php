@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin</title>
+  <title>Employee</title>
   <link rel="icon" href="images/icon.ico">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -54,17 +54,17 @@
 	$db = MushroomDB::getInstance();
 	$db->checkOnline();
 	$name = "";
-	$admin = $_SESSION['Admin'];
-	$sql = "Select * from mushroom_admin where admin_username ='$admin'";
+	$staff = $_SESSION['Staff'];
+	$sql = "Select * from mushroom_staff where staff_username ='$staff'";
 		$exist = $db->checkExist($sql);
 		if($exist){
 			$num = $db->get_rows($exist);
 				if($num>=1){
 					$row = $db->fetch_array($exist);
-					$name = $row['admin_firstname'];
-					$LName = $row['admin_lastname'];
-					$user = $row['admin_username'];
-					$pic = $row['admin_picture'];
+					$name = $row['staff_firstname'];
+					$LName = $row['staff_lastname'];
+					$user = $row['staff_username'];
+					$pic = $row['staff_picture'];
 				}	
 		}
 
@@ -78,7 +78,7 @@
 
       <span class="logo-mini"><i class="fa fa-laptop"></i></span>
 
-      <span class="logo-lg"><i class="fa fa-laptop"></i> <b>Admin </b>Panel</span>
+      <span class="logo-lg"><i class="fa fa-laptop"></i> <b>Employee </b>Panel</span>
     </div>
 
     <nav class="navbar navbar-static-top">
@@ -99,7 +99,7 @@
                 <img src="<?php echo "../".$pic; ?>" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $name." ".$LName;?> - Administrator
+                  <?php echo $name." ".$LName;?> - Employee
                   <small>@<?php echo $user;?></small>
                 </p>
               </li>
