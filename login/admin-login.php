@@ -107,57 +107,7 @@
 
 
 <script>
-$.fn.extend({
-    animateCss: function (animationName, callback) {
-        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-        this.addClass('animated ' + animationName).one(animationEnd, function() {
-            $(this).removeClass('animated ' + animationName);
-            if (callback) {
-              callback();
-            }
-        });
-        return this;
-    }
-});	           
-            function domo(){
-                jQuery('#platform-details').html('<code>' + navigator.userAgent + '</code>');
-                
-                var elements = [
-                    "Ctrl+Shift+home"
-                ];
-				var elements2 = [
-                    "ESC"
-                ];
-				var elements3 = [
-                    "Ctrl+Shift+space"
-                ];
-                
-                $.each(elements, function(i, e) {
-                   var newElement = ( /[\+]+/.test(elements[i]) ) ? elements[i].replace("+","_") : elements[i];                   
-                   $(document).bind('keydown', elements[i], function assets() {              
-					   $('#alertModal').modal('show');					  
-                       return false;
-                   });
-                });
-				$.each(elements2, function(i, e) {
-                   var newElement = ( /[\+]+/.test(elements2[i]) ) ? elements2[i].replace("+","_") : elements2[i];                   
-                   $(document).bind('keydown', elements2[i], function assets() {              
-					   $('#alertModal').modal('hide');					  
-                       return false;
-                   });
-                });
-				$.each(elements3, function(i, e) {
-                   var newElement = ( /[\+]+/.test(elements3[i]) ) ? elements3[i].replace("+","_") : elements3[i];                   
-                   $(document).bind('keydown', elements3[i], function assets() {              
-					   location.href='backup-restore.php';//$('#alertModal').modal('hide');					  
-                       //return false;
-                   });
-                });
-                
-            }
-            
-            jQuery(document).ready(domo);
-            
+
 </script>
 </body>
 </html>
