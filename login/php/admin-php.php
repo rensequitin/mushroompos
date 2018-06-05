@@ -1426,11 +1426,33 @@
 			if(isset($_SESSION['Staff'])){
 				$account = $_SESSION['Staff'];
 			}
-		$sql = "Update mushroom_staff set staff_firstname ='$firstname', staff_lastname='$lastname',staff_email ='$email',staff_username='$username' where staff_username ='$account'";
-		$check = $db->checkExist($sql);
-			if($check){
-				$_SESSION['Staff'] = $username;
+		if($account != $username){
+			$sql_check = "Select * from mushroom_staff where staff_username = '$username'";
+			$check_num = $db->checkExist($sql_check);
+			$numrows = $db->get_rows($check_num);
+
+			if(!$numrows>=1){
+				$sql = "Update mushroom_staff set staff_firstname ='$firstname', staff_lastname='$lastname',staff_email ='$email',staff_username='$username' where staff_username ='$account'";
+				$check = $db->checkExist($sql);
+					if($check){
+						$_SESSION['Staff'] = $username;
+						echo "success";
+					}
 			}
+			else{
+				echo "exist";
+			}
+		}
+		else{
+			$sql = "Update mushroom_staff set staff_firstname ='$firstname', staff_lastname='$lastname',staff_email ='$email',staff_username='$username' where staff_username ='$account'";
+			$check = $db->checkExist($sql);
+				if($check){
+					$_SESSION['Staff'] = $username;
+					echo "success";
+				}	
+		}
+		
+		
 	}
 
 	function deleteChkbox($db){

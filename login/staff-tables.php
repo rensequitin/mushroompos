@@ -114,7 +114,7 @@
  
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="admin-profile.php" class="btn btn-default btn-flat">Profile</a>
+                  <a href="staff-profile.php" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a onclick="signout();" class="btn btn-default btn-flat">Sign out</a>
@@ -153,7 +153,7 @@
           </a>
         </li>
         <li>
-          <a href="admin-reservation.php">
+          <a href="staff-reservation.php">
             <i class="fa fa-inbox"></i> <span>Reservations</span>
           </a>
         </li>
@@ -166,8 +166,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-      <li><a href="admin-products.php"><i class="fa fa-circle-o"></i> Products</a></li>
-      <li><a href="admin-foods.php"><i class="fa fa-circle-o"></i> Foods</a></li>           
+      <li><a href="staff-products.php"><i class="fa fa-circle-o"></i> Products</a></li>
+      <li><a href="staff-foods.php"><i class="fa fa-circle-o"></i> Foods</a></li>           
           </ul>
         </li>
         <li class="treeview active">
@@ -178,7 +178,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-      <li class="active"><a href="admin-tables.php"><i class="fa fa-circle-o"></i> Tables </a></li>
+      <li class="active"><a href="staff-tables.php"><i class="fa fa-circle-o"></i> Tables </a></li>
           </ul>
         </li>
         

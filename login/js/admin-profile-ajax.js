@@ -271,15 +271,25 @@ function updateProfile(){
 		
 		if(obj){
 			obj.onreadystatechange = function(){
-				if(this.readyState==4 && this.status==200){		
-					iziToast.success({
-						title: 'Updated successfully',
-						//message: 'Successfully Added!',
-						timeout: 3000,
-					});
-					setTimeout(function(){
-						location.href = window.location.href;
-					},500);
+				if(this.readyState==4 && this.status==200){	
+					if(this.responseText=='success'){
+						iziToast.success({
+							title: 'Updated successfully',
+							//message: 'Successfully Added!',
+							timeout: 3000,
+						});
+						setTimeout(function(){
+							location.href = window.location.href;
+						},500);
+					}
+					else{
+						iziToast.error({
+							title: 'Username is not available',
+							//message: 'Successfully Added!',
+							timeout: 3000,
+						});
+					}
+					
 					/* if(this.responseText=="same"){
 						iziToast.warning({
 							title: 'Warning',

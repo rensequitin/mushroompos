@@ -167,11 +167,11 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-dashboard"></i>  Dashboard <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">       
-                <li><a style="color:#000;" href="admin-reservation.php"><i class="fa fa-inbox"></i> Reservations</a></li>
+                <li><a style="color:#000;" href="staff-reservation.php"><i class="fa fa-inbox"></i> Reservations</a></li>
                 <li class="divider"></li>
-                <li><a style="color:#000;" href="admin-products.php"><i class="fa fa-cutlery"></i> Products</a></li>
+                <li><a style="color:#000;" href="staff-products.php"><i class="fa fa-cutlery"></i> Products</a></li>
 				<li class="divider"></li>
-                <li><a style="color:#000;" href="admin-tables.php"><i class="fa fa-cog"></i> Etc.</a></li>
+                <li><a style="color:#000;" href="staff-tables.php"><i class="fa fa-cog"></i> Etc.</a></li>
               </ul>
             </li>
           </ul>
@@ -220,7 +220,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="admin-profile.php" class="btn btn-default btn-flat">Profile</a>
+                  <a href="staff-profile.php" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a onclick="signout();" class="btn btn-default btn-flat">Sign out</a>
