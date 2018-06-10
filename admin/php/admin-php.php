@@ -1735,6 +1735,7 @@
 
 	function viewCart($db){
 		$total = 0;
+		$total_cart = 0;
 		if(isset($_SESSION['POSCart'])){
 			foreach ($_SESSION['POSCart'] as $cart => $cartItems) {
 					$sql = "Select * from mushroom_foods where food_code = '$cart'";
@@ -1752,6 +1753,7 @@
 						$db->set_foodPrice($food_price);
 						$db->set_foodSubtotal($subtotal);
 						$total = $db->compute_bill();
+						$total_cart += $cartItems;
 						$db->view_cart();
 					}
 
@@ -1762,8 +1764,9 @@
 		else{
 			echo "<td class='col-xs-1' align='center' style='height:100px; font-size:15pt; color:#949494; background-image:url(images/icon-cutlery.png); background-repeat:no-repeat; background-size:100px 60px; background-position: center;'><i> No Open Orders</i><br/><p>Tap the New Order button to start a new order.</p></td>";
 		}
-
 		echo "*".number_format($total,"2");
+		echo "*".$total_cart;
+
 	}
 
 	function viewCartDel($db){

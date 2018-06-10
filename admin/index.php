@@ -425,6 +425,8 @@
 			<div style="padding-right:0px;" class="box-tools col-xs-12">
 				<button onclick='viewQueue();' style="margin:1px; background-color:#0080a5; color:white;" type="button" class="quantity-minus btn btn-lg pull-right">
 					<i  class="fa fa-database" style="margin-right:5px;"></i>Queue
+					<small id="cartAnimate" style="background-color:#dddddd; color:#0080a5; position:relative; top:-7px; z-index:5; right:-5px; margin-left: -5px; margin-right: -7px; " class="label pull-right"><span id="cartQuantity"><?php echo $items; ?></span></small>
+
 				</button>
 				<div id="id-available" >
 					<label>Table No.</label>
@@ -454,7 +456,7 @@
 				</div>-->
 			</div>
 		</div>
-		<small id="cartAnimate" style="background-color:#3399FF; position:relative; top:17px; z-index:5; right:2px;" class="label pull-right"><span id="cartQuantity"><?php echo $items; ?></span></small>
+		<small id="cartInfoAnimate" style="background-color:#3399FF; position:relative; top:17px; z-index:5; right:2px;" class="label pull-right"><span id="cartInfo">0</span></small>
           <!-- small box -->
           <div class="small-box bg-white" style="margin-bottom:0px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 3px;">
             <div class="inner">
