@@ -817,6 +817,38 @@
 	</form>
   </div>
 
+  <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="vipTkModal" role="dialog">
+  <form id="reg-form" class='reg-form'>
+    <div id="vipTkModalBody" class="modal-dialog modal-sm">
+      <div class="modal-content" id="vipTkModalAnimate" style="border-radius:3pt;">
+        <div class="modal-header">
+
+          <h3 id='orders-label'class="modal-title"><i class="fa fa-money"></i>Choose</h3>
+        </div>
+		
+        <div class="modal-body">
+			<div class="has-feedback ">
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentTkVIPID('20');" src='images/icon-20.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentTkVIPID('50');" src='images/icon-50.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentTkVIPID('70');" src='images/icon-70.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentTkVIPID('100');" src='images/icon-100.png'v width='65' >
+				 <!-- <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewVIP" onkeypress="handleKeyPressCustomerReviewVIP(event); return isNumbers(event); " class="input-lg form-control"> -->
+			</div>
+		
+        </div>
+        <div class="modal-footer">		
+			<a data-dismiss="modal" class="btn btn-default" data-dismiss="modal">
+				<i class="fa fa-ban fa-1x"></i> Cancel
+			</a>
+			<!-- <button data-dismiss="modal" type="button" onclick="discountPaymentReviewPwdID();" name="" class="btn btn-success" >
+				<i class="fa fa-check-circle fa-lg"></i> Confirm
+			</button>		 -->
+        </div>
+      </div>
+    </div>
+	</form>
+  </div>
+
   <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="pwdTkModal" role="dialog">
   <form id="reg-form" class='reg-form'>
     <div id="pwdTkModalBody" class="modal-dialog modal-sm">
@@ -1085,6 +1117,12 @@
 				</div>	
 				<div onclick="showTkPWD();" data-dismiss="modal" style="cursor:pointer; padding:25px;" class="visible-xs box-header with-border">
 				  <p class="box-title" style="text-align:center; font-size:17.3pt;">PWD</p>
+				</div>	
+				<div onclick="showTkVIP();" data-dismiss="modal" style="cursor:pointer; padding:25px; background-image:url('images/icon-vip.png'); background-repeat:no-repeat; background-size:120px 60px; background-position:130px center;" class="hidden-xs box-header with-border">
+				  <p class="box-title" style="text-align:center; font-size:17.3pt;">VIP</p>
+				</div>	
+				<div onclick="showTkVIP();" data-dismiss="modal" style="cursor:pointer; padding:25px;" class="visible-xs box-header with-border">
+				  <p class="box-title" style="text-align:center; font-size:17.3pt;">VIP</p>
 				</div>		
 			</div>
         </div>
