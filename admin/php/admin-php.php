@@ -3781,6 +3781,109 @@
 			}
 	}
 
+	function discountPaymentReviewVIPID($db){
+		$choice = $_GET['choice'];
+		$total = 0;
+		$discount_price = 0;
+		$count = 0;
+		$cart = 0;
+		$discounted = 0;
+		$sc = 0;
+		$ctr = 0;
+		$code = $_SESSION['Discounted'];
+		$sql1 = "Select * from mushroom_queue_orders where queue_code = '$code' and queue_paid='No'";
+		$exist1 = $db->checkExist($sql1);
+			while ($row1 = $db->fetch_array($exist1)) {
+				$qtyDiscount = $row1['orders_quantity'];
+				$cart+= $qtyDiscount;
+			}
+
+		if(isset($_SESSION['Discount'])){
+			$count = count($_SESSION['Discount']);
+			$sc = 1;
+		}
+		else{
+			$sc = 0;
+		}
+
+		if($count>=$cart){
+			echo "0";
+		}
+		else{
+			if($sc==1){
+				$add = array("PWD");
+				array_push($_SESSION['Discount'],$add);
+			}
+			else{
+
+				$_SESSION['Discount'] = array("PWD");
+			}
+			echo "1";
+		}
+		if($choice=='20'){
+			$choice = 0.20;
+		}
+		else if($choice=='50'){
+			$choice = 0.50;
+		}
+		else if($choice=='70'){
+			$choice = 0.70;
+		}
+		else{
+			$choice = 1.00;
+		}
+			$count = count($_SESSION['Discount']);
+			$num = count($_SESSION['Discount']);
+
+			$ctr = $count;
+
+			$sql = "Select * from mushroom_queue_orders where queue_code = '$code' and queue_paid='No'";
+			$exist = $db->checkExist($sql);
+				while ($rows = $db->fetch_array($exist)) {
+					$cartItems = $rows['orders_quantity'];
+					$food_price = $rows['orders_price'];
+					$subtotal = $rows['orders_subtotal'];
+					$foodName = $rows['orders_foods'];
+					if($ctr > 0){
+						if($ctr>=$cartItems){
+							$ctr -= $cartItems;
+							$discounted_food = (float)$food_price * (float)$cartItems;
+							$discount_price = $discounted_food * $choice;
+							$discounted += $discount_price;
+						}
+						else{
+							$discounted_food = (float)$food_price * (float)$ctr;
+							$discount_price = $discounted_food * $choice;
+							$discounted += $discount_price;
+							$ctr = 0;
+						}
+					}
+				}
+
+			echo "*".number_format($discounted,"2")."*";
+			$total_price = 0;
+			if(isset($_SESSION['Discount'])){
+				$sql2 = "Select * from mushroom_queue_orders where queue_code = '$code' and queue_paid = 'No' ";
+				$exist2 = $db->checkExist($sql2);
+					if($exist2){
+						while($row2 = $db->fetch_array($exist2)){
+							// $row2 = $db->fetch_array($exist2);
+							$cartItems2 = $row2['orders_quantity'];
+							$food_price2 = $row2['orders_price'];
+							$subtotal2 = $row2['orders_subtotal'];
+							$foodName2 = $row2['orders_foods'];
+							$food_price2 = number_format($food_price2,"2");
+							$subtotal2 = number_format($subtotal2,"2");
+							$subtotal2 = floatval(str_replace(",","",$subtotal2));
+							$total_price += $subtotal2;
+						}
+						
+					}
+
+				echo number_format($total_price,"2");
+			}
+	}
+
 	function discountPaymentReviewPwdID($db){
 
 		$total = 0;
