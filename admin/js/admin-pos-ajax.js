@@ -1226,6 +1226,12 @@ function showPWD(){
 	$("#pwdModal").modal("show");
 	$("#txtPWD").select();
 }
+function showVIP(){
+	$("#txtVIP").val("");
+	$("#vipModal").modal("show");
+	$("#txtVIP").select();
+	
+}
 function showTkSC(){
 	$("#txtTkSC").val("");
 	$("#scTkModal").modal("show");
@@ -1868,6 +1874,67 @@ function discountPaymentReviewScID(){
 			}
 		};
 		obj.open("GET","php/admin-php.php?action="+'discountPaymentReviewScID', true);
+		obj.send(null);
+	}
+	else{
+		alert("Error");
+	}
+}
+
+function discountPaymentVIPID(choice){
+	
+	if(window.XMLHttpRequest){
+		obj = new XMLHttpRequest();
+	}
+	else{
+		if(window.ActiveXObject){
+			try{
+				obj = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch(e){
+				
+			}
+		}
+	}
+	
+	if(obj){
+		obj.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200) {
+				var msg = this.responseText.split("*");
+				if(msg[0]=="0"){
+					iziToast.warning({
+						title: 'Error',
+						message: 'Add more orders',
+						backgroundColor: '#E16045',
+						timeout: 2000,
+					});	
+				}
+				else{
+					var value = document.getElementById('paymentText').value;
+					value = parseFloat(value);				
+					document.getElementById("review-discount-payment").innerHTML = msg[1];
+					var discount = document.getElementById("review-discount-payment").innerHTML;
+					discount = parseFloat(discount.replace(',','').replace('.','.'));
+					
+					document.getElementById("payment-total-price").innerHTML =  msg[2];
+					
+					var total = document.getElementById("payment-total-price").innerHTML;
+					total = parseFloat(total.replace(',','').replace('.','.'));
+					var newTotal = (total - discount).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+					total = document.getElementById("payment-total-price").innerHTML =  newTotal;
+					total = parseFloat(total.replace(',','').replace('.','.'));
+					var value = parseFloat(value);
+					
+					if(value>0){						
+						var change = value - total;
+						change = change.toFixed(2);
+						document.getElementById("payment-change").innerHTML = change;								
+					}
+				}
+				
+			}
+		};
+		obj.open("GET","php/admin-php.php?action="+'discountPaymentVIPID'+'&choice='+choice, true);
 		obj.send(null);
 	}
 	else{

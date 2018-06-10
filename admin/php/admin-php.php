@@ -3544,6 +3544,111 @@
 			}
 	}
 
+	function discountPaymentVIPID($db){
+		$choice = $_GET['choice'];
+		$total = 0;
+		$discount_price = 0;
+		$count = 0;
+		$cart = 0;
+		$discounted = 0;
+		$sc = 0;
+		$ctr = 0;
+		if(isset($_SESSION['POSCart'])){
+			foreach ($_SESSION['POSCart'] as $index){
+				$cart+= $index;
+			}
+
+		}
+
+		if(isset($_SESSION['Discount'])){
+			$count = count($_SESSION['Discount']);
+			$sc = 1;
+		}
+		else{
+			$sc = 0;
+		}
+		if($choice=='20'){
+			$choice = 0.20;
+		}
+		else if($choice=='50'){
+			$choice = 0.50;
+		}
+		else if($choice=='70'){
+			$choice = 0.70;
+		}
+		else{
+			$choice = 1.00;
+		}
+		if($count>=$cart){
+			echo "0";
+		}
+		else{
+			if($sc==1){
+				$add = array("PWD");
+				array_push($_SESSION['Discount'],$add);
+			}
+			else{
+
+				$_SESSION['Discount'] = array("PWD");
+			}
+			echo "1";
+		}
+			$count = count($_SESSION['Discount']);
+			$num = count($_SESSION['Discount']);
+
+			$ctr = $count;
+			foreach ($_SESSION['POSCart'] as $cartItem => $cartItems) {
+				$sql = "Select * from mushroom_foods where food_code = '$cartItem'";
+				$exist = $db->checkExist($sql) or die(mysql_error());
+
+				if($exist){
+					$row = $db->fetch_array($exist);
+					$food_price = $row['food_price'];
+					$subtotal = (float)$food_price * (float)$cartItems;
+					$foodName = $row['food_name'];
+
+					if($ctr > 0){
+						if($ctr>=$cartItems){
+							$ctr -= $cartItems;
+							$discounted_food = (float)$food_price * (float)$cartItems;
+							$discount_price = $discounted_food * $choice;
+							$discounted += $discount_price;
+						}
+						else{
+							$discounted_food = (float)$food_price * (float)$ctr;
+							$discount_price = $discounted_food * $choice;
+							$discounted += $discount_price;
+							$ctr = 0;
+						}
+					}
+				}
+			}
+			echo "*".number_format($discounted,"2")."*";
+			$total_price = 0;
+			if(isset($_SESSION['Discount'])){
+
+				if(isset($_SESSION['POSCart'])){
+					foreach ($_SESSION['POSCart'] as $cart2 => $cartItems2) {
+						$sql2 = "Select * from mushroom_foods where food_code = '$cart2'";
+						$exist2 = $db->checkExist($sql2) or die(mysql_error());
+
+						if($exist2){
+
+							$row2 = $db->fetch_array($exist2);
+							$food_price2 = $row2['food_price'];
+							$subtotal2 = (float)$food_price2 * (float)$cartItems2;
+							$foodName2 = $row2['food_name'];
+							$food_price2 = number_format($food_price2,"2");
+							$subtotal2 = number_format($subtotal2,"2");
+							$subtotal2 = floatval(str_replace(",","",$subtotal2));
+							$total_price += $subtotal2;
+						}
+					}
+				}
+				echo number_format($total_price,"2");
+			}
+	}
+
 	function discountPaymentPwdID($db){
 
 		$total = 0;
