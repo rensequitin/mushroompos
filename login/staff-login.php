@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width = device-width, initial-scale = 1">
-<title>Admin</title>
+<title>Employee</title>
 <link rel="icon" href="images/icon.ico">
 <link href='fonts/fonts.css' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -33,7 +33,7 @@
 <body>
 <?php
 	require_once("php/class.database.php");
-	if (isset($_SESSION['Admin'])){
+	if (isset($_SESSION['Staff'])){
 		header("Location:index.php");
 	}
 ?>
@@ -45,7 +45,7 @@
             <div class="panel panel-default" >
                 <div class="panel-heading">
                     <div class="panel-title">Login</div>
-                        <div style="float:right; font-size: .8em; position: relative; top:-15px">ADMIN</div>
+                        <div style="float:right; font-size: .8em; position: relative; top:-15px">EMPLOYEE</div>
                 </div>     
                 <div style="padding-top:30px" class="panel-body" >
                     <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>            

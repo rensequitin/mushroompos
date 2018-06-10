@@ -1758,6 +1758,7 @@
 
 	function viewCart($db){
 		$total = 0;
+		$total_cart = 0;
 		if(isset($_SESSION['POSCart'])){
 			foreach ($_SESSION['POSCart'] as $cart => $cartItems) {
 					$sql = "Select * from mushroom_foods where food_code = '$cart'";
@@ -1775,6 +1776,7 @@
 						$db->set_foodPrice($food_price);
 						$db->set_foodSubtotal($subtotal);
 						$total = $db->compute_bill();
+						$total_cart += $cartItems;
 						$db->view_cart();
 					}
 
@@ -1787,6 +1789,7 @@
 		}
 
 		echo "*".number_format($total,"2");
+		echo "*".$total_cart;
 	}
 
 	function viewCartDel($db){
@@ -4104,30 +4107,32 @@
 						date_default_timezone_set('Asia/Manila');
 						$date = date("l <\b\\r> M. d, Y, h:i A", $secs);
 						if($paid=="No"){
-							$style = "background-color:#fff; cursor:pointer;";
+							$style = "<td class='col-xs-1'><i class='fa fa-cutlery fa-5x'></i></td>";
+							// $style = "background-color:#fff; cursor:pointer;";
 						}
 						else{
-							$style = "background-color:#5cb85c; cursor:pointer;";
+							$style = "<td class='col-xs-1'><img src='images/paid.png'v width='70' ></td>";
+							// $style = "background-color:#5cb85c; cursor:pointer;";
 						}
 						if($type=="Dine-in"){
-							echo "<tr style='$style' id='$code' onclick='showQueue(this.id);'>
+							echo "<tr id='$code' onclick='showQueue(this.id);' style='cursor:pointer;'>
 									<td class='col-xs-1'><label style='position:relative; top:10px;'>table #</label><h3 style='position:relative; left:35px; font-size:45pt;'>$table</h3></td>
 									<td class='col-xs-2'><strong>$code</strong><br/><label style='font-weight:normal; cursor:pointer;'>$date</label></td>
-									<td class='col-xs-1'><i  class='fa fa-cutlery fa-5x'></i></td>
+									$style
 								  </tr>";
 						}
 						else if($type=="Take-out"){
-							echo "<tr style='$style' id='$code' onclick='showQueue(this.id);'>
+							echo "<tr id='$code' onclick='showQueue(this.id);' style='cursor:pointer;'>
 									<td class='col-xs-1'><label style='position:relative; top:10px;'>$type</label><h3 style='position:relative; left:35px; font-size:45pt;'><i  class='fa fa-shopping-basket fa-1x'></h3></td>
 									<td class='col-xs-2'><strong>$code</strong><br/><label style='font-weight:normal; cursor:pointer;'>$date</label></td>
-									<td class='col-xs-1'><i  class='fa fa-cutlery fa-5x'></i></td>
+									$style
 								  </tr>";
 						}
 						else{
-							echo "<tr style='$style' id='$code' onclick='showQueue(this.id);'>
+							echo "<tr id='$code' onclick='showQueue(this.id);' style='cursor:pointer;'>
 									<td class='col-xs-1'><label style='position:relative; top:10px;'>$type</label><h3 style='position:relative; left:35px; font-size:45pt;'><i  class='fa fa-motorcycle fa-1x'></h3></td>
 									<td class='col-xs-2'><strong>$code</strong><br/><label style='font-weight:normal; cursor:pointer;'>$date</label></td>
-									<td class='col-xs-1'><i  class='fa fa-cutlery fa-5x'></i></td>
+									$style
 								  </tr>";
 						}
 				}

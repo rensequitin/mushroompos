@@ -754,7 +754,13 @@ function addQuantity(food_code){
 						document.getElementById('cartQuantity').firstChild.data = total;
 					},1000);	 */				
 					$("#queue-tab").css({"display":"none"});
-					changeCartValues();	
+					// var cartQuantity = document.getElementById('cartQuantity').firstChild.data;
+					document.getElementById('cartInfo').firstChild.data = "+"+1;
+					$("#cartInfoAnimate").animateCss('bounce');
+						setTimeout(function(){
+							changeCartValues();
+						// document.getElementById('cartInfo').firstChild.data = total;
+					},250);
 				}
 				else{
 					iziToast.info({
@@ -2991,6 +2997,7 @@ function changeCartValues(){
 				msg = this.responseText.split("*");								
 				document.getElementById("table-foods").innerHTML = 	msg[0];				
 				document.getElementById("topay").innerHTML = 	msg[1];
+				document.getElementById('cartInfo').firstChild.data = msg[2];
 				checkCart();
 				//init();
 			}
