@@ -2640,6 +2640,8 @@
 
 	function checkType($db){
 		unset($_SESSION['Discount']);
+		unset($_SESSION['Choice']);
+		unset($_SESSION['Counter']);
 		$order = $_SESSION['OrderType'];
 		if($order=="DineIn"){
 			echo "Dine";
@@ -2688,7 +2690,7 @@
 								$food_price = $row['food_price'];
 								$subtotal = (float)$food_price * (float)$cartItems;
 								$food = $row['food_name'];
-								$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','No','No')";
+								$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','No','No','')";
 								$exist3 = $db->checkExist($sql3);
 
 							}
@@ -3333,7 +3335,8 @@
 				$discount = $row['queue_discount'];
 				//$subtotal = (float)$food_price * (float)$row['orders_quantity'];
 				if($discount=="Yes"){
-					$db->set_foodName($row['orders_foods']." (20%)");
+					$text_discount = $row['queue_discount_text'];
+					$db->set_foodName($row['orders_foods']." ({$text_discount}%)");
 
 				}
 				else{
@@ -3579,17 +3582,29 @@
 		else{
 			$choice = 1.00;
 		}
+		$_SESSION['Choice'] = $choice;
+		// if(isset($_SESSION['Choice'])){
+		// 	array_push($_SESSION['Choice'],$choice);
+		// 	$total_count = $_SESSION['Counter'];
+		// 	$total_count++;
+		// 	$_SESSION['Counter'] = $total_count;
+		// }
+		// else{
+		// 	$_SESSION['Choice'] = array($choice);
+		// 	$_SESSION['Counter'] = 0;
+		// }
+		// $choices = $_SESSION['Choice'];
 		if($count>=$cart){
 			echo "0";
 		}
 		else{
 			if($sc==1){
-				$add = array("PWD");
+				$add = array("VIP");
 				array_push($_SESSION['Discount'],$add);
 			}
 			else{
 
-				$_SESSION['Discount'] = array("PWD");
+				$_SESSION['Discount'] = array("VIP");
 			}
 			echo "1";
 		}
@@ -3597,6 +3612,7 @@
 			$num = count($_SESSION['Discount']);
 
 			$ctr = $count;
+			$total_discount = 0;
 			foreach ($_SESSION['POSCart'] as $cartItem => $cartItems) {
 				$sql = "Select * from mushroom_foods where food_code = '$cartItem'";
 				$exist = $db->checkExist($sql) or die(mysql_error());
@@ -3606,23 +3622,37 @@
 					$food_price = $row['food_price'];
 					$subtotal = (float)$food_price * (float)$cartItems;
 					$foodName = $row['food_name'];
+					$discounted_food = (float)$food_price * (float)$cartItems;
+					$discount_price = $discounted_food * $choice;
+					$discounted += $discount_price;					
+					// if($ctr > 0){
+					// 	if($ctr>=$cartItems){
+					// 		$ctr -= $cartItems;
+					// 		$discounted_food = (float)$food_price * (float)$cartItems;
+					// 		$discount_price = $discounted_food * $choices[$counter_cart];
+					// 		$discounted += $discount_price;
+					// 		$counter_cart+=1;
+					// 	}
+					// 	else{
 
-					if($ctr > 0){
-						if($ctr>=$cartItems){
-							$ctr -= $cartItems;
-							$discounted_food = (float)$food_price * (float)$cartItems;
-							$discount_price = $discounted_food * $choice;
-							$discounted += $discount_price;
-						}
-						else{
-							$discounted_food = (float)$food_price * (float)$ctr;
-							$discount_price = $discounted_food * $choice;
-							$discounted += $discount_price;
-							$ctr = 0;
-						}
-					}
+					// 		$discounted_food = (float)$food_price * (float)$ctr;
+					// 		$discount_price = $discounted_food * $choices[$counter_cart];
+					// 		$discounted += $discount_price;
+					// 		$ctr = 0;
+					// 		$counter_cart+=1;
+					// 	}
+					// }
+				}
+				$total_discount += $cartItems;
+				
+			}
+			if($total_discount>1){
+				for($i=1; $i<=$total_discount;$i++){
+					$add = array("VIP");
+					array_push($_SESSION['Discount'],$add);
 				}
 			}
+
 			echo "*".number_format($discounted,"2")."*";
 			$total_price = 0;
 			if(isset($_SESSION['Discount'])){
@@ -3916,12 +3946,12 @@
 		}
 		else{
 			if($sc==1){
-				$add = array("PWD");
+				$add = array("VIP");
 				array_push($_SESSION['Discount'],$add);
 			}
 			else{
 
-				$_SESSION['Discount'] = array("PWD");
+				$_SESSION['Discount'] = array("VIP");
 			}
 			echo "1";
 		}
@@ -3937,11 +3967,12 @@
 		else{
 			$choice = 1.00;
 		}
+			$_SESSION['Choice'] = $choice;
 			$count = count($_SESSION['Discount']);
 			$num = count($_SESSION['Discount']);
 
 			$ctr = $count;
-
+			$total_discount = 0;
 			$sql = "Select * from mushroom_queue_orders where queue_code = '$code' and queue_paid='No'";
 			$exist = $db->checkExist($sql);
 				while ($rows = $db->fetch_array($exist)) {
@@ -3949,21 +3980,32 @@
 					$food_price = $rows['orders_price'];
 					$subtotal = $rows['orders_subtotal'];
 					$foodName = $rows['orders_foods'];
-					if($ctr > 0){
-						if($ctr>=$cartItems){
-							$ctr -= $cartItems;
-							$discounted_food = (float)$food_price * (float)$cartItems;
-							$discount_price = $discounted_food * $choice;
-							$discounted += $discount_price;
-						}
-						else{
-							$discounted_food = (float)$food_price * (float)$ctr;
-							$discount_price = $discounted_food * $choice;
-							$discounted += $discount_price;
-							$ctr = 0;
-						}
-					}
+					$ctr -= $cartItems;
+					$discounted_food = (float)$food_price * (float)$cartItems;
+					$discount_price = $discounted_food * $choice;
+					$discounted += $discount_price;
+					// if($ctr > 0){
+					// 	if($ctr>=$cartItems){
+					// 		$ctr -= $cartItems;
+					// 		$discounted_food = (float)$food_price * (float)$cartItems;
+					// 		$discount_price = $discounted_food * $choice;
+					// 		$discounted += $discount_price;
+					// 	}
+					// 	else{
+					// 		$discounted_food = (float)$food_price * (float)$ctr;
+					// 		$discount_price = $discounted_food * $choice;
+					// 		$discounted += $discount_price;
+					// 		$ctr = 0;
+					// 	}
+					// }
+					$total_discount += $cartItems;
 				}
+			if($total_discount>1){
+				for($i=1; $i<=$total_discount;$i++){
+					$add = array("VIP");
+					array_push($_SESSION['Discount'],$add);
+				}
+			}
 
 			echo "*".number_format($discounted,"2")."*";
 			$total_price = 0;
@@ -4666,10 +4708,14 @@
 						$printer->setTextSize(1,1);
 						$printer -> setJustification();
 						$printer->feed();
-
+						$choice = 0.20;
 						if(isset($_SESSION['Discount'])){
 							$ctr = count($_SESSION['Discount']);
+							if($_SESSION['Discount'][0]=="VIP"){
+								$choice = $_SESSION['Choice'];
+							}
 						}
+
 
 						foreach ($_SESSION['POSCart'] as $cart => $cartItems) {
 							$sql1 = "Select * from mushroom_foods where food_code = '$cart'";
@@ -4683,16 +4729,40 @@
 								if(isset($_SESSION['Discount'])){
 									$discountedOrder = $_SESSION['Discount'];
 									$food = $row2['food_name'];
+									if($_SESSION['Discount'][0]=="VIP"){
+										if($_SESSION['Choice']==0.20){
+											$text_discount = "20%";
+											$discount_text = "20";
+										}
+										if($_SESSION['Choice']==0.50){
+											$text_discount = "50%";
+											$discount_text = "50";
+										}
+										if($_SESSION['Choice']==0.70){
+											$text_discount = "70%";
+											$discount_text = "70";
+										}
+										if($_SESSION['Choice']==1.00){
+											$text_discount = "100%";
+											$discount_text = "100";
+										}
+										 
+									}
+									else{
+										$text_discount = "20%";		
+										$discount_text = "20";								
+									}
 
 									if($ctr > 0){
 										if($ctr>=$cartItems){
 											$ctr -= $cartItems;
 											$subtotal = (float)$food_price * (float)$cartItems;
 											$subtotal =  floatval(str_replace(",","",$subtotal));
-											$discounted = $subtotal * 0.20;
+											$discounted = $subtotal * $choice;
 											$subtotal = $subtotal - $discounted;
-											$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','Yes')";
-											$food = $food."(20%)";
+											
+											$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','Yes','$discount_text')";
+											$food = $food."($text_discount)";
 											/* $discounted_food = (float)$food_price * (float)$cartItems;
 											$discount_price = $discounted_food * 0.20;
 											$discounted += $discount_price; */
@@ -4703,16 +4773,16 @@
 											$cartQty = (int)$cartItems - (int)$ctr;
 											$subtotal = (float)$food_price * (float)$cartQty;
 											$discounted_subtotal += $subtotal;
-											$sqli = "Insert into mushroom_queue_orders values('$code','$food','$cartQty','$food_price','$subtotal','Yes','No')";
+											$sqli = "Insert into mushroom_queue_orders values('$code','$food','$cartQty','$food_price','$subtotal','Yes','No','$discount_text')";
 											$exists3 = $db->checkExist($sqli);
 
 											$subtotal = (float)$food_price * (float)$ctr;
 											$subtotal =  floatval(str_replace(",","",$subtotal));
-											$discounted = $subtotal * 0.20;
+											$discounted = $subtotal * $choice;
 											$subtotal = $subtotal - $discounted;
 											$discounted_subtotal += $subtotal;
-											$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$ctr','$food_price','$subtotal','Yes','Yes')";
-											$food = $food."(20% - ".$ctr."x)";
+											$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$ctr','$food_price','$subtotal','Yes','Yes','$discount_text')";
+											$food = $food."($text_discount - ".$ctr."x)";
 											/* $discounted_food = (float)$food_price * (float)$ctr;
 											$discount_price = $discounted_food * 0.20;
 											$discounted += $discount_price; */
@@ -4726,7 +4796,7 @@
 										$subtotal = (float)$food_price * (float)$cartItems;
 										$food = $row2['food_name'];
 
-										$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','No')";
+										$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','No','$discount_text')";
 									}
 
 									/* if($food==$discountedOrder){
@@ -4749,7 +4819,7 @@
 									$subtotal = (float)$food_price * (float)$cartItems;
 									$food = $row2['food_name'];
 
-									$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','No')";
+									$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','No','$discount_text')";
 								}
 
 
@@ -4820,6 +4890,7 @@
 	}
 
 	function printPaymentTakeoutReceipt($db){
+		// [TODO]
 		$payment = $_GET["payment"];
 		/* $table = $_GET["table"]; */
 		ob_start();
@@ -5052,6 +5123,7 @@
 		$date = date("m/d/Y");
 		$time = date("h:i A");
 		$cashier = "";
+		$choice = 0.20;
 		if(isset($_SESSION['Admin'])){
 			$admin = $_SESSION['Admin'];
 			$sql = "Select * from mushroom_admin where admin_username ='$admin'";
@@ -5113,6 +5185,27 @@
 			$exist2 = $db->checkExist($sql2);
 				if(isset($_SESSION['Discount'])){
 					$ctr = count($_SESSION['Discount']);
+					$choice = $_SESSION['Choice'];
+					if($_SESSION['Choice']==0.20){
+						$text_discount = "20%";
+						$discount_text = "20";
+					}
+					if($_SESSION['Choice']==0.50){
+						$text_discount = "50%";
+						$discount_text = "50";
+					}
+					if($_SESSION['Choice']==0.70){
+						$text_discount = "70%";
+						$discount_text = "70";
+					}
+					if($_SESSION['Choice']==1.00){
+						$text_discount = "100%";
+						$discount_text = "100";
+					}
+				}
+				else{
+					$text_discount = "20%";		
+					$discount_text = "20";								
 				}
 				if($exist2){
 					while($row2 = $db->fetch_array($exist2)){
@@ -5127,26 +5220,26 @@
 									$ctr -= $cartItems;
 									$subtotal = (float)$food_price * (float)$cartItems;
 									$subtotal =  floatval(str_replace(",","",$subtotal));
-									$discounted = $subtotal * 0.20;
+									$discounted = $subtotal * $choice;
 									$subtotal = $subtotal - $discounted;
-									$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','Yes')";
-									$food = $food."(20%)";
+									$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','Yes','$discount_text')";
+									$food = $food."({$discount_text}%)";
 								}
 								else{
 									$discounted_subtotal = 0;
 									$cartQty = (int)$cartItems - (int)$ctr;
 									$subtotal = (float)$food_price * (float)$cartQty;
 									$discounted_subtotal += $subtotal;
-									$sqli = "Insert into mushroom_queue_orders values('$code','$food','$cartQty','$food_price','$subtotal','Yes','No')";
+									$sqli = "Insert into mushroom_queue_orders values('$code','$food','$cartQty','$food_price','$subtotal','Yes','No','$discount_text')";
 									$exists3 = $db->checkExist($sqli);
 
 									$subtotal = (float)$food_price * (float)$ctr;
 									$subtotal =  floatval(str_replace(",","",$subtotal));
-									$discounted = $subtotal * 0.20;
+									$discounted = $subtotal * $choice;
 									$subtotal = $subtotal - $discounted;
 									$discounted_subtotal += $subtotal;
-									$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$ctr','$food_price','$subtotal','Yes','Yes')";
-									$food = $food."(20% - ".$ctr."x)";
+									$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$ctr','$food_price','$subtotal','Yes','Yes','$discount_text')";
+									$food = $food."({$discount_text}% - ".$ctr."x)";
 									$ctr = 0;
 									$subtotal = $discounted_subtotal;
 								}
@@ -5155,7 +5248,7 @@
 								$subtotal = (float)$food_price * (float)$cartItems;
 								$food = $row2['orders_foods'];	
 
-								$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','No')";
+								$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','No','$discount_text')";
 							}					
 						}
 						else{
@@ -5163,7 +5256,7 @@
 							$food = $row2['orders_foods'];
 							$subtotal = (float)$food_price * (float)$cartItems;
 							// $food = $row2['food_name'];
-							$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','No')";
+							$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','No','$discount_text')";
 						}
 						
 						$exist3 = $db->checkExist($sql3);
@@ -5312,13 +5405,14 @@
 						else{
 							echo $discountedOrder;
 							if($discountedOrder=="Yes"){
+								$choice = $row2[queue_discount_text];
 								/* $subtotal =  floatval(str_replace(",","",$subtotal));
 								echo $subtotal."?";
 								$discounted = $subtotal * 0.20;
 								echo $discounted." ";
 								//$subtotal = $subtotal - $discounted;
 								//echo $subtotal; */
-								$foodName.="(20%)";
+								$foodName.="({$choice}%)";
 								$sql6 = "Insert into mushroom_orders values('$code','$foodName','$cartItems','$food_price','$subtotal')";
 								$exist6 = $db->checkExist($sql6) or die(mysql_error());
 								//$sql3 = "Insert into mushroom_orders values('$code','$food','$cartItems','$food_price','$subtotal')";

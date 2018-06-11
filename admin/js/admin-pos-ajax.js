@@ -1906,6 +1906,7 @@ function discountPaymentVIPID(choice){
 		obj.onreadystatechange = function(){
 			if(this.readyState == 4 && this.status == 200) {
 				var msg = this.responseText.split("*");
+				alert(msg)
 				if(msg[0]=="0"){
 					iziToast.warning({
 						title: 'Error',
