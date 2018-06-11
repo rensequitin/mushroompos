@@ -258,7 +258,7 @@
 				<div>
 					<div style="padding-left:0px; padding-right:0px;" class="box-tools col-xs-12">
 						<div class="has-feedback ">
-							<input onkeyup="searchQueue(this.value)" id="search-queue" type="text" class="form-control input-lg" placeholder="Search by order no.">
+							<input onkeyup="searchQueue(this.value)" id="search-queue" type="text" class="form-control input-lg" autocomplete="off" placeholder="Search by order no.">
 							<span class="glyphicon glyphicon-search form-control-feedback"></span>
 						</div>
 					</div>
@@ -367,7 +367,7 @@
 			<div>
 				<div class="box-tools col-lg-12">
 					<div class="has-feedback ">
-						<input onkeyup="searchProducts(this.value)" id="search-product" type="text" class="form-control input-lg" placeholder="Search">
+						<input onkeyup="searchProducts(this.value)" id="search-product" type="text" class="form-control input-lg" autocomplete="off" placeholder="Search">
 						<span class="glyphicon glyphicon-search form-control-feedback"></span>
 					</div>
 				</div>
@@ -685,7 +685,7 @@
 		
         <div class="modal-body">
 			<div class="has-feedback ">
-				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtSC" onkeypress="handleKeyPressCustomerSC(event); return isNumbers(event); " class="input-lg form-control">
+				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtSC" onkeypress="handleKeyPressCustomerSC(event); return isNumbers(event); " autocomplete="off" class="input-lg form-control">
 			</div>
 	
         </div>
@@ -741,7 +741,7 @@
 		
         <div class="modal-body">
 			<div class="has-feedback ">
-				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewSC" onkeypress="handleKeyPressCustomerReviewSC(event); return isNumbers(event); " class="input-lg form-control">
+				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewSC" onkeypress="handleKeyPressCustomerReviewSC(event); return isNumbers(event); " autocomplete="off" class="input-lg form-control">
 			</div>
 	
         </div>
@@ -769,7 +769,7 @@
 		
         <div class="modal-body">
 			<div class="has-feedback ">
-				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtPWD" onkeypress="handleKeyPressCustomerPWD(event); return isNumbers(event); " class="input-lg form-control">
+				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtPWD" onkeypress="handleKeyPressCustomerPWD(event); return isNumbers(event); " autocomplete="off" class="input-lg form-control">
 			</div>
 		
         </div>
@@ -919,7 +919,7 @@
 		
         <div class="modal-body">
 			<div class="has-feedback ">
-				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewPWD" onkeypress="handleKeyPressCustomerReviewPWD(event); return isNumbers(event); " class="input-lg form-control">
+				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewPWD" onkeypress="handleKeyPressCustomerReviewPWD(event); return isNumbers(event); " autocomplete="off" class="input-lg form-control">
 			</div>
 		
         </div>
@@ -1381,7 +1381,7 @@
 					</div>
 					<div class="col-sm-4" style="padding-top:10px; position:relative; height:605px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
 						<div class="has-feedback ">
-						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="paymentText" onkeyup="changePaymentTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" placeholder="0">
+						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="paymentText" onkeyup="changePaymentTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" autocomplete="off" placeholder="0">
 						</div>
 						<div class="col-xs-12" style="padding-top:15px;">
 							<div class="table-responsive">
@@ -1700,7 +1700,7 @@
 					</div>
 					<div class="col-sm-4" style="padding-top:10px; position:relative; height:551px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
 						<div class="has-feedback ">
-						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtPayment" onkeyup="changeDineTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" placeholder="0">
+						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtPayment" onkeyup="changeDineTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" autocomplete="off" placeholder="0">
 						</div>
 						<div class="col-xs-12" style="padding-top:15px;">
 							<div class="table-responsive">
