@@ -4903,6 +4903,7 @@
 		$dateSales = date('ymd');
 		$secs = time();
 		$cashier = "";
+		$choice = 0.20;
 
 
 
@@ -5001,16 +5002,40 @@
 
 								if(isset($_SESSION['Discount'])){
 									$discountedOrder = $_SESSION['Discount'];
+									$choice = $_SESSION['Choice'];
+									if($_SESSION['Discount'][0]=="VIP"){
+										if($_SESSION['Choice']==0.20){
+											$text_discount = "20%";
+											$discount_text = "20";
+										}
+										if($_SESSION['Choice']==0.50){
+											$text_discount = "50%";
+											$discount_text = "50";
+										}
+										if($_SESSION['Choice']==0.70){
+											$text_discount = "70%";
+											$discount_text = "70";
+										}
+										if($_SESSION['Choice']==1.00){
+											$text_discount = "100%";
+											$discount_text = "100";
+										}
+										 
+									}
+									else{
+										$text_discount = "20%";		
+										$discount_text = "20";								
+									}
 
 									if($ctr > 0){
 										if($ctr>=$cartItems){
 											$ctr -= $cartItems;
 											$subtotal = (float)$food_price * (float)$cartItems;
 											$subtotal =  floatval(str_replace(",","",$subtotal));
-											$discounted = $subtotal * 0.20;
+											$discounted = $subtotal * $choice;
 											$subtotal = $subtotal - $discounted;
 											// $sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','Yes','Yes')";
-											$food = $food."(20%)";			
+											$food = $food."({$discount_text}%)";			
 											$sql3 = "Insert into mushroom_orders values('$code','$food','$cartItems','$food_price','$subtotal')";																	
 										}
 										else{
@@ -5024,13 +5049,13 @@
 
 											$subtotal = (float)$food_price * (float)$ctr;
 											$subtotal =  floatval(str_replace(",","",$subtotal));
-											$discounted = $subtotal * 0.20;
+											$discounted = $subtotal * $choice;
 											$subtotal = $subtotal - $discounted;
 											$discounted_subtotal += $subtotal;
 											// $sql3 = "Insert into mushroom_queue_orders values('$code','$food','$ctr','$food_price','$subtotal','Yes','Yes')";
-											$food1 = $food."(20%)";			
+											$food1 = $food."({$discount_text}%)";			
 											$sql3 = "Insert into mushroom_orders values('$code','$food1','$ctr','$food_price','$subtotal')";
-											$food = $food."(20% - ".$ctr."x)";											
+											$food = $food."({$discount_text}% - ".$ctr."x)";											
 											/* $discounted_food = (float)$food_price * (float)$ctr;
 											$discount_price = $discounted_food * 0.20;
 											$discounted += $discount_price; */
