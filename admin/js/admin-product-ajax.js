@@ -248,14 +248,24 @@ function updateProduct(value){
 		
 	if(obj){
 		obj.onreadystatechange = function(){
-			if(this.readyState==4 && this.status==200){						
-				iziToast.success({
-					title: 'Success',
-					message: 'Successfully updated product.',
-					timeout: 2000,
-				});
-				document.getElementById("editProductAnimate").style.display="none";
-				show();
+			if(this.readyState==4 && this.status==200){		
+				if(this.responseText=="same"){
+					iziToast.warning({
+						title: 'Warning',
+						message: 'Cannot update the product with the same product name!',
+						backgroundColor: '#E16045',
+						timeout: 3000,
+					});	
+				}
+				else{				
+					iziToast.success({
+						title: 'Success',
+						message: 'Successfully updated product.',
+						timeout: 2000,
+					});
+					document.getElementById("editProductAnimate").style.display="none";
+					show();
+				}
 			};
 		}
 		obj.open("GET","php/admin-php.php?action="+'editProduct'+"&category="+value+"&name="+name+"&price="+price, true);

@@ -128,14 +128,24 @@ function updateProduct(value){
 		
 	if(obj){
 		obj.onreadystatechange = function(){
-			if(this.readyState==4 && this.status==200){						
-				iziToast.success({
-					title: 'Success',
-					message: 'Successfully updated product.',
-					timeout: 2000,
-				});
-				document.getElementById("editProductAnimate").style.display="none";
-				viewProducts();
+			if(this.readyState==4 && this.status==200){		
+				if(this.responseText=="same"){
+					iziToast.warning({
+						title: 'Warning',
+						message: 'Cannot update the food with the same food name!',
+						backgroundColor: '#E16045',
+						timeout: 3000,
+					});	
+				}	
+				else{
+					iziToast.success({
+						title: 'Success',
+						message: 'Successfully updated product.',
+						timeout: 2000,
+					});
+					document.getElementById("editProductAnimate").style.display="none";
+					viewProducts();
+				}
 			};
 		}
 		obj.open("GET","php/admin-php.php?action="+'editFood'+"&code="+value+"&name="+name+"&price="+price, true);

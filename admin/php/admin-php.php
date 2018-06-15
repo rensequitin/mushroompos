@@ -2088,10 +2088,19 @@
 		$category = $_GET["category"];
 		$name = $_GET["name"];
 		$price = $_GET["price"];
-		$sql = "Update mushroom_products set product_name = '$name', product_price='$price' where food_category='$category'";
-		$exist = $db->checkExist($sql);
-		$activity = "Edited product ($name)";
-		$db->activity_log($activity);
+		$sqli = "Select * from mushroom_products where product_name = '$name'";
+		$exist1 = $db->checkExist($sqli);
+		$num_rows = $db->get_rows($exist1);
+		if($num_rows >= 1){
+			echo "same";
+		}
+		else{
+			$sql = "Update mushroom_products set product_name = '$name', product_price='$price' where food_category='$category'";
+			$exist = $db->checkExist($sql);
+			$activity = "Edited product ($name)";
+			$db->activity_log($activity);
+			echo "success";
+		}
 	}
 
 	function editTable($db){
@@ -2107,11 +2116,34 @@
 		$code = $_GET["code"];
 		$name = $_GET["name"];
 		$price = $_GET["price"];
-		$sql = "Update mushroom_foods set food_name = '$name', food_price='$price' where food_code='$code'";
-		$exist = $db->checkExist($sql);
+		$sql2 = "Select * from mushroom_foods where food_code ='$code'";
+		$exist2 = $db->checkExist($sql2);
+		$row_food = $db->fetch_array($exist2);
+		$old_name = $row_food['food_name'];
+		if($old_name == $name){
+			$sql = "Update mushroom_foods set food_name = '$name', food_price='$price' where food_code='$code'";
+			$exist = $db->checkExist($sql);
 
-		$activity = "Edited food ($name)";
-		$db->activity_log($activity);
+			$activity = "Edited food ($name)";
+			$db->activity_log($activity);
+			echo "success";
+		}
+		else{
+			$sqli = "Select * from mushroom_foods where food_name ='$name'";
+			$exist1 = $db->checkExist($sqli);
+			$num_rows = $db->get_rows($exist1);
+			if($num_rows>=1){
+				echo "same";
+			}
+			else{
+				$sql = "Update mushroom_foods set food_name = '$name', food_price='$price' where food_code='$code'";
+				$exist = $db->checkExist($sql);
+
+				$activity = "Edited food ($name)";
+				$db->activity_log($activity);
+				echo "success";
+			}
+		}
 	}
 
 	function showProducts($db){
