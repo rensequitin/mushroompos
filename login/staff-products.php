@@ -291,7 +291,7 @@
                 <thead style="background-color:#e9f0f5;">
                 <tr>                  
                   <th style="text-align:center;">Product Name</th>
-                  <th style="text-align:center;">Product True Price</th>
+                  <!-- <th style="text-align:center;">Product True Price</th> -->
 				  <th style="text-align:center;">Added Date</th>
                   <th style="text-align:center;">Status</th>                  
                 </tr>

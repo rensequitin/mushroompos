@@ -280,7 +280,7 @@
       </div>
       <div class="row">
 	  <div id="addProductAnimate" class="col-md-12">
-          <div class="box box-primary" style="border-top-color:#fff; height:180px;">		
+          <div class="box box-primary" style="border-top-color:#fff; height:100px;">		
 			<!--<div class="col-xs-5"> 
 				<input id="food-category-input" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="Food Category"> 
 			</div>
@@ -302,15 +302,15 @@
 				<label style="padding-left:25px; font-weight:normal;">e.g. "All Day Meals", "Sizzling For 3", "Student"</label>	
 			</div>
 			<div class="col-xs-5"> 
-				<input id="food-price-input" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="True Price">
+				<input id="food-price-input" class="form-control input-lg" style="display:none; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="True Price">
 			</div>
 			<div class="col-xs-12">
-				<label style="padding-left:25px; font-weight:normal;">e.g. "120", "50", or you can leave this empty</label>
+				<label style="padding-left:25px; display:none; font-weight:normal;">e.g. "120", "50", or you can leave this empty</label>
 			</div>
 		  </div>		
 		</div>
 		 <div id="editProductAnimate" class="col-md-12">		 
-          <div class="box box-primary" style="border-top-color:#fff; height:250px;">		
+          <div class="box box-primary" style="border-top-color:#fff; height:150px;">		
 			<h3 class="box-title" style="padding-left:10px; margin-top:0px;">Product category: <label id="product-category"></label></h3>
 			<div class="col-xs-5"> 
 				<input id="food-name-value" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="Food Name">
@@ -327,10 +327,10 @@
 				<label style="padding-left:25px; font-weight:normal;">e.g. "All Day Meals", "Sizzling For 3", "Student"</label>	
 			</div>
 			<div class="col-xs-5"> 
-				<input id="food-price-value" class="form-control input-lg" style="box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="True Price">
+				<input id="food-price-value" class="form-control input-lg" style="display:none; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); margin:10px 0 0 15px;" type="text" placeholder="True Price">
 			</div>
 			<div class="col-xs-12">
-				<label style="padding-left:25px; font-weight:normal;">e.g. "120", "50", or you can leave this empty</label>
+				<label style="padding-left:25px; display:none; font-weight:normal;">e.g. "120", "50", or you can leave this empty</label>
 			</div>
 		  </div>		
 		</div>
@@ -349,7 +349,7 @@
                 <thead style="background-color:#e9f0f5;">
                 <tr>                  
                   <th style="text-align:center;">Product Name</th>
-                  <th style="text-align:center;">Product True Price</th>
+                  <!-- <th style="text-align:center;">Product True Price</th> -->
 				  <th style="text-align:center;">Added Date</th>
                   <th style="text-align:center;">Status</th>
                   <th style="text-align:center;">Action</th>
