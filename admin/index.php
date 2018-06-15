@@ -1577,7 +1577,7 @@
 									<i  class="fa fa-tags"></i><span>  Add Discount</span>
 								</button>
 								<button type="button" value="" name="" onclick="printPaymentTakeoutReceipt(this.value);" id="takeout-print" class="quantity-plus btn-lg btn-danger btn-number">
-									<i  class="fa fa-upload"></i><span>  Pay & Queue</span>
+									<i  class="fa fa-upload"></i><span>  Payment</span>
 								</button>
 						
 						</div>
