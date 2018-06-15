@@ -3295,7 +3295,7 @@
 						}
 						else{
 							$subtotal = (float)$food_price * (float)$cartItems;
-							$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','No','No')";
+							$sql3 = "Insert into mushroom_queue_orders values('$code','$food','$cartItems','$food_price','$subtotal','No','No','')";
 							$exist3 = $db->checkExist($sql3);
 						}
 
