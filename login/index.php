@@ -257,7 +257,7 @@
 				<div>
 					<div style="padding-left:0px; padding-right:0px;" class="box-tools col-xs-12">
 						<div class="has-feedback ">
-							<input onkeyup="searchQueue(this.value)" id="search-queue" type="text" class="form-control input-lg" placeholder="Search by order no.">
+							<input onkeyup="searchQueue(this.value)" id="search-queue" type="text" class="form-control input-lg" autocomplete="off" placeholder="Search by order no.">
 							<span class="glyphicon glyphicon-search form-control-feedback"></span>
 						</div>
 					</div>
@@ -366,7 +366,7 @@
 			<div>
 				<div class="box-tools col-lg-12">
 					<div class="has-feedback ">
-						<input onkeyup="searchProducts(this.value)" id="search-product" type="text" class="form-control input-lg" placeholder="Search">
+						<input onkeyup="searchProducts(this.value)" id="search-product" type="text" class="form-control input-lg" autocomplete="off" placeholder="Search">
 						<span class="glyphicon glyphicon-search form-control-feedback"></span>
 					</div>
 				</div>
@@ -425,6 +425,7 @@
 				<button onclick='viewQueue();' style="margin:1px; background-color:#0080a5; color:white;" type="button" class="quantity-minus btn btn-lg pull-right">
 					<i  class="fa fa-database" style="margin-right:5px;"></i>Queue
 					<small id="cartAnimate" style="background-color:#dddddd; color:#0080a5; position:relative; top:-7px; z-index:5; right:-5px; margin-left: -5px; margin-right: -7px; " class="label pull-right"><span id="cartQuantity"><?php echo $items; ?></span></small>
+
 				</button>
 				<div id="id-available" >
 					<label>Table No.</label>
@@ -719,7 +720,7 @@
 		
         <div class="modal-body">
 			<div class="has-feedback ">
-				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtSC" onkeypress="handleKeyPressCustomerSC(event); return isNumbers(event); " class="input-lg form-control">
+				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtSC" onkeypress="handleKeyPressCustomerSC(event); return isNumbers(event); " autocomplete="off" class="input-lg form-control">
 			</div>
 	
         </div>
@@ -775,7 +776,7 @@
 		
         <div class="modal-body">
 			<div class="has-feedback ">
-				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewSC" onkeypress="handleKeyPressCustomerReviewSC(event); return isNumbers(event); " class="input-lg form-control">
+				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewSC" onkeypress="handleKeyPressCustomerReviewSC(event); return isNumbers(event); " autocomplete="off" class="input-lg form-control">
 			</div>
 	
         </div>
@@ -803,7 +804,7 @@
 		
         <div class="modal-body">
 			<div class="has-feedback ">
-				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtPWD" onkeypress="handleKeyPressCustomerPWD(event); return isNumbers(event); " class="input-lg form-control">
+				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtPWD" onkeypress="handleKeyPressCustomerPWD(event); return isNumbers(event); " autocomplete="off" class="input-lg form-control">
 			</div>
 		
         </div>
@@ -814,6 +815,69 @@
 			<button data-dismiss="modal" type="button" onclick="discountPaymentPwdID();" name="" class="btn btn-success" >
 				<i class="fa fa-check-circle fa-lg"></i> Confirm
 			</button>		
+        </div>
+      </div>
+    </div>
+	</form>
+  </div>
+  <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="vipModal" role="dialog">
+  <form id="reg-form" class='reg-form'>
+    <div id="vipModalBody" class="modal-dialog modal-sm">
+      <div class="modal-content" id="vipModalAnimate" style="border-radius:3pt;">
+        <div class="modal-header">
+
+          <h3 id='orders-label'class="modal-title"><i class="fa fa-money"></i>Choose</h3>
+        </div>
+		
+        <div class="modal-body">
+			<div class="has-feedback ">
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentVIPID('20');" src='images/icon-20.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentVIPID('50');" src='images/icon-50.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentVIPID('70');" src='images/icon-70.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentVIPID('100');" src='images/icon-100.png'v width='65' >
+				 <!-- <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewVIP" onkeypress="handleKeyPressCustomerReviewVIP(event); return isNumbers(event); " class="input-lg form-control"> -->
+			</div>
+		
+        </div>
+        <div class="modal-footer">		
+			<a data-dismiss="modal" class="btn btn-default" data-dismiss="modal">
+				<i class="fa fa-ban fa-1x"></i> Cancel
+			</a>
+			<!-- <button data-dismiss="modal" type="button" onclick="discountPaymentReviewPwdID();" name="" class="btn btn-success" >
+				<i class="fa fa-check-circle fa-lg"></i> Confirm
+			</button>		 -->
+        </div>
+      </div>
+    </div>
+	</form>
+  </div>
+
+  <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="vipTkModal" role="dialog">
+  <form id="reg-form" class='reg-form'>
+    <div id="vipTkModalBody" class="modal-dialog modal-sm">
+      <div class="modal-content" id="vipTkModalAnimate" style="border-radius:3pt;">
+        <div class="modal-header">
+
+          <h3 id='orders-label'class="modal-title"><i class="fa fa-money"></i>Choose</h3>
+        </div>
+		
+        <div class="modal-body">
+			<div class="has-feedback ">
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentTkVIPID('20');" src='images/icon-20.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentTkVIPID('50');" src='images/icon-50.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentTkVIPID('70');" src='images/icon-70.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentTkVIPID('100');" src='images/icon-100.png'v width='65' >
+				 <!-- <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewVIP" onkeypress="handleKeyPressCustomerReviewVIP(event); return isNumbers(event); " class="input-lg form-control"> -->
+			</div>
+		
+        </div>
+        <div class="modal-footer">		
+			<a data-dismiss="modal" class="btn btn-default" data-dismiss="modal">
+				<i class="fa fa-ban fa-1x"></i> Cancel
+			</a>
+			<!-- <button data-dismiss="modal" type="button" onclick="discountPaymentReviewPwdID();" name="" class="btn btn-success" >
+				<i class="fa fa-check-circle fa-lg"></i> Confirm
+			</button>		 -->
         </div>
       </div>
     </div>
@@ -848,6 +912,37 @@
 	</form>
   </div>
   
+  <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="vipReviewModal" role="dialog">
+  <form id="reg-form" class='reg-form'>
+    <div id="vipReviewModalBody" class="modal-dialog modal-sm">
+      <div class="modal-content" id="vipReviewModalAnimate" style="border-radius:3pt;">
+        <div class="modal-header">
+
+          <h3 id='orders-label'class="modal-title"><i class="fa fa-money"></i>Choose</h3>
+        </div>
+		
+        <div class="modal-body">
+			<div class="has-feedback ">
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentReviewVIPID('20');" src='images/icon-20.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentReviewVIPID('50');" src='images/icon-50.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentReviewVIPID('70');" src='images/icon-70.png'v width='65' >
+				<img data-dismiss="modal" style="cursor:pointer;" onclick="discountPaymentReviewVIPID('100');" src='images/icon-100.png'v width='65' >
+				 <!-- <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewVIP" onkeypress="handleKeyPressCustomerReviewVIP(event); return isNumbers(event); " class="input-lg form-control"> -->
+			</div>
+		
+        </div>
+        <div class="modal-footer">		
+			<a data-dismiss="modal" class="btn btn-default" data-dismiss="modal">
+				<i class="fa fa-ban fa-1x"></i> Cancel
+			</a>
+			<!-- <button data-dismiss="modal" type="button" onclick="discountPaymentReviewPwdID();" name="" class="btn btn-success" >
+				<i class="fa fa-check-circle fa-lg"></i> Confirm
+			</button>		 -->
+        </div>
+      </div>
+    </div>
+	</form>
+  </div>
   <div class="modal" data-backdrop="static" data-keyboard="false" style="padding-top:100px; z-index:99999;" id="pwdReviewModal" role="dialog">
   <form>
     <div id="pwdReviewModalBody" class="modal-dialog modal-sm">
@@ -859,7 +954,7 @@
 		
         <div class="modal-body">
 			<div class="has-feedback ">
-				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewPWD" onkeypress="handleKeyPressCustomerReviewPWD(event); return isNumbers(event); " class="input-lg form-control">
+				 <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtReviewPWD" onkeypress="handleKeyPressCustomerReviewPWD(event); return isNumbers(event); " autocomplete="off" class="input-lg form-control">
 			</div>
 		
         </div>
@@ -1013,6 +1108,12 @@
 				<div onclick="showPWD();" data-dismiss="modal" style="cursor:pointer; padding:25px;" class="visible-xs box-header with-border">
 				  <p class="box-title" style="text-align:center; font-size:17.3pt;">PWD</p>
 				</div>		
+				<div onclick="showVIP();" data-dismiss="modal" style="cursor:pointer; padding:25px; background-image:url('images/icon-vip.png'); background-repeat:no-repeat; background-size:120px 60px; background-position:130px center;" class="hidden-xs box-header with-border">
+				  <p class="box-title" style="text-align:center; font-size:17.3pt;">VIP</p>
+				</div>	
+				<div onclick="showVIP();" data-dismiss="modal" style="cursor:pointer; padding:25px;" class="visible-xs box-header with-border">
+				  <p class="box-title" style="text-align:center; font-size:17.3pt;">VIP</p>
+				</div>
 					
 				<!--<div onclick="newOrder('AddOrd'); hideNewModal();" style="cursor:pointer; padding:25px; background-image:url('images/icon-add-order.png'); background-repeat:no-repeat; background-size:120px 60px; background-position:130px center;" class="hidden-xs box-header with-border">
 				   <p class="box-title" style="text-align:center; font-size:17.3pt; padding-left:40px;">Add Order(s)</span></p>
@@ -1051,6 +1152,12 @@
 				</div>	
 				<div onclick="showTkPWD();" data-dismiss="modal" style="cursor:pointer; padding:25px;" class="visible-xs box-header with-border">
 				  <p class="box-title" style="text-align:center; font-size:17.3pt;">PWD</p>
+				</div>	
+				<div onclick="showTkVIP();" data-dismiss="modal" style="cursor:pointer; padding:25px; background-image:url('images/icon-vip.png'); background-repeat:no-repeat; background-size:120px 60px; background-position:130px center;" class="hidden-xs box-header with-border">
+				  <p class="box-title" style="text-align:center; font-size:17.3pt;">VIP</p>
+				</div>	
+				<div onclick="showTkVIP();" data-dismiss="modal" style="cursor:pointer; padding:25px;" class="visible-xs box-header with-border">
+				  <p class="box-title" style="text-align:center; font-size:17.3pt;">VIP</p>
 				</div>		
 			</div>
         </div>
@@ -1083,7 +1190,13 @@
 				</div>	
 				<div onclick="showModalPWD();" data-dismiss="modal" style="cursor:pointer; padding:25px;" class="visible-xs box-header with-border">
 				  <p class="box-title" style="text-align:center; font-size:17.3pt;">PWD</p>
-				</div>		
+				</div>	
+				<div onclick="showModalVIP();" data-dismiss="modal" style="cursor:pointer; padding:25px; background-image:url('images/icon-vip.png'); background-repeat:no-repeat; background-size:120px 60px; background-position:130px center;" class="hidden-xs box-header with-border">
+				  <p class="box-title" style="text-align:center; font-size:17.3pt;">VIP</p>
+				</div>	
+				<div onclick="showModalVIP();" data-dismiss="modal" style="cursor:pointer; padding:25px;" class="visible-xs box-header with-border">
+				  <p class="box-title" style="text-align:center; font-size:17.3pt;">VIP</p>
+				</div>	
 			</div>
         </div>
         <div class="modal-footer" style=" text-align:center;">		
@@ -1303,7 +1416,7 @@
 					</div>
 					<div class="col-sm-4" style="padding-top:10px; position:relative; height:605px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
 						<div class="has-feedback ">
-						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="paymentText" onkeyup="changePaymentTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" placeholder="0">
+						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="paymentText" onkeyup="changePaymentTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" autocomplete="off" placeholder="0">
 						</div>
 						<div class="col-xs-12" style="padding-top:15px;">
 							<div class="table-responsive">
@@ -1622,7 +1735,7 @@
 					</div>
 					<div class="col-sm-4" style="padding-top:10px; position:relative; height:551px; background-color:#fefefe; overflow:hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); border-radius: 0px 3px 3px 3px;">	
 						<div class="has-feedback ">
-						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtPayment" onkeyup="changeDineTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" placeholder="0">
+						  <input type="text" style="text-align:right; padding:40px; font-size:25pt;" id="txtPayment" onkeyup="changeDineTotal(this.value);" onkeypress="return isNumber(event)" class="input-lg form-control" id="inputSuccess" autocomplete="off" placeholder="0">
 						</div>
 						<div class="col-xs-12" style="padding-top:15px;">
 							<div class="table-responsive">
