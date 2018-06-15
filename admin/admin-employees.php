@@ -36,6 +36,7 @@
   <script src="js/admin-script.js"> </script>    
   <!--<script src="js/admin-users-ajax.js"> </script>  -->
   <script src="js/add-employee.js"> </script>  
+  <script src="js/admin-settings.js"> </script>
 	 
   
   

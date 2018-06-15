@@ -19,6 +19,7 @@
 <script src="iziToast-master/dist/js/iziToast.js"> </script>
 <script src="js/jquery.js"> </script>
 <script src="js/login-ajax.js"></script>
+<script src="js/admin-settings.js"> </script>
 
 <style>
 	body { overflow: hidden; background-image: url(images/background.png); }

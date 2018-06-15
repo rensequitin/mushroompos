@@ -1,5 +1,5 @@
 document.addEventListener('contextmenu', function(e) {
-  //e.preventDefault();
+  e.preventDefault();
 });
 document.onkeydown = function(e) {
   if(event.keyCode == 123) {
@@ -21,7 +21,7 @@ document.addEventListener("keydown", e => {
 	if(e.key == "F1") e.preventDefault();
 	if(e.key == "F3") e.preventDefault();
 	if(e.key == "F10") e.preventDefault();
-	//if(e.key == "F5") e.preventDefault();
+	if(e.key == "F5") e.preventDefault();
 });
 $(document).keydown(function(event) {
 if (event.ctrlKey==true && (event.which == '61' || event.which == '107' || event.which == '173' || event.which == '109'  || event.which == '187'  || event.which == '189'  ) ) {

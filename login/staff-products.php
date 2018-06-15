@@ -35,7 +35,7 @@
   <script src="js/jquery.timers.js"> </script>
   <script src="js/admin-script.js"> </script>    
   <script src="js/admin-product-ajax.js"> </script>      
-
+  <script src="js/admin-settings.js"> </script>
  
   <style>
   #addProductAnimate{

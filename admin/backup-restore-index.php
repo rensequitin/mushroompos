@@ -37,6 +37,7 @@
   <script src="js/jquery.js"> </script> 
   <script src="js/jquery.timers.js"> </script>
   <script src="js/admin-backup-restore.js"> </script>
+  <script src="js/admin-settings.js"> </script>
   <!--<script src="js/admin-script.js"> </script> -->
   <!--<script src="js/admin-reports.js"> </script>-->
   <!-- <script src="js/admin-script.js"> </script> -->
