@@ -420,7 +420,7 @@
 			
 			function checkOnline(){
 				if (!isset($_SESSION['Staff'])){
-					header("Location:admin-login.php");
+					header("Location:staff-login.php");
 				}
 			}
 			
