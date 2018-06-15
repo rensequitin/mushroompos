@@ -761,6 +761,7 @@ function addQuantity(food_code){
 							changeCartValues();
 						// document.getElementById('cartInfo').firstChild.data = total;
 					},250);
+						
 				}
 				else{
 					iziToast.info({
@@ -1225,6 +1226,12 @@ function showPWD(){
 	$("#pwdModal").modal("show");
 	$("#txtPWD").select();
 }
+function showVIP(){
+	$("#txtVIP").val("");
+	$("#vipModal").modal("show");
+	$("#txtVIP").select();
+	
+}
 function showTkSC(){
 	$("#txtTkSC").val("");
 	$("#scTkModal").modal("show");
@@ -1236,6 +1243,11 @@ function showTkPWD(){
 	$("#pwdTkModal").modal("show");
 	$("#txtTkPWD").select();
 }
+function showTkVIP(){
+	$("#txtTkVIP").val("");
+	$("#vipTkModal").modal("show");
+	$("#txtTkVIP").select();
+}
 function showModalSC(){
 	$("#txtReviewSC").val("");
 	$("#scReviewModal").modal("show");
@@ -1246,6 +1258,11 @@ function showModalPWD(){
 	$("#txtReviewPWD").val("");
 	$("#pwdReviewModal").modal("show");
 	$("#txtReviewPWD").select();
+}
+function showModalVIP(){
+	$("#txtReviewVIP").val("");
+	$("#vipReviewModal").modal("show");
+	$("#txtReviewVIP").select();
 }
 
 function queuePaymentDine(){
@@ -1869,6 +1886,68 @@ function discountPaymentReviewScID(){
 	}
 }
 
+function discountPaymentVIPID(choice){
+	
+	if(window.XMLHttpRequest){
+		obj = new XMLHttpRequest();
+	}
+	else{
+		if(window.ActiveXObject){
+			try{
+				obj = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch(e){
+				
+			}
+		}
+	}
+	
+	if(obj){
+		obj.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200) {
+				var msg = this.responseText.split("*");
+				
+				if(msg[0]=="0"){
+					iziToast.warning({
+						title: 'Error',
+						message: 'Add more orders',
+						backgroundColor: '#E16045',
+						timeout: 2000,
+					});	
+				}
+				else{
+					var value = document.getElementById('paymentText').value;
+					value = parseFloat(value);				
+					document.getElementById("review-discount-payment").innerHTML = msg[1];
+					var discount = document.getElementById("review-discount-payment").innerHTML;
+					discount = parseFloat(discount.replace(',','').replace('.','.'));
+					
+					document.getElementById("payment-total-price").innerHTML =  msg[2];
+					
+					var total = document.getElementById("payment-total-price").innerHTML;
+					total = parseFloat(total.replace(',','').replace('.','.'));
+					var newTotal = (total - discount).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+					total = document.getElementById("payment-total-price").innerHTML =  newTotal;
+					total = parseFloat(total.replace(',','').replace('.','.'));
+					var value = parseFloat(value);
+					
+					if(value>0){						
+						var change = value - total;
+						change = change.toFixed(2);
+						document.getElementById("payment-change").innerHTML = change;								
+					}
+				}
+				
+			}
+		};
+		obj.open("GET","php/admin-php.php?action="+'discountPaymentVIPID'+'&choice='+choice, true);
+		obj.send(null);
+	}
+	else{
+		alert("Error");
+	}
+}
+
 function discountPaymentPwdID(){
 	
 	if(window.XMLHttpRequest){
@@ -1923,6 +2002,67 @@ function discountPaymentPwdID(){
 			}
 		};
 		obj.open("GET","php/admin-php.php?action="+'discountPaymentPwdID', true);
+		obj.send(null);
+	}
+	else{
+		alert("Error");
+	}
+}
+
+function discountPaymentTkVIPID(choice){
+	
+	if(window.XMLHttpRequest){
+		obj = new XMLHttpRequest();
+	}
+	else{
+		if(window.ActiveXObject){
+			try{
+				obj = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch(e){
+				
+			}
+		}
+	}
+	
+	if(obj){
+		obj.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200) {
+				var msg = this.responseText.split("*");
+				if(msg[0]=="0"){
+					iziToast.warning({
+						title: 'Error',
+						message: 'Add more orders',
+						backgroundColor: '#E16045',
+						timeout: 2000,
+					});	
+				}
+				else{
+					var value = document.getElementById('paymentTakeout').value;
+					value = parseFloat(value);				
+					document.getElementById("review-discount-takeout").innerHTML = msg[1];
+					var discount = document.getElementById("review-discount-takeout").innerHTML;
+					discount = parseFloat(discount.replace(',','').replace('.','.'));
+					
+					document.getElementById("takeout-total-price").innerHTML =  msg[2];
+					
+					var total = document.getElementById("takeout-total-price").innerHTML;
+					total = parseFloat(total.replace(',','').replace('.','.'));
+					var newTotal = (total - discount).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+					total = document.getElementById("takeout-total-price").innerHTML =  newTotal;
+					total = parseFloat(total.replace(',','').replace('.','.'));
+					var value = parseFloat(value);
+					
+					if(value>0){						
+						var change = value - total;
+						change = change.toFixed(2);
+						document.getElementById("takeout-change").innerHTML = change;								
+					}
+				}
+				
+			}
+		};
+		obj.open("GET","php/admin-php.php?action="+'discountPaymentVIPID'+'&choice='+choice, true);
 		obj.send(null);
 	}
 	else{
@@ -2044,6 +2184,66 @@ function discountPaymentReviewPwdID(){
 			}
 		};
 		obj.open("GET","php/admin-php.php?action="+'discountPaymentReviewPwdID', true);
+		obj.send(null);
+	}
+	else{
+		alert("Error");
+	}
+}
+
+function discountPaymentReviewVIPID(choice){
+	
+	if(window.XMLHttpRequest){
+		obj = new XMLHttpRequest();
+	}
+	else{
+		if(window.ActiveXObject){
+			try{
+				obj = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch(e){
+				
+			}
+		}
+	}
+	
+	if(obj){
+		obj.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200) {
+				var msg = this.responseText.split("*");
+				if(msg[0]=="0"){
+					iziToast.warning({
+						title: 'Error',
+						message: 'Add more orders',
+						backgroundColor: '#E16045',
+						timeout: 2000,
+					});	
+				}
+				else{					
+					var value = document.getElementById('txtPayment').value;
+					value = parseFloat(value);				
+					document.getElementById("review-discount").innerHTML = msg[1];
+					var discount = document.getElementById("review-discount").innerHTML;
+					discount = parseFloat(discount.replace(',','').replace('.','.'));
+					
+					document.getElementById("review-total").innerHTML =  msg[2];
+					var total = document.getElementById("review-total").innerHTML;
+					total = parseFloat(total.replace(',','').replace('.','.'));
+					var newTotal = (total - discount).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+					total = document.getElementById("review-total").innerHTML =  newTotal;
+					total = parseFloat(total.replace(',','').replace('.','.'));
+					var value = parseFloat(value);
+					
+					if(value>0){						
+						var change = value - total;
+						change = change.toFixed(2);
+						document.getElementById("review-change").innerHTML = change;								
+					}
+				}
+				
+			}
+		};
+		obj.open("GET","php/admin-php.php?action="+'discountPaymentReviewVIPID'+'&choice='+choice, true);
 		obj.send(null);
 	}
 	else{
@@ -3286,6 +3486,16 @@ function handleKeyPressCustomerReviewPWD(e){
   if (key==13){
   	discountPaymentReviewPwdID();
 	$("#pwdReviewModal").modal("hide");
+  }
+  
+}
+
+function handleKeyPressCustomerReviewVIP(e){
+ var key=e.keyCode || e.which;
+ 
+  if (key==13){
+  	discountPaymentReviewPwdVIP();
+	$("#vipReviewModal").modal("hide");
   }
   
 }
